@@ -12,11 +12,12 @@ const LoginSignup = () => {
     return (
         <>
             <div>
+                <div id='login-signup-errors'></div>
                 <div>
                     {signup ? <Signup /> : <Login />}
                 </div>
                 <div>
-                    <button onClick={createAccount}>{signup ? 'Login' : 'Create an account' }</button>
+                    <a onClick={createAccount}>{signup ? 'I already have an account' : 'Create an account' }</a>
                 </div>
             </div>
         </>

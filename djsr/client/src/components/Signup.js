@@ -8,30 +8,36 @@ const Signup = ({
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        submitSignup(username, email, password);
+        if (password === confirmPassword) {
+            submitSignup(username, email, password);
+        } else {
+            let loginSignupErrors = document.getElementById('login-signup-errors');
+            loginSignupErrors.innerHTML = "Passwords don't match";
+        }
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <div className='signup-container'>
                 <label>
-                    Username
-                    <input name="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input name="username" type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
                 </label>
                 <label>
-                    Email
-                    <input name="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input name="email" type="text" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
                 <label>
-                    Password
-                    <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input name="password" type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
-                <input type="submit" value="Login" />
-            </form>
-        </>
+                <label>
+                    <input name="confirm-password" type="password" placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                </label>
+                <input type="submit" value="Register" />
+            </div>
+        </form>
     )
 }
 
