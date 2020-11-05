@@ -1,6 +1,6 @@
 import { authConstants } from '../constants/authentication';
 
-export function authentication(state = {}, action) {
+export function authentication(state = {loggedIn: false}, action) {
     switch (action.type) {
         case authConstants.LOGIN_SUCCESS:
             return {

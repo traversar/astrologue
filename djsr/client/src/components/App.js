@@ -1,25 +1,49 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import Login from './Login';
-import Signup from './Signup';
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import LoginSignup from './LoginSignup';
+import Navbar from './Navbar';
+import NatalView from './NatalView'
+import CompatibilityView from './CompatibilityView'
+import LearnView from './LearnView'
+import TransitsView from './TransitsView'
+import ProfileView from './ProfileView'
+import './App.css'
 
-const App = () => {
+const App = ({
+    loggedIn
+}) => {
     return (
         <>
+        <BrowserRouter>
             <main>
                 <div className='app-container'>
                     <h1>Astrologue</h1>
                     <div className='app-content-container'>
+                        <div className='app-nav-container'>
+                            <Navbar />
+                        </div>
+                        <div className='app-profile-container'>
+                            {loggedIn ? <ProfileView /> : <LoginSignup />}
+                        </div>
                         <Switch>
-                            <Route exact path={'/login/'} component={Login} />
-                            <Route exact path={'/signup/'} component={Signup} />
-                            <Route path={'/'} render={() => <h1>Home again</h1>} />
+                            <Route exact path={'/natal/'} component={NatalView} />
+                            <Route exact path={'/transits/'} component={TransitsView} />
+                            <Route exact path={'/compatiblity/'} component={CompatibilityView} />
+                            <Route exact path={'/learn/'} component={LearnView} />
                         </Switch>
                     </div>
                 </div>
             </main>
+            </BrowserRouter>
         </>
     )
 }
 
-export default App
+const AppContainer = () => {
+    let loggedIn = useSelector(state => state.authentication.loggedIn );
+
+    return <App loggedIn={loggedIn} />
+}
+
+export default AppContainer
