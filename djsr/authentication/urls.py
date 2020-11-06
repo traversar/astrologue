@@ -6,6 +6,6 @@ urlpatterns = [
     path('user/create/', CustomUserCreate.as_view(), name='create_user'),
     path('token/obtain/', ObtainTokenPairWithDefaultProfileView.as_view(), name='token_create'),
     # override sjwt stock token
-    path('token/refresh/', ObtainTokenPairWithDefaultProfileView.as_view(), name='token_refresh'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist')
 ]

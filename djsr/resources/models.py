@@ -1,5 +1,5 @@
 from django.db import models
-from djsr.authentication.models import CustomUser
+from authentication.models import CustomUser
 
 class Profile(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
