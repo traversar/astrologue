@@ -1,7 +1,7 @@
 body {
     /* background-color: rgb(29, 29, 83); */
-    background-color: rgb(51, 51, 104);
-    font-size: 12px;
+    background-color: rgb(62, 62, 107);
+    font-size: 15px;
 }
 
 .boxed {
@@ -15,7 +15,7 @@ body {
 /* ==================================== App == */
 
 .app-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -33,10 +33,6 @@ body {
     margin-bottom: 5px;
 }
 
-.app-profile-container a {
-    cursor: pointer;
-    color: rgb(140, 0, 255);
-}
 
 
 /* ==================================== Navbar == */
@@ -62,6 +58,7 @@ body {
 
 .nb-loginsignup-container {
     position: absolute;
+    right: 30px;
 
     /* boxed */
     border: 1px solid rgb(72, 72, 124);
@@ -69,7 +66,8 @@ body {
     padding: 7px 5px;
 
     /* background-color */
-    background-color: rgb(51, 51, 104);
+    background-color: rgb(139, 139, 182, .2);
+
 }
 
 .hidden {
@@ -82,8 +80,11 @@ body {
     justify-content: space-between;
 }
 
-
-/* ==================================== Navbar == */
+.nb-auth-button {
+    font-family: helvetica;
+    cursor: pointer;
+    color: rgb(146, 114, 204);
+}
 
 .login-container {
     display: flex;
@@ -93,4 +94,33 @@ body {
 .signup-container {
     display: flex;
     flex-direction: column;
+}
+
+.ls-toggle-link {
+    cursor: pointer;
+    color: rgb(140, 0, 255);
+}
+
+
+/* ==================================== ProfileView == */
+
+.pv-addprofile-btn {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.pv-addprofile-btn:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.062);
+}
+
+.pv-addprofile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-profile-container {
+    position: absolute;
 }

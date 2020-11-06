@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LoginSignup from './LoginSignup';
 import Navbar from './Navbar';
 import NatalView from './NatalView'
 import CompatibilityView from './CompatibilityView'
@@ -13,14 +12,20 @@ import './App.css'
 const App = ({
     loggedIn
 }) => {
+
+    useEffect(() => {
+        return null;
+        // fetch profiles from database
+    }, [loggedIn]);
+
     return (
         <>
         <BrowserRouter>
             <main>
                 <div className='app-container'>
-                    <div className='app-header-container'>
+                    {/* <div className='app-header-container'>
                         <h1>Astrologue</h1>
-                    </div>
+                    </div> */}
                     <div className='app-body-container boxed'>
                         <div className='app-nav-container'>
                             <Navbar />

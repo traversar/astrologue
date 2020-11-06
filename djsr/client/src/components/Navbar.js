@@ -13,6 +13,9 @@ const Navbar = () => {
 
     return (
         <>
+            <div className='app-header-container'>
+                <h1>Astrologue</h1>
+            </div>
             <div className='nb-links-container'>
                 <div>
                     <Link to='/chart/'>Chart</Link>
@@ -20,8 +23,8 @@ const Navbar = () => {
                     <Link to='/compatibility/'>Compatibility</Link>
                     <Link to='/learn/'>Learn</Link>
                 </div>
-                <div>
-                    <button onClick={handleLoginSignup}>Account (Not signed in)</button>
+                <div className='nb-auth-container'>
+                    <div className='nb-auth-button' onClick={handleLoginSignup}>Account (Not signed in)</div>
                     <div id='auth-container' className='nb-loginsignup-container hidden'>
                         <LoginSignup />
                     </div>

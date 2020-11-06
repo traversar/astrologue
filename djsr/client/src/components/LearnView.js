@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const LearnView = () => {
 
     return (
-        pass
+        null
     )
 }
 
