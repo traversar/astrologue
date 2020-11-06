@@ -7,6 +7,5 @@ urlpatterns = [
     path('token/obtain/', ObtainTokenPairWithDefaultProfileView.as_view(), name='token_create'),
     # override sjwt stock token
     path('token/refresh/', ObtainTokenPairWithDefaultProfileView.as_view(), name='token_refresh'),
-    path('hello/', HelloWorldView.as_view(), name='hello_world'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist')
 ]

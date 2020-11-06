@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'authentication',
     'rest_framework',
-    'client'
+    'client',
+    'resources'
 ]
 
 MIDDLEWARE = [
@@ -104,8 +105,13 @@ SIMPLE_JWT = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['DB_DATABASE'],
+        'USER': os.environ['DB_USERNAME'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': 'localhost',
+        'PORT': '',
+
     }
 }
 
