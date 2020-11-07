@@ -3,16 +3,19 @@ import { profileConstants } from '../constants/profiles';
 export function profiles(state = {}, action) {
     switch (action.type) {
         case profileConstants.LOAD_PROFILES:
+            let selectedProfile;
+            let profilesObject;
+            action.profiles.forEach((profile) => {
+                profilesObject[profile.id] = profile;
+            });
             return {
                 ...state,
                 profiles: action.profiles
             }
         case profileConstants.SELECT_PROFILE:
-            let temp = state.profiles['1'];
-            state.profiles[1] = action.id;
-            state.profiles[action.id] = temp;
             return {
-                ...state
+                ...state,
+                selectedProfile: action.profileId
             }
         default:
             return state;

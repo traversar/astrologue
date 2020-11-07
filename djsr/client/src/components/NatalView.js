@@ -1,7 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '../actions/authentication';
+import * as profileActions from '../actions/profiles'
 
-const NatalView = () => {
+
+const NatalView = ({
+    chartTest
+}) => {
+
+    chartTest()
 
     return (
         null
@@ -9,8 +16,11 @@ const NatalView = () => {
 }
 
 const NatalViewContainer = () => {
+    const dispatch = useDispatch();
+    let chartTest = () => dispatch(profileActions.chartTest());
 
-    return <NatalView />
+
+    return <NatalView chartTest={chartTest} />
 }
 
 export default NatalViewContainer

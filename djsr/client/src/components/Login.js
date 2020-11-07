@@ -19,10 +19,10 @@ const Login = ({
         <form onSubmit={handleSubmit}>
             <div className='login-container'>
                 <label>
-                    <input name="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input name="email" type="text" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
                 <label>
-                    <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input name="password" type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
                 <input type="submit" value="Login" />
             </div>

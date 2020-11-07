@@ -12,7 +12,7 @@ const ProfileView = ({
 
     const handleAddProfile = () => {
         let addProfileContainer = document.getElementById('add-profile-container')
-        addProfileContainer.classList.contains('hidden') ? addProfileContainer.classList.remove('hidden') : addProfileContainer.classList.add('hidden');
+        addProfileContainer.classList.contains('add-profile-container-hidden') ? addProfileContainer.classList.remove('add-profile-container-hidden') : addProfileContainer.classList.add('add-profile-container-hidden');
     }
 
     const addProfile = (e) => {
@@ -27,7 +27,7 @@ const ProfileView = ({
                 <div>+</div>
                 <div>Add Profile</div>
             </div>
-            <div id='add-profile-container' className='hidden'>
+            <div id='add-profile-container' className='add-profile-container-hidden'>
                 <form onSubmit={addProfile}>
                     <div className='pv-addprofile-form'>
                         <label>

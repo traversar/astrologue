@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const handleLoginSignup = () => {
         let authContainer = document.getElementById('auth-container')
-        authContainer.classList.contains('hidden') ? authContainer.classList.remove('hidden') : authContainer.classList.add('hidden');
+        authContainer.classList.contains('nb-loginsignup-container-hidden') ? authContainer.classList.remove('nb-loginsignup-container-hidden') : authContainer.classList.add('nb-loginsignup-container-hidden');
         loginSignup = loginSignup === 'login' ? false : true;
     }
 
@@ -25,7 +25,7 @@ const Navbar = () => {
                 </div>
                 <div className='nb-auth-container'>
                     <div className='nb-auth-button' onClick={handleLoginSignup}>Account (Not signed in)</div>
-                    <div id='auth-container' className='nb-loginsignup-container hidden'>
+                    <div id='auth-container' className='nb-loginsignup-container nb-loginsignup-container-hidden'>
                         <LoginSignup />
                     </div>
                 </div>
