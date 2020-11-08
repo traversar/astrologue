@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles'
 
 const ProfileView = ({
-    createProfile
+    createProfile,
+    profiles
 }) => {
     let [name, setName] = useState('');
     let [birthDate, setBirthDate] = useState('');
@@ -21,12 +22,24 @@ const ProfileView = ({
         return null;
     }
 
+
     return (
         <div>
             <div onClick={handleAddProfile} className='pv-addprofile-btn boxed'>
                 <div>+</div>
                 <div>Add Profile</div>
             </div>
+            {Array.isArray(profiles) &&
+                // Object.keys(profiles).map((id) => (
+                //     <div>
+                //         {profiles.id.name}
+                //     </div>
+                profiles.map(profile => (
+                    <div>
+                        {profile.name}
+                    </div>
+                ))
+            }
             <div id='add-profile-container' className='add-profile-container-hidden'>
                 <form onSubmit={addProfile}>
                     <div className='pv-addprofile-form'>
@@ -53,8 +66,10 @@ const ProfileView = ({
 const ProfileViewContainer = () => {
     const dispatch = useDispatch();
     let createProfile = (name, birthDate, birthTime, birthLocation) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthLocation));
+    let profiles = useSelector(state => state.entities.profiles.profiles)
+    // let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile)
 
-    return <ProfileView createProfile={createProfile} />
+    return <ProfileView createProfile={createProfile} profiles={profiles} />
 }
 
 export default ProfileViewContainer

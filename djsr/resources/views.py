@@ -6,8 +6,11 @@ from .models import Profile
 from .serializers import ProfileSerializer
 from rest_framework.parsers import JSONParser
 import requests
+import json
 
 class ProfilesView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
     def get(self, request):
         if request.user.is_authenticated:
             user_id = request.user.id
@@ -20,26 +23,38 @@ class ProfilesView(APIView):
         if request.user.is_authenticated:
             try:
                 data = JSONParser().parse(request)
+                data = json.loads(data['body'])
+
                 print('Post data: ', data)
 
-                serialized = ProfileSerializer(data=data)
-                if serialized.is_valid():
-                    serialized.save()
-                    return Response(serialized.data)
+                print('user = ', request.user)
+                print('name = ', data['name'])
+                print('birthDate = ', data['birthDate'])
+                print('birthTime = ', data['birthTime'])
+                print('birthLocation = ', data['birthLocation'])
+                # print('profile = ', data['body']['profile'])
 
-                # print('request.user: ', request.user)
-                # print('request.body.name: ', request.body.name)
-                # new_profile = Profile(
-                #     user = request.user,
-                #     name = request.body.name,
-                #     birthDate = request.body.birthData,
-                #     birthTime = request.body.birthTime,
-                #     person_object = request.body.person_object,
-                #     chart_object = request.body.chart_object,
-                # )
-                # new_profile.save()
-            except Exception:
+                # serialized = ProfileSerializer(data=data['body'])
+                # print(serialized)
+                # if serialized.is_valid():
+                #     print('\n\nvalid\n\n')
+                #     serialized.save()
+                #     # return Response(serialized.data)
+                # # print('request.user: ', request.user)
+                # # print('request.body.name: ', request.body.name)
+                new_profile = Profile(
+                    user = request.user,
+                    name = data['name'],
+                    birthDate = data['birthDate'],
+                    birthTime = data['birthTime'],
+                    birthLocation = data['birthLocation'],
+                    profile_object = data['profile']
+                )
+                new_profile.save()
+            except Exception as e:
+                print(e)
                 return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_200_OK)
 
 class AstroHelper(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -47,12 +62,13 @@ class AstroHelper(APIView):
     def post(self, request):
         if request.user.is_authenticated:
             data = JSONParser().parse(request)
-            print(data)
-            address = data['body'].split(' ')
-            address = '+'.join(address)
-            print(address)
+            data = json.loads(data['body'])
+            city = data['city']
+            state = data['stateProvince']
+            country = data['country']
+            city = f'&locality={city}' if city else ''
             ak = 'ApcaXhwxeE_RSaDrryKrzRoUEViV1h-sUcw76TOb0D-FbBNozCcJtsY1DkM2tweX'
-            google_geocode = requests.get(f'http://dev.virtualearth.net/REST/v1/Locations?&addressLine={address}&maxResults={1}&key={ak}')
-            print(google_geocode)
-            print(JSONParser().parse(google_geocode))
-            return Response(data=google_geocode, status=status.HTTP_200_OK)
+            google_geocode = requests.get(f'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion={country}&adminDistrict={state}{city}&maxResults=1&key={ak}')
+            google_geocode = google_geocode.json()
+            lat_and_long = google_geocode['resourceSets'][0]['resources'][0]['geocodePoints'][0]['coordinates']
+            return Response(data=lat_and_long, status=status.HTTP_200_OK)

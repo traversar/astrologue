@@ -7,5 +7,4 @@ class Profile(models.Model):
     birthDate = models.CharField(max_length=40)
     birthTime = models.CharField(max_length=40)
     birthLocation = models.CharField(max_length=50)
-    person_object = models.CharField(max_length=200)
-    chart_object = models.CharField(max_length=200)
+    profile_object = models.TextField()

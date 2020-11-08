@@ -36,14 +36,16 @@ export const loadProfiles = () => async (dispatch, getState) => {
     )
 
     if (response.status === 200) {
-        response = await response.json()
-        console.log(response)
-        dispatch(success(response))
+        let data = response.data
+        console.log(data)
+        console.log('here')
+        dispatch(success(data))
+        console.log('here')
     } else {
         console.log('Failed to load profiles')
     }
 
-    function success(response) { return { type: profileConstants.LOAD_PROFILES, response } }
+    function success(data) { return { type: profileConstants.LOAD_PROFILES, profiles: data } }
 }
 
 export const selectProfile = (profileId) => async (dispatch, getState) => {
@@ -53,19 +55,21 @@ export const selectProfile = (profileId) => async (dispatch, getState) => {
 export const createProfile = (name, birthDate, birthTime, birthLocation) => async(dispatch, getState) => {
     let [year, month, date] = birthDate.split('-');
     let [hour, minute] = birthTime.split(':');
-    let [stateProvince, country] = birthLocation.split(',').map(ele => ele.trim())
-    let [latitude, longitude] = getLongLat(stateProvince, country);
+    let [city, stateProvince, country] = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''))
+    let latAndLong = await dispatch(getLongLat(city, stateProvince, country));
+    let [latitude, longitude] = latAndLong
 
-    // console.log(
-    //     'year: ', year,
-    //     'month: ', month,
-    //     'date: ', date,
-    //     'hour: ', hour,
-    //     'minute: ', minute,
-    //     'state: ', stateProvince,
-    //     'country: ', country,
-    //     'latLong: ', latLong,
-    // )
+    console.log(
+        'year: ', year,
+        'month: ', month,
+        'date: ', date,
+        'hour: ', hour,
+        'minute: ', minute,
+        'state: ', stateProvince,
+        'country: ', country,
+        'lat: ', latitude,
+        'long: ', longitude,
+    )
 
     const profile = new Origin({
         year,
@@ -81,30 +85,30 @@ export const createProfile = (name, birthDate, birthTime, birthLocation) => asyn
         '/profiles/',
         {
             method: 'POST',
-            body: JSON.stringify({name, birthDate, birthTime, birthLocation, profile})
+            body: JSON.stringify({name, birthDate, birthTime, birthLocation, profile: profile})
         }
-        )
+    )
 
-        if (response.status === 200) {
-            dispatch(success())
-            console.log('Successfully created profile');
-        } else {
-            console.log('Failed to create profile');
-        }
+    if (response.status === 200) {
+        dispatch(success())
+        console.log('Successfully created profile');
+    } else {
+        console.log('Failed to create profile');
+    }
 
-        function success() { return { type: profileConstants.LOAD_PROFILES } }
+    function success() { return { type: profileConstants.LOAD_PROFILES } }
 }
 
-export const getLongLat = (stateProvince, country) => async(dispatch, getState) => {
+export const getLongLat = (city, stateProvince, country) => async(dispatch, getState) => {
     const response = await axiosInstance.post(
         '/address/',
         {
             method: 'POST',
-            body: JSON.stringify([stateProvince, country])
+            body: JSON.stringify({city, stateProvince, country})
         }
     )
     if (response.status === 200) {
-        return await response.json()
+        return response.data
     } else {
         console.log('Error getting Long/Lat from address')
     }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import NatalView from './NatalView'
@@ -7,14 +7,16 @@ import CompatibilityView from './CompatibilityView'
 import LearnView from './LearnView'
 import TransitsView from './TransitsView'
 import ProfileView from './ProfileView'
+import * as profileActions from '../actions/profiles';
 import './App.css'
 
 const App = ({
+    loadProfiles,
     loggedIn
 }) => {
 
     useEffect(() => {
-        return null;
+        loadProfiles()
         // fetch profiles from database
     }, [loggedIn]);
 
@@ -45,9 +47,12 @@ const App = ({
 }
 
 const AppContainer = () => {
-    let loggedIn = useSelector(state => state.authentication.loggedIn );
+    const dispatch = useDispatch();
+    const loadProfiles = () => dispatch(profileActions.loadProfiles())
+    let loggedIn = useSelector(state => state.authentication.loggedIn);
 
-    return <App loggedIn={loggedIn} />
+
+    return <App loggedIn={loggedIn} loadProfiles={loadProfiles} />
 }
 
 export default AppContainer
