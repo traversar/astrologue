@@ -115,7 +115,32 @@ body {
 
 /* ==================================== ProfileView == */
 
+.pv-profile-links {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 5px;
+}
+
+.pb-container {
+    font-family: helvetica;
+    color: rgb(167, 167, 201);
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    transition: .5s background-color;
+}
+
+.pb-container:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.062);
+}
+
 .pv-addprofile-btn {
+    font-family: helvetica;
+    color: rgb(167, 167, 201);
+    font-size: 1em;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -146,12 +171,6 @@ body {
     left: -20%;
 }
 
-.pv-addprofile-btn {
-    font-family: helvetica;
-    color: rgb(167, 167, 201);
-    font-size: 1em;
-}
-
 .pv-addprofile-btn > div {
     text-align: center;
 }
@@ -164,4 +183,12 @@ body {
     border: 1px solid rgb(106, 106, 150);
     border-radius: 5px;
     background-clip: content-box;
+}
+
+
+/* ==================================== NatalView == */
+
+.nv-container {
+    display: flex;
+    flex-direction: row;
 }

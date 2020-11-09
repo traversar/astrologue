@@ -9,12 +9,20 @@ export function profiles(state = {}, action) {
             // });
             return {
                 ...state,
-                profiles: action.profiles
+                profiles: action.profiles,
+                selectedProfile: action.profiles[0]
             }
         case profileConstants.SELECT_PROFILE:
+            let selectedProfile;
+            state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfile = profile } })
             return {
                 ...state,
-                selectedProfile: action.profileId
+                selectedProfile
+            }
+        case profileConstants.LOAD_CHART_DATA:
+            return {
+                ...state,
+                chartData: action.chartData
             }
         default:
             return state;

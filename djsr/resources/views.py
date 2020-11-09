@@ -32,7 +32,8 @@ class ProfilesView(APIView):
                 print('birthDate = ', data['birthDate'])
                 print('birthTime = ', data['birthTime'])
                 print('birthLocation = ', data['birthLocation'])
-                # print('profile = ', data['body']['profile'])
+                print('longitude = ', data['longitude'])
+                print('latitude = ', data['latitude'])
 
                 # serialized = ProfileSerializer(data=data['body'])
                 # print(serialized)
@@ -48,7 +49,8 @@ class ProfilesView(APIView):
                     birthDate = data['birthDate'],
                     birthTime = data['birthTime'],
                     birthLocation = data['birthLocation'],
-                    profile_object = data['profile']
+                    latitude = data['latitude'],
+                    longitude = data['longitude']
                 )
                 new_profile.save()
             except Exception as e:

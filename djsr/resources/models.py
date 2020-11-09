@@ -7,4 +7,5 @@ class Profile(models.Model):
     birthDate = models.CharField(max_length=40)
     birthTime = models.CharField(max_length=40)
     birthLocation = models.CharField(max_length=50)
-    profile_object = models.TextField()
+    latitude = models.CharField(max_length=50)
+    longitude = models.CharField(max_length=50)

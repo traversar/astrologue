@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles'
+import ProfileButton from './ProfileButton'
 
 const ProfileView = ({
     createProfile,
-    profiles
+    profiles,
+    getLongLat
 }) => {
     let [name, setName] = useState('');
     let [birthDate, setBirthDate] = useState('');
@@ -25,21 +27,17 @@ const ProfileView = ({
 
     return (
         <div>
-            <div onClick={handleAddProfile} className='pv-addprofile-btn boxed'>
-                <div>+</div>
-                <div>Add Profile</div>
+            <div className='pv-profile-links'>
+                <div onClick={handleAddProfile} className='pv-addprofile-btn boxed'>
+                    <div>+</div>
+                    <div>Add Profile</div>
+                </div>
+                {Array.isArray(profiles) &&
+                    profiles.map(profile => (
+                        <ProfileButton key={profile.id} profile={profile} />
+                    ))
+                }
             </div>
-            {Array.isArray(profiles) &&
-                // Object.keys(profiles).map((id) => (
-                //     <div>
-                //         {profiles.id.name}
-                //     </div>
-                profiles.map(profile => (
-                    <div>
-                        {profile.name}
-                    </div>
-                ))
-            }
             <div id='add-profile-container' className='add-profile-container-hidden'>
                 <form onSubmit={addProfile}>
                     <div className='pv-addprofile-form'>
@@ -65,6 +63,7 @@ const ProfileView = ({
 
 const ProfileViewContainer = () => {
     const dispatch = useDispatch();
+    let getLongLat = (city, state, country) => dispatch(profileActions.getLongLat(city, state, country))
     let createProfile = (name, birthDate, birthTime, birthLocation) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthLocation));
     let profiles = useSelector(state => state.entities.profiles.profiles)
     // let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile)
