@@ -10,7 +10,8 @@ export function profiles(state = {}, action) {
             return {
                 ...state,
                 profiles: action.profiles,
-                selectedProfile: action.profiles[0]
+                selectedProfile: action.profiles[0],
+                selectedProfileOther: null
             }
         case profileConstants.SELECT_PROFILE:
             let selectedProfile;
@@ -24,6 +25,16 @@ export function profiles(state = {}, action) {
                 ...state,
                 chartData: action.chartData,
                 horoscopeData: action.horoscope
+            }
+        case profileConstants.ALLOW_SELECT_OTHER:
+            return {
+                ...state,
+                selectOtherOn: true
+            }
+        case profileConstants.DISALLOW_SELECT_OTHER:
+            return {
+                ...state,
+                selectOtherOn: false
             }
         case profileConstants.SELECT_PROFILE_OTHER:
             let selectedProfileOther;

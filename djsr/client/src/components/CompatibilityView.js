@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signup } from '../actions/authentication';
 import * as profileActions from '../actions/profiles';
-import { Horoscope, Origin } from 'circular-natal-horoscope-js';
 
 
 const CompatibilityView = ({
     renderChart,
+    selectOther,
     selectedProfile,
     selectedProfileOther,
     chartData,
@@ -14,6 +13,7 @@ const CompatibilityView = ({
     horoscopeData,
     horoscopeDataOther
 }) => {
+    selectOther(true);
     let [chartOverview, setChartOverview] = useState('{}');
 
     useEffect(() => {
@@ -22,7 +22,9 @@ const CompatibilityView = ({
             renderChart(selectedProfile)
         }
         if(selectedProfileOther) {
-            renderChart(selectedProfileOther, other=true)
+            console.log('Before render other chart')
+            renderChart(selectedProfileOther, true)
+            console.log('After render other chart')
         }
 
     }, [selectedProfile, selectedProfileOther])
@@ -83,7 +85,8 @@ const CompatibilityView = ({
 
 const CompatibilityViewContainer = () => {
     const dispatch = useDispatch();
-    let renderChart = (profile) => dispatch(profileActions.renderChart(profile));
+    let renderChart = (profile, other) => dispatch(profileActions.renderChart(profile, other));
+    let selectOther = (status) => dispatch(profileActions.selectOther(status));
     let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile);
     let chartData = useSelector(state => state.entities.profiles.chartData);
     let horoscopeData = useSelector(state => state.entities.profiles.horoscopeData);
@@ -98,7 +101,8 @@ const CompatibilityViewContainer = () => {
         horoscopeDataOther={horoscopeDataOther}
         selectedProfile={selectedProfile}
         selectedProfileOther={selectedProfileOther}
-        renderChart={renderChart} />
+        renderChart={renderChart}
+        selectOther={selectOther} />
 }
 
 export default CompatibilityViewContainer

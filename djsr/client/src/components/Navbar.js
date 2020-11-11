@@ -22,9 +22,9 @@ const Navbar = ({
             </div>
             <div className='nb-links-container'>
                 <div>
-                    <Link to='/chart/'>Chart</Link>
+                    <Link to='/natal' activeClassName='active'>Natal</Link>
                     <Link to='/transits/'>Transits</Link>
-                    <Link to='/compatibility/'>Compatibility</Link>
+                    <Link to='/compatibility/' activeClassName='active'>Compatibility</Link>
                     <Link to='/learn/'>Learn</Link>
                 </div>
                 <div className='nb-auth-container'>

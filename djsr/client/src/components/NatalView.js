@@ -9,12 +9,13 @@ const NatalView = ({
     selectedProfile,
     renderChart,
     chartData,
-    horoscopeData
+    horoscopeData,
+    selectOther
 }) => {
     let [chartOverview, setChartOverview] = useState('{}');
 
     useEffect(() => {
-
+        selectOther(false)
         if(selectedProfile) {
             renderChart(selectedProfile)
         }
@@ -76,12 +77,13 @@ const NatalView = ({
 
 const NatalViewContainer = () => {
     const dispatch = useDispatch();
+    let selectOther = (status) => dispatch(profileActions.selectOther(status));
     let renderChart = (profile) => dispatch(profileActions.renderChart(profile));
     let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile);
     let chartData = useSelector(state => state.entities.profiles.chartData);
     let horoscopeData = useSelector(state => state.entities.profiles.horoscopeData);
 
-    return <NatalView chartData={chartData} horoscopeData={horoscopeData} selectedProfile={selectedProfile} renderChart={renderChart} />
+    return <NatalView selectOther={selectOther} chartData={chartData} horoscopeData={horoscopeData} selectedProfile={selectedProfile} renderChart={renderChart} />
 }
 
 export default NatalViewContainer

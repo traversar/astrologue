@@ -3,7 +3,7 @@ import axiosInstance from '../axiosApi';
 import { Origin, Horoscope } from 'circular-natal-horoscope-js';
 
 
-export const renderChart = (profileData) => async(dispatch, getState) => {
+export const renderChart = (profileData, other=false) => async(dispatch, getState) => {
     let { birthDate, birthTime, birthLocation, latitude, longitude } = profileData;
     let [ year, month, date ] = birthDate.split('-');
     [year, month, date] = [Number(year), Number(month)-1, Number(date)];
@@ -70,11 +70,13 @@ export const renderChart = (profileData) => async(dispatch, getState) => {
     if(!other) {
         dispatch(chartDataAction());
     } else {
+        console.log('Before dispatch chartDataOtherAction')
         dispatch(chartDataOtherAction());
+        console.log('After dispatch chartDataOtherAction')
     }
 
-    function chartDataAction (chartData) { return { type: profileConstants.LOAD_CHART_DATA, chartData, horoscope } }
-    function chartDataOtherAction (chartData) { return { type: profileConstants.LOAD_CHART_DATA_OTHER, chartData, horoscope } }
+    function chartDataAction () { return { type: profileConstants.LOAD_CHART_DATA, chartData, horoscope } }
+    function chartDataOtherAction () { return { type: profileConstants.LOAD_CHART_DATA_OTHER, chartData, horoscope } }
 }
 
 
@@ -178,4 +180,15 @@ export const getLongLat = (city, stateProvince, country) => async(dispatch, getS
     } else {
         console.log('Error getting Long/Lat from address')
     }
+}
+
+export const selectOther = (status) => async(dispatch, getState) => {
+    if(status) {
+        dispatch(allowSelectOther())
+    } else {
+        dispatch(disallowSelectOther())
+    }
+
+    function allowSelectOther() { return { type: profileConstants.ALLOW_SELECT_OTHER } }
+    function disallowSelectOther() { return { type: profileConstants.DISALLOW_SELECT_OTHER } }
 }

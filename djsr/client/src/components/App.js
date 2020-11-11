@@ -22,8 +22,8 @@ const App = ({
 
     return (
         <>
-        <BrowserRouter>
-            <main>
+        <main>
+            <BrowserRouter>
                 <div className='app-container boxed'>
                     <div className='app-nav-container'>
                         <Navbar />
@@ -33,15 +33,15 @@ const App = ({
                     </div>
                     <div className='app-content-container boxed'>
                         <Switch>
-                            <Route exact path={'/'} component={NatalView} />
-                            <Route exact path={'/transits/'} component={TransitsView} />
-                            <Route exact path={'/compatiblity/'} component={CompatibilityView} />
-                            <Route exact path={'/learn/'} component={LearnView} />
+                            <Route exact path='/' component={NatalView}></Route>
+                            <Route exact path='/transits/' component={TransitsView}></Route>
+                            <Route exact path='/compatibility/' component={CompatibilityView}></Route>
+                            <Route exact path='/learn/' component={LearnView}></Route>
                         </Switch>
                     </div>
                 </div>
-            </main>
             </BrowserRouter>
+        </main>
         </>
     )
 }
