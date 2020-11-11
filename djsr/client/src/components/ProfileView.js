@@ -6,8 +6,8 @@ import ProfileButton from './ProfileButton'
 const ProfileView = ({
     createProfile,
     profiles,
-    getLongLat
 }) => {
+
     let [name, setName] = useState('');
     let [birthDate, setBirthDate] = useState('');
     let [birthTime, setBirthTime] = useState('');
@@ -32,11 +32,13 @@ const ProfileView = ({
                     <div>+</div>
                     <div>Add Profile</div>
                 </div>
+                <div className='pv-profile-links-scrolldiv'>
                 {Array.isArray(profiles) &&
                     profiles.map(profile => (
                         <ProfileButton key={profile.id} profile={profile} />
                     ))
                 }
+                </div>
             </div>
             <div id='add-profile-container' className='add-profile-container-hidden'>
                 <form onSubmit={addProfile}>
@@ -63,7 +65,6 @@ const ProfileView = ({
 
 const ProfileViewContainer = () => {
     const dispatch = useDispatch();
-    let getLongLat = (city, state, country) => dispatch(profileActions.getLongLat(city, state, country))
     let createProfile = (name, birthDate, birthTime, birthLocation) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthLocation));
     let profiles = useSelector(state => state.entities.profiles.profiles)
     // let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile)

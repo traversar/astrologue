@@ -14,7 +14,7 @@ export function profiles(state = {}, action) {
             }
         case profileConstants.SELECT_PROFILE:
             let selectedProfile;
-            state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfile = profile } })
+            state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfile = profile } });
             return {
                 ...state,
                 selectedProfile
@@ -22,7 +22,21 @@ export function profiles(state = {}, action) {
         case profileConstants.LOAD_CHART_DATA:
             return {
                 ...state,
-                chartData: action.chartData
+                chartData: action.chartData,
+                horoscopeData: action.horoscope
+            }
+        case profileConstants.SELECT_PROFILE_OTHER:
+            let selectedProfileOther;
+            state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfileOther = profile} });
+            return {
+                ...state,
+                selectedProfileOther
+            }
+        case profileConstants.LOAD_CHART_DATA_OTHER:
+            return {
+                ...state,
+                chartDataOther: action.chartData,
+                horoscopeDataOther: action.horoscope
             }
         default:
             return state;

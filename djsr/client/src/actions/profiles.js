@@ -5,34 +5,23 @@ import { Origin, Horoscope } from 'circular-natal-horoscope-js';
 
 export const renderChart = (profileData) => async(dispatch, getState) => {
     let { birthDate, birthTime, birthLocation, latitude, longitude } = profileData;
-    console.log('1');
     let [ year, month, date ] = birthDate.split('-');
-    console.log('2');
     [year, month, date] = [Number(year), Number(month)-1, Number(date)];
-    console.log('3');
     let [ hour, minute ] = birthTime.split(':');
     [hour, minute] = [Number(hour), Number(minute)]
-    console.log('4');
     let [ city, stateProvince, country ] = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''));
-    // console.log('5');
-    // let latAndLong = await dispatch(getLongLat(city, stateProvince, country));
-    // console.log('6');
-    // console.log(latAndLong)
-    // let [ latitude, longitude ] = latAndLong;
-    // console.log('7');
 
-
-    console.log(
-        'year: ', year,
-        'month: ', month,
-        'date: ', date,
-        'hour: ', hour,
-        'minute: ', minute,
-        'state: ', stateProvince,
-        'country: ', country,
-        'lat: ', latitude,
-        'long: ', longitude,
-    )
+    // console.log(
+    //     'year: ', year,
+    //     'month: ', month,
+    //     'date: ', date,
+    //     'hour: ', hour,
+    //     'minute: ', minute,
+    //     'state: ', stateProvince,
+    //     'country: ', country,
+    //     'lat: ', latitude,
+    //     'long: ', longitude,
+    // )
 
     const profile = new Origin({
         year,
@@ -55,23 +44,37 @@ export const renderChart = (profileData) => async(dispatch, getState) => {
         language: 'en',
     });
 
-    // let horoscope = renderChart(JSON.parse(profile.profile_object));
 
     let planets = {}
     let celestialBodies = horoscope.CelestialBodies.all;
+
     for(let i = 0; i < celestialBodies.length; i++){
         planets[celestialBodies[i].label] = [celestialBodies[i].ChartPosition.Ecliptic.DecimalDegrees]
     }
-    console.log('Planets: ', planets)
+    delete planets['Sirius'];
+
+    let cusps = [horoscope.Ascendant.ChartPosition.Ecliptic.DecimalDegrees]
+    for(let i = 1; i < 12; i++) {
+        cusps.push((cusps[i-1] + 30) % 360)
+    }
+
+    // console.log(horoscope);
+    // console.log('Planets: ', planets)
+    // console.log('Cusps: ', cusps)
 
     let chartData = {
         planets,
-        cusps: [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+        cusps
     }
 
-    dispatch(chartDataAction(chartData));
+    if(!other) {
+        dispatch(chartDataAction());
+    } else {
+        dispatch(chartDataOtherAction());
+    }
 
-    function chartDataAction (chartData) { return { type: profileConstants.LOAD_CHART_DATA, chartData } }
+    function chartDataAction (chartData) { return { type: profileConstants.LOAD_CHART_DATA, chartData, horoscope } }
+    function chartDataOtherAction (chartData) { return { type: profileConstants.LOAD_CHART_DATA_OTHER, chartData, horoscope } }
 }
 
 
@@ -109,9 +112,7 @@ export const loadProfiles = () => async (dispatch, getState) => {
 
     if (response.status === 200) {
         let data = response.data
-        console.log('before dispatch load profiles')
         dispatch(success(data))
-        console.log('after dispatch load profiles')
     } else {
         console.log('Failed to load profiles')
     }
@@ -119,28 +120,33 @@ export const loadProfiles = () => async (dispatch, getState) => {
     function success(data) { return { type: profileConstants.LOAD_PROFILES, profiles: data } }
 }
 
-export const selectProfile = (profileId) => async (dispatch, getState) => {
-    dispatch(profileConstants.SELECT_PROFILE(profileId))
+export const selectProfile = (profileId, other=false) => async (dispatch, getState) => {
+    if(!other) {
+        dispatch({ type: profileConstants.SELECT_PROFILE, profileId})
+    } else {
+        dispatch({ type: profileConstants.SELECT_PROFILE_OTHER, profileId})
+    }
 }
 
 export const createProfile = (name, birthDate, birthTime, birthLocation) => async(dispatch, getState) => {
     let [year, month, date] = birthDate.split('-');
     let [hour, minute] = birthTime.split(':');
-    let [city, stateProvince, country] = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''))
+    let locationArr = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''))
+    let [city, stateProvince, country] = locationArr.length === 3 ? locationArr : locationArr.length === 2 ? ['', ...locationArr] : ['', '', ...locationArr];
     let latAndLong = await dispatch(getLongLat(city, stateProvince, country));
     let [latitude, longitude] = latAndLong
 
-    console.log(
-        'year: ', year,
-        'month: ', month,
-        'date: ', date,
-        'hour: ', hour,
-        'minute: ', minute,
-        'state: ', stateProvince,
-        'country: ', country,
-        'lat: ', latitude,
-        'long: ', longitude,
-    )
+    // console.log(
+    //     'year: ', year,
+    //     'month: ', month,
+    //     'date: ', date,
+    //     'hour: ', hour,
+    //     'minute: ', minute,
+    //     'state: ', stateProvince,
+    //     'country: ', country,
+    //     'lat: ', latitude,
+    //     'long: ', longitude,
+    // )
 
     const response = await axiosInstance.post(
         '/profiles/',

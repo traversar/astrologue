@@ -17,7 +17,7 @@ const LoginSignup = () => {
                     {signup ? <Signup /> : <Login />}
                 </div>
                 <div className='ls-toggle-link'>
-                    <a onClick={createAccount}>{signup ? 'I already have an account' : 'Create an account' }</a>
+                    <div onClick={createAccount}>{signup ? 'OR Login' : 'OR Register' }</div>
                 </div>
             </div>
         </>

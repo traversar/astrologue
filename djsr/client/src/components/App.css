@@ -11,6 +11,14 @@ body {
     padding: 7px 5px;
 }
 
+.boxed-selected {
+    /* border: 1px solid rgb(53, 53, 105); */
+    border: 1px solid rgb(119, 119, 158);
+    border-radius: 4px;
+    padding: 7px 5px;
+}
+
+
 
 /* ==================================== App == */
 
@@ -82,7 +90,7 @@ body {
 
 .nb-loginsignup-container-hidden {
     visibility: hidden;
-    top: -20%;
+    top: -10%;
 }
 
 
@@ -107,18 +115,36 @@ body {
     flex-direction: column;
 }
 
-.ls-toggle-link {
-    cursor: pointer;
-    color: rgb(140, 0, 255);
-}
-
 
 /* ==================================== ProfileView == */
 
 .pv-profile-links {
     display: flex;
     flex-direction: row;
-    margin: 0 0 0 5px;
+    margin: 0;
+    overflow: hidden;
+    height: 80px;
+}
+
+.pv-profile-links div {
+    min-width: 120px;
+    margin: 0 5px 0 0;
+}
+
+.pv-profile-links-scrolldiv {
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pv-profile-links-scrolldiv div {
+    min-width: 120px;
+    height: 80px;
+    box-sizing: border-box;
+    margin: 0 5px 0 0;
 }
 
 .pb-container {
@@ -178,11 +204,28 @@ body {
 /* ==================================== LoginSignup == */
 
 .login-container input {
-    margin: 5px 0 0 0;
+    margin: 0 0 5px 0;
     padding: 2px;
     border: 1px solid rgb(106, 106, 150);
     border-radius: 5px;
     background-clip: content-box;
+    font-size: 1em;
+}
+
+.signup-container input {
+    margin: 0 0 5px 0;
+    padding: 2px;
+    border: 1px solid rgb(106, 106, 150);
+    border-radius: 5px;
+    background-clip: content-box;
+    font-size: 1em;
+}
+
+.ls-toggle-link {
+    cursor: pointer;
+    /* color: white; */
+    color: rgb(134, 104, 168);
+    font-family: helvetica;
 }
 
 
@@ -191,4 +234,15 @@ body {
 .nv-container {
     display: flex;
     flex-direction: row;
+}
+
+.nv-details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.nv-details-container div {
+    font-family: helvetica;
+    color: rgb(183, 183, 211);
+    font-size: 1em;
 }

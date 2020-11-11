@@ -1,8 +1,12 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoginSignup from './LoginSignup'
 
-const Navbar = () => {
+const Navbar = ({
+    loggedIn,
+    logout
+}) => {
     let loginSignup = '';
 
     const handleLoginSignup = () => {
@@ -24,7 +28,11 @@ const Navbar = () => {
                     <Link to='/learn/'>Learn</Link>
                 </div>
                 <div className='nb-auth-container'>
-                    <div className='nb-auth-button' onClick={handleLoginSignup}>Account (Not signed in)</div>
+                    {loggedIn ?
+                    <div className='nb-auth-button' onClick={logout}>Logout</div>
+                    :
+                    <div className='nb-auth-button' onClick={handleLoginSignup}>Login/Signup</div>
+                    }
                     <div id='auth-container' className='nb-loginsignup-container nb-loginsignup-container-hidden'>
                         <LoginSignup />
                     </div>
@@ -38,8 +46,11 @@ const Navbar = () => {
 }
 
 const NavbarContainer = () => {
+    const dispatch = useDispatch();
+    let loggedIn = useSelector(state => state.authentication.loggedIn);
+    let logout = () => dispatch(authenticationActions.logout());
 
-    return <Navbar />
+    return <Navbar loggedIn={loggedIn} logout={logout} />
 }
 
 export default NavbarContainer
