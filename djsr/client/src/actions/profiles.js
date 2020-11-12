@@ -195,6 +195,31 @@ export const createProfile = (name, birthDate, birthTime, birthLocation) => asyn
     }
 }
 
+export const editProfile = (profileId, name, birthDate, birthTime, birthLocation) => async (dispatch, getState) => {
+    let [year, month, date] = birthDate.split('-');
+    let [hour, minute] = birthTime.split(':');
+    let locationArr = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''))
+    let [city, stateProvince, country] = locationArr.length === 3 ? locationArr : locationArr.length === 2 ? ['', ...locationArr] : ['', '', ...locationArr];
+    let latAndLong = await dispatch(getLongLat(city, stateProvince, country));
+    let [latitude, longitude] = latAndLong;
+
+    const response = await axiosInstance.patch(
+        '/profiles/',
+        {
+            method: 'PATCH',
+            body: JSON.stringify({profileId, name, birthDate, birthTime, birthLocation, latitude, longitude})
+        }
+    )
+
+    if (response.status === 200) {
+        dispatch(loadProfiles())
+        console.log('Successfully edited profile');
+    } else {
+        console.log('Failed to edit profile');
+    }
+
+}
+
 export const getLongLat = (city, stateProvince, country) => async(dispatch, getState) => {
     const response = await axiosInstance.post(
         '/address/',

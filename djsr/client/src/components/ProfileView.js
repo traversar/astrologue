@@ -13,7 +13,7 @@ const ProfileView = ({
     let [birthTime, setBirthTime] = useState('');
     let [birthLocation, setBirthLocation] = useState('');
 
-    const handleAddProfile = () => {
+    const handleAddProfileContainer = () => {
         let addProfileContainer = document.querySelector('.add-profile-container')
         addProfileContainer.classList.contains('add-profile-container-hidden') ? addProfileContainer.classList.remove('add-profile-container-hidden') : addProfileContainer.classList.add('add-profile-container-hidden');
     }
@@ -28,7 +28,7 @@ const ProfileView = ({
     return (
         <div>
             <div className='pv-profile-links'>
-                <div onClick={handleAddProfile} className='pv-addprofile-btn boxed'>
+                <div onClick={handleAddProfileContainer} className='pv-addprofile-btn boxed'>
                     <div>+</div>
                     <div>Add Profile</div>
                 </div>

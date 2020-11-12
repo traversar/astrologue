@@ -31,7 +31,7 @@ const Navbar = ({
                     <h1>Astrologue</h1>
                 </div>
                 <div className='nb-links'>
-                    <Link to='/' activeClassName='active'>Natal</Link>
+                    <Link to='/'>Natal</Link>
                     <Link to='/transits/'>Transits</Link>
                     <Link to='/compatibility/' activeClassName='active'>Compatibility</Link>
                     <Link to='/learn/'>Learn</Link>

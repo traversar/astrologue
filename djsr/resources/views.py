@@ -14,10 +14,30 @@ class ProfilesView(APIView):
     def get(self, request):
         if request.user.is_authenticated:
             user_id = request.user.id
-            print('user_id ', user_id)
             profiles = Profile.objects.all().filter(user_id=user_id)
             serialized = ProfileSerializer(profiles, many=True)
         return Response(data=serialized.data, status=status.HTTP_200_OK)
+
+    def patch(self, request):
+        if request.user.is_authenticated:
+            data = json.loads(request)
+            data = data['body']
+
+            profile = Profile.objects.get(id=data['profileId'])
+
+            if(request.user.id == profile.user.id):
+                profile.name = data['name'],
+                profile.birthDate = data['birthDate']
+                profile.birthTime = data['birthTime']
+                profile.birthLocation = data['birthLocation']
+                profile.latitude = data['latitude']
+                profile.lonitude = data['longitude']
+                profile.save()
+
+                return Response(status=status.HTTP_200_OK)
+
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
     def post(self, request):
         if request.user.is_authenticated:

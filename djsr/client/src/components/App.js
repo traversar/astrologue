@@ -16,9 +16,9 @@ const App = ({
 }) => {
 
     useEffect(() => {
-        loadProfiles()
-        // fetch profiles from database
-
+        if(loggedIn) {
+            loadProfiles()
+        }
     }, [loggedIn]);
 
     return (
