@@ -18,6 +18,7 @@ const App = ({
     useEffect(() => {
         loadProfiles()
         // fetch profiles from database
+
     }, [loggedIn]);
 
     return (

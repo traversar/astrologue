@@ -13,25 +13,34 @@ const Navbar = ({
         let authContainer = document.getElementById('auth-container')
         authContainer.classList.contains('nb-loginsignup-container-hidden') ? authContainer.classList.remove('nb-loginsignup-container-hidden') : authContainer.classList.add('nb-loginsignup-container-hidden');
         loginSignup = loginSignup === 'login' ? false : true;
+
+        // window.addEventListener('click', e => {
+        //     if(e.target.id !== ('auth-container' || 'nb-auth-button') ) {
+        //         let authContainer = document.getElementById('auth-container');
+        //         if(!authContainer.classList.contains('nb-loginsignup-container-hidden')) {
+        //             authContainer.classList.add('nb-loginsignup-container-hidden')
+        //         }
+        //     }
+        // })
     }
 
     return (
         <>
-            <div className='app-header-container'>
-                <h1>Astrologue</h1>
-            </div>
             <div className='nb-links-container'>
-                <div>
-                    <Link to='/natal' activeClassName='active'>Natal</Link>
+                <div className='app-header-container'>
+                    <h1>Astrologue</h1>
+                </div>
+                <div className='nb-links'>
+                    <Link to='/' activeClassName='active'>Natal</Link>
                     <Link to='/transits/'>Transits</Link>
                     <Link to='/compatibility/' activeClassName='active'>Compatibility</Link>
                     <Link to='/learn/'>Learn</Link>
                 </div>
                 <div className='nb-auth-container'>
                     {loggedIn ?
-                    <div className='nb-auth-button' onClick={logout}>Logout</div>
+                    <div id='nb-auth-button' className='nb-auth-button' onClick={logout}>Logout</div>
                     :
-                    <div className='nb-auth-button' onClick={handleLoginSignup}>Login/Signup</div>
+                    <div id='nb-auth-button' className='nb-auth-button' onClick={handleLoginSignup}>Login/Signup</div>
                     }
                     <div id='auth-container' className='nb-loginsignup-container nb-loginsignup-container-hidden'>
                         <LoginSignup />

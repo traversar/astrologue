@@ -16,6 +16,10 @@ const TransitsView = ({
     selectOther(true);
     let [chartOverview, setChartOverview] = useState('{}');
 
+    const getProfileForNow = () => {
+
+    }
+
     useEffect(() => {
 
         if(selectedProfile) {

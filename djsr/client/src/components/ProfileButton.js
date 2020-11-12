@@ -21,11 +21,20 @@ const ProfileButton = ({
         }
     }
 
+    let elementColors = {
+        0: 'pb-container-air',
+        1: 'pb-container-water',
+        2: 'pb-container-fire',
+        3: 'pb-container-earth',
+    }
+
     return (
-        <div onClick={() => handleProfileSelect(profile.id)} className={profile.id === selectedProfile.id || (selectedProfileOther && selectedProfileOther.id === profile.id) ? 'pb-container boxed-selected' : 'pb-container boxed'} >
-            <div>{profile.name}</div>
-            <div>{profile.birthDate}</div>
-            <div>{profile.birthLocation}</div>
+        <div
+            onClick={() => handleProfileSelect(profile.id)}
+            className={ profile.id === selectedProfile.id || (selectedProfileOther && selectedProfileOther.id === profile.id) ? 'pb-container boxed-selected ' + elementColors[profile.id % 4] : 'pb-container boxed ' + elementColors[profile.id % 4]}>
+                <div>{profile.name}</div>
+                <div>{profile.birthDate}</div>
+                <div>{profile.birthLocation}</div>
         </div>
     )
 }
@@ -43,7 +52,7 @@ const ProfileButtonContainer = ({profile}) => {
         selectProfile={selectProfile}
         selectedProfile={selectedProfile}
         selectedProfileOther={selectedProfileOther}
-        />
+    />
 }
 
 export default ProfileButtonContainer

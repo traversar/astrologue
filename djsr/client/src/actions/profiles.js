@@ -2,6 +2,35 @@ import { profileConstants } from '../constants/profiles';
 import axiosInstance from '../axiosApi';
 import { Origin, Horoscope } from 'circular-natal-horoscope-js';
 
+export const renderChartForNow = (profileData) => async(dispatch, getState) => {
+    let { latitude, longitude } = profileData;
+    currentDate = new Date();
+    console.log(currentDate)
+    let [ year, month, date ] = currentDate;
+
+    const profile = new Origin({
+        year,
+        month,
+        date,
+        hour,
+        minute,
+        latitude,
+        longitude
+    });
+
+    let horoscope = new Horoscope({
+        origin: profile,
+        houseSystem: "whole-sign",
+        zodiac: "tropical",
+        aspectPoints: ["bodies", "points", "angles"],
+        aspectWithPoints: ["bodies", "points", "angles"],
+        aspectTypes: ["major", "minor"],
+        customOrbs: {},
+        language: 'en',
+    });
+
+
+}
 
 export const renderChart = (profileData, other=false) => async(dispatch, getState) => {
     let { birthDate, birthTime, birthLocation, latitude, longitude } = profileData;

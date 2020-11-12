@@ -14,7 +14,7 @@ const ProfileView = ({
     let [birthLocation, setBirthLocation] = useState('');
 
     const handleAddProfile = () => {
-        let addProfileContainer = document.getElementById('add-profile-container')
+        let addProfileContainer = document.querySelector('.add-profile-container')
         addProfileContainer.classList.contains('add-profile-container-hidden') ? addProfileContainer.classList.remove('add-profile-container-hidden') : addProfileContainer.classList.add('add-profile-container-hidden');
     }
 
@@ -40,7 +40,7 @@ const ProfileView = ({
                 }
                 </div>
             </div>
-            <div id='add-profile-container' className='add-profile-container-hidden'>
+            <div className='add-profile-container add-profile-container-hidden'>
                 <form onSubmit={addProfile}>
                     <div className='pv-addprofile-form'>
                         <label>
