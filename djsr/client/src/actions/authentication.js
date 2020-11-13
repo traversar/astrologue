@@ -54,3 +54,30 @@ export const signup = (username, email, password) => async (dispatch, getState) 
     function success() { return { type: authConstants.REGISTER_SUCCESS } }
     function failure() { return { type: authConstants.REGISTER_FAILURE } }
 }
+
+export const refreshLogin = () => async (dispatch, getState) => {
+    const refreshToken = localStorage.getItem('refresh_token');
+
+    if (refreshToken){
+        const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
+
+        // exp date in token is expressed in seconds, while now() returns milliseconds:
+        const now = Math.ceil(Date.now() / 1000);
+        console.log(tokenParts.exp);
+
+        if (tokenParts.exp > now) {
+            let response = await axiosInstance.post('/token/refresh/', {refresh: refreshToken})
+
+            if(response.status === 200) {
+                localStorage.setItem('access_token', response.data.access);
+                localStorage.setItem('refresh_token', response.data.refresh);
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+
+                dispatch(success())
+            }
+
+        }
+    }
+
+    function success() { return { type: authConstants.LOGIN_SUCCESS } }
+}

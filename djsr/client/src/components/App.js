@@ -8,17 +8,24 @@ import LearnView from './LearnView'
 import TransitsView from './TransitsView'
 import ProfileView from './ProfileView'
 import * as profileActions from '../actions/profiles';
+import * as authActions from '../actions/authentication';
 import './App.css'
 
 const App = ({
     loadProfiles,
-    loggedIn
+    loggedIn,
+    refreshLogin
 }) => {
 
     useEffect(() => {
+
         if(loggedIn) {
             loadProfiles()
+        } else {
+            console.log('before refresh login')
+            refreshLogin()
         }
+
     }, [loggedIn]);
 
     return (
@@ -50,10 +57,11 @@ const App = ({
 const AppContainer = () => {
     const dispatch = useDispatch();
     const loadProfiles = () => dispatch(profileActions.loadProfiles())
+    const refreshLogin = () => dispatch(authActions.refreshLogin())
     let loggedIn = useSelector(state => state.authentication.loggedIn);
 
 
-    return <App loggedIn={loggedIn} loadProfiles={loadProfiles} />
+    return <App loggedIn={loggedIn} loadProfiles={loadProfiles} refreshLogin={refreshLogin} />
 }
 
 export default AppContainer
