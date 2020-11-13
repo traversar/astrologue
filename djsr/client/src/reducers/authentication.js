@@ -11,6 +11,10 @@ export function authentication(state = {loggedIn: false}, action) {
                 loggedIn: false,
                 loginFailed: true
             }
+        case authConstants.LOGOUT:
+            return {
+                loggedIn: false,
+            }
         case authConstants.REGISTER_SUCCESS:
             return {
                 loggedIn: false,

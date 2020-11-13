@@ -24,18 +24,19 @@ export const login = (username, password) => async (dispatch, getState) => {
 }
 
 export const logout = () => async (dispatch, getState) => {
-    try {
-        const response = await axiosInstance.post('/blacklist/', {
-            "refresh_token": localStorage.getItem("refresh_token")
-        });
-        console.log(response);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        axiosInstance.defaults.headers['Authorization'] = null;
+    const response = await axiosInstance.post('/blacklist/', {
+        "refresh_token": localStorage.getItem("refresh_token")
+    });
+    console.log(response);
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    axiosInstance.defaults.headers['Authorization'] = null;
+
+    if(response.status === 205) {
+        dispatch(success())
     }
-    catch (e) {
-        console.log(e);
-    }
+
+    function success() { return { type: authConstants.LOGOUT } }
 };
 
 

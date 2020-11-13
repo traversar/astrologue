@@ -30,7 +30,7 @@ const ProfileForm = ({
             <form onSubmit={handleSubmit === 'edit' ? handleEditProfile : handleAddProfile}>
                 <div className='pf-inputs-container'>
                     <label>
-                        <input name="name" type="text" placeholder='Name/Alias' value={name} onChange={(e) => setName(e.target.value)} />
+                        <div name="name" type="text" placeholder='Name/Alias' value={name} onChange={(e) => setName(e.target.value)}></div>
                     </label>
                     <label>
                         <input name="birthdate" type="date" placeholder='Birthdate' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />

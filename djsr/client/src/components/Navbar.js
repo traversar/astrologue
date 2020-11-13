@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoginSignup from './LoginSignup'
+import * as authActions from '../actions/authentication'
 
 const Navbar = ({
     loggedIn,
@@ -57,7 +58,7 @@ const Navbar = ({
 const NavbarContainer = () => {
     const dispatch = useDispatch();
     let loggedIn = useSelector(state => state.authentication.loggedIn);
-    let logout = () => dispatch(authenticationActions.logout());
+    let logout = () => dispatch(authActions.logout());
 
     return <Navbar loggedIn={loggedIn} logout={logout} />
 }
