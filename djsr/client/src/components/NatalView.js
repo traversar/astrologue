@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signup } from '../actions/authentication';
 import * as profileActions from '../actions/profiles';
-import { Horoscope, Origin } from 'circular-natal-horoscope-js';
-
+import { astroSVGs } from '../svgs'
 
 const NatalView = ({
     selectedProfile,
@@ -65,7 +63,7 @@ const NatalView = ({
                 {chartOverview &&
                     Object.keys(chartOverview).map(planet => (
                         <div>
-                            {planet} in {chartOverview[planet].sign} in the {chartOverview[planet].house} house
+                            {astroSVGs['planets'][planet]} in {astroSVGs['signs'][chartOverview[planet].sign]} in the {chartOverview[planet].house} house
                         </div>
                     ))
                 }
