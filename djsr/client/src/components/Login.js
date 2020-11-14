@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../actions/authentication';
 
 const Login = ({
-    submitLogin
+    submitLogin,
+    setCloseCondition
 }) => {
     let [username, setUsername] = useState('');
     let handleUsername = value => setUsername(value);
@@ -13,6 +14,7 @@ const Login = ({
     const handleSubmit = event => {
         event.preventDefault();
         submitLogin(username, password);
+        setCloseCondition(false);
     }
 
     return (
@@ -30,11 +32,11 @@ const Login = ({
     )
 }
 
-const LoginContainer = () => {
+const LoginContainer = ({setCloseCondition}) => {
     const dispatch = useDispatch();
     const submitLogin = (username, password) => dispatch(authActions.login(username, password));
 
-    return <Login submitLogin={submitLogin} />
+    return <Login submitLogin={submitLogin} setCloseCondition={setCloseCondition} />
 }
 
 export default LoginContainer

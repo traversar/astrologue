@@ -44,3 +44,13 @@ const DropInComponent = ({
 }
 
 export default DropInComponent
+
+
+        // window.addEventListener('click', e => {
+        //     if(e.target.id !== ('auth-container' || 'nb-auth-button') ) {
+        //         let authContainer = document.getElementById('auth-container');
+        //         if(!authContainer.classList.contains('nb-loginsignup-container-hidden')) {
+        //             authContainer.classList.add('nb-loginsignup-container-hidden')
+        //         }
+        //     }
+        // })

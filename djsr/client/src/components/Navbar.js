@@ -1,28 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoginSignup from './LoginSignup'
-import * as authActions from '../actions/authentication'
+import * as authActions from '../actions/authentication';
+import DropInComponent from '../utils/DropInComponent';
 
 const Navbar = ({
     loggedIn,
     logout
 }) => {
-    let loginSignup = '';
+    let [showPanel, setShowPanel] = useState(false);
 
     const handleLoginSignup = () => {
-        let authContainer = document.getElementById('auth-container')
-        authContainer.classList.contains('nb-loginsignup-container-hidden') ? authContainer.classList.remove('nb-loginsignup-container-hidden') : authContainer.classList.add('nb-loginsignup-container-hidden');
-        loginSignup = loginSignup === 'login' ? false : true;
+        // let authContainer = document.getElementById('auth-container')
+        // authContainer.classList.contains('nb-loginsignup-container-hidden') ? authContainer.classList.remove('nb-loginsignup-container-hidden') : authContainer.classList.add('nb-loginsignup-container-hidden');
+        setShowPanel(true);
 
-        // window.addEventListener('click', e => {
-        //     if(e.target.id !== ('auth-container' || 'nb-auth-button') ) {
-        //         let authContainer = document.getElementById('auth-container');
-        //         if(!authContainer.classList.contains('nb-loginsignup-container-hidden')) {
-        //             authContainer.classList.add('nb-loginsignup-container-hidden')
-        //         }
-        //     }
-        // })
     }
 
     return (
@@ -43,14 +36,14 @@ const Navbar = ({
                     :
                     <div id='nb-auth-button' className='nb-auth-button' onClick={handleLoginSignup}>Login/Signup</div>
                     }
-                    <div id='auth-container' className='nb-loginsignup-container nb-loginsignup-container-hidden'>
+                    {/* <div id='auth-container' className='nb-loginsignup-container nb-loginsignup-container-hidden'>
                         <LoginSignup />
-                    </div>
+                    </div> */}
                 </div>
             </div>
-            {/* <div id='auth-container' className='nb-loginsignup-container hidden'>
-                <LoginSignup />
-            </div> */}
+            {showPanel &&
+                <DropInComponent id="login-signup-panel" dropIn={LoginSignup} setCloseCondition={setShowPanel} />
+            }
         </>
     )
 }
