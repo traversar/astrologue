@@ -23,6 +23,20 @@ body {
 }
 
 
+.dic {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    transition: .8s top;
+}
+
+.dic-hidden {
+    position: absolute;
+    top: -10%;
+    transition: .8s top;
+}
+
 
 /* ==================================== App == */
 

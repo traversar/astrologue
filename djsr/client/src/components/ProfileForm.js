@@ -6,7 +6,8 @@ const ProfileForm = ({
     handleSubmit,
     createProfile,
     editProfile,
-    profileId
+    profileId,
+    setCloseCondition
 }) => {
 
     let [name, setName] = useState('');
@@ -14,15 +15,17 @@ const ProfileForm = ({
     let [birthTime, setBirthTime] = useState('');
     let [birthLocation, setBirthLocation] = useState('');
 
-    const handleEditProfile = () => {
+    const handleEditProfile = (e) => {
         e.preventDefault();
-        editProfile(profileId, name, birthDate, birthTime, birthLocation);
+        if(profileId && name && birthDate && birthTime && birthLocation)
+            editProfile(profileId, name, birthDate, birthTime, birthLocation);
+        setCloseCondition(false);
     }
 
     const handleAddProfile = (e) => {
         e.preventDefault();
         createProfile(name, birthDate, birthTime, birthLocation);
-        return null;
+        setCloseCondition(false);
     }
 
     return (
@@ -51,6 +54,7 @@ const ProfileForm = ({
 const ProfileFormContainer = ({
     profileId,
     handleSubmit,
+    setCloseCondition
 }) => {
     const dispatch = useDispatch();
     let createProfile = (name, birthDate, birthTime, birthLocation) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthLocation));
@@ -61,6 +65,7 @@ const ProfileFormContainer = ({
         handleSubmit={handleSubmit}
         createProfile={createProfile}
         editProfile={editProfile}
+        setCloseCondition={setCloseCondition}
     />
 }
 
