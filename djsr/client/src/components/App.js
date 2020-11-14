@@ -1,25 +1,67 @@
-import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import Login from './Login';
-import Signup from './Signup';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navbar from './Navbar';
+import NatalView from './NatalView'
+import CompatibilityView from './CompatibilityView'
+import LearnView from './LearnView'
+import TransitsView from './TransitsView'
+import ProfileView from './ProfileView'
+import * as profileActions from '../actions/profiles';
+import * as authActions from '../actions/authentication';
+import './App.css'
 
-const App = () => {
+const App = ({
+    loadProfiles,
+    loggedIn,
+    refreshLogin
+}) => {
+
+    useEffect(() => {
+
+        if(loggedIn) {
+            loadProfiles()
+        } else {
+            console.log('before refresh login')
+            refreshLogin()
+        }
+
+    }, [loggedIn]);
+
     return (
         <>
-            <main>
-                <div className='app-container'>
-                    <h1>Astrologue</h1>
-                    <div className='app-content-container'>
+        <main>
+            <BrowserRouter>
+                <div className='app-container boxed'>
+                    <div className='app-nav-container'>
+                        <Navbar />
+                    </div>
+                    <div className='app-profile-container boxed'>
+                        <ProfileView />
+                    </div>
+                    <div className='app-content-container boxed'>
                         <Switch>
-                            <Route exact path={'/login/'} component={Login} />
-                            <Route exact path={'/signup/'} component={Signup} />
-                            <Route path={'/'} render={() => <h1>Home again</h1>} />
+                            <Route exact path='/' component={NatalView}></Route>
+                            <Route exact path='/transits/' component={TransitsView}></Route>
+                            <Route exact path='/compatibility/' component={CompatibilityView}></Route>
+                            <Route exact path='/learn/' component={LearnView}></Route>
                         </Switch>
                     </div>
                 </div>
-            </main>
+            </BrowserRouter>
+        </main>
         </>
     )
 }
 
-export default App
+const AppContainer = () => {
+    const dispatch = useDispatch();
+    const loadProfiles = () => dispatch(profileActions.loadProfiles())
+    const refreshLogin = () => dispatch(authActions.refreshLogin())
+    let loggedIn = useSelector(state => state.authentication.loggedIn);
+
+
+    return <App loggedIn={loggedIn} loadProfiles={loadProfiles} refreshLogin={refreshLogin} />
+}
+
+export default AppContainer

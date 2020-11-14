@@ -1,0 +1,298 @@
+body {
+    /* background-color: rgb(29, 29, 83); */
+    background-color: rgb(62, 62, 107);
+    font-size: 15px;
+}
+
+.boxed {
+    /* border: 1px solid rgb(53, 53, 105); */
+    border: 1px solid rgb(90, 90, 138);
+    border-radius: 4px;
+    padding: 7px 5px;
+}
+
+.boxed-selected {
+    /* border: 1px solid rgb(53, 53, 105); */
+    border: 1.5px solid rgb(119, 119, 158);
+    border-radius: 4px;
+    padding: 7px 5px;
+}
+
+#chart {
+    z-index: -1;
+}
+
+
+
+/* ==================================== App == */
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.app-header-container h1 {
+    color: white;
+    margin: 0 0 0 0;
+    padding: 0;
+    font-size: 2.5em;
+}
+
+.app-nav-container {
+    margin-bottom: 8px;
+}
+
+.app-profile-container {
+    margin-bottom: 5px;
+}
+
+
+
+/* ==================================== Navbar == */
+
+.app-nav-container a {
+    font-family: helvetica;
+    font-size: .9em;
+    font-weight: 100;
+    text-decoration: none;
+    /* border: 1px solid rgb(53, 53, 105); */
+    /* border: 1px solid rgb(72, 72, 124); */
+    border-radius: 8px;
+    padding: 4px 4px 2px;
+    margin: 0 3px 5px 0;
+    color: rgb(57, 50, 94);
+    /* color: rgb(167, 167, 201); */
+    background-color: rgb(237, 206, 255);
+    transition: .5s background-color;
+    /* transition: .5s color; */
+
+}
+
+.app-nav-container a:hover {
+    /* background-color: rgb(137, 0, 250); */
+    /* border-color: rgb(68, 68, 124); */
+    /* border-color: rgb(100, 100, 158); */
+    background-color: rgb(230, 211, 255);
+    color: rgb(82, 74, 122);
+}
+
+.nb-loginsignup-container {
+    z-index: 0;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+
+    /* boxed */
+    border: 1px solid rgb(72, 72, 124);
+    border-radius: 4px;
+    padding: 7px 5px;
+
+    /* background-color */
+    background-color: rgb(62, 62, 107, .7);
+    transition: .8s top;
+}
+
+.nb-loginsignup-container-hidden {
+    visibility: hidden;
+    top: -10%;
+}
+
+.nb-links-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.nb-auth-button {
+    font-family: helvetica;
+    cursor: pointer;
+    color: rgb(146, 114, 204);
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==================================== ProfileView == */
+
+.pv-profile-links {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    overflow: hidden;
+    height: 80px;
+}
+
+.pv-profile-links div {
+    min-width: 120px;
+    margin: 0 5px 0 0;
+}
+
+.pv-profile-links-scrolldiv {
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pv-profile-links-scrolldiv div {
+    min-width: 120px;
+    height: 80px;
+    box-sizing: border-box;
+    margin: 0 5px 0 0;
+}
+
+.pb-container {
+    font-family: helvetica;
+    color: rgb(167, 167, 201);
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    transition: .5s background-color;
+}
+
+.pb-container:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.062);
+}
+
+.pb-container-earth {
+    background-color: rgba(209, 225, 151, 0.1);
+}
+
+.pb-container-fire {
+    background-color: rgba(243, 108, 108, 0.1);
+}
+
+.pb-container-air {
+    background-color: rgba(169, 151, 223, 0.1);
+}
+
+.pb-container-water {
+    background-color: rgba(135, 207, 235, 0.1);
+}
+
+.pv-addprofile-btn {
+    font-family: helvetica;
+    color: rgb(167, 167, 201);
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    transition: .5s background-color;
+}
+
+.pv-addprofile-btn:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.062);
+}
+
+.pv-addprofile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-profile-container {
+    z-index: 0;
+    border: 1px solid rgb(72, 72, 124);
+    border-radius: 4px;
+    padding: 7px 5px;
+    background-color: rgb(62, 62, 107, .7);
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    transition: .8s top;
+}
+
+.add-profile-container input {
+    margin: 0 0 5px 0;
+    padding: 2px;
+    border: 1px solid rgb(106, 106, 150);
+    border-radius: 5px;
+    background-clip: content-box;
+    font-size: 1.2em;
+}
+
+.add-profile-container-hidden {
+    visibility: hidden;
+    top: -10%;
+}
+
+.pv-addprofile-btn > div {
+    text-align: center;
+}
+
+/* ==================================== LoginSignup == */
+
+.login-container {
+    /* padding: 10px; */
+}
+
+.login-container input {
+    margin: 0 0 5px 0;
+    padding: 2px;
+    border: 1px solid rgb(106, 106, 150);
+    border-radius: 5px;
+    background-clip: content-box;
+    font-size: 1.2em;
+}
+
+.signup-container input {
+    margin: 0 0 5px 0;
+    padding: 2px;
+    border: 1px solid rgb(106, 106, 150);
+    border-radius: 5px;
+    background-clip: content-box;
+    font-size: 1.2em;
+}
+
+.ls-toggle-link {
+    cursor: pointer;
+    /* color: white; */
+    color: rgb(134, 104, 168);
+    font-family: helvetica;
+}
+
+
+/* ==================================== NatalView == */
+
+.nv-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.nv-details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.nv-details-container div {
+    font-family: helvetica;
+    color: rgb(183, 183, 211);
+    font-size: 1em;
+}
+
+
+
+/* ==================================== ProfileForm == */
+
+.pf-inputs-container {
+    background-color: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+}

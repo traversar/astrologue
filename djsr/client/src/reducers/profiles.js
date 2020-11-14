@@ -2,15 +2,52 @@ import { profileConstants } from '../constants/profiles';
 
 export function profiles(state = {}, action) {
     switch (action.type) {
-        case profileConstants.LOAD_PROFILE:
+        case profileConstants.LOAD_PROFILES:
+            // let profilesObject;
+            // action.profiles.forEach((profile) => {
+            //     profilesObject[profile.id] = profile;
+            // });
             return {
                 ...state,
-                current: action.profile
+                profiles: action.profiles,
+                selectedProfile: action.profiles[0],
+                selectedProfileOther: null
             }
-        case profileConstants.LOAD_OTHER_PROFILE:
+        case profileConstants.SELECT_PROFILE:
+            let selectedProfile;
+            state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfile = profile } });
             return {
                 ...state,
-                other: action.profile
+                selectedProfile
+            }
+        case profileConstants.LOAD_CHART_DATA:
+            return {
+                ...state,
+                chartData: action.chartData,
+                horoscopeData: action.horoscope
+            }
+        case profileConstants.ALLOW_SELECT_OTHER:
+            return {
+                ...state,
+                selectOtherOn: true
+            }
+        case profileConstants.DISALLOW_SELECT_OTHER:
+            return {
+                ...state,
+                selectOtherOn: false
+            }
+        case profileConstants.SELECT_PROFILE_OTHER:
+            let selectedProfileOther;
+            state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfileOther = profile} });
+            return {
+                ...state,
+                selectedProfileOther
+            }
+        case profileConstants.LOAD_CHART_DATA_OTHER:
+            return {
+                ...state,
+                chartDataOther: action.chartData,
+                horoscopeDataOther: action.horoscope
             }
         default:
             return state;

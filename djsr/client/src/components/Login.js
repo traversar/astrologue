@@ -5,36 +5,34 @@ import * as authActions from '../actions/authentication';
 const Login = ({
     submitLogin
 }) => {
-    let [email, setEmail] = useState('');
-    let handleEmail = value => setEmail(value);
+    let [username, setUsername] = useState('');
+    let handleUsername = value => setUsername(value);
     let [password, setPassword] = useState('');
     let handlePassword = value => setPassword(value);
 
     const handleSubmit = event => {
         event.preventDefault();
-        submitLogin(email, password);
+        submitLogin(username, password);
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <div className='login-container'>
                 <label>
-                    Email
-                    <input name="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input name="email" type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
                 </label>
                 <label>
-                    Password
-                    <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input name="password" type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
                 <input type="submit" value="Login" />
-            </form>
-        </>
+            </div>
+        </form>
     )
 }
 
 const LoginContainer = () => {
     const dispatch = useDispatch();
-    const submitLogin = (email, password) => dispatch(authActions.login(email, password));
+    const submitLogin = (username, password) => dispatch(authActions.login(username, password));
 
     return <Login submitLogin={submitLogin} />
 }
