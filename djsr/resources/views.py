@@ -16,6 +16,9 @@ class ProfilesView(APIView):
             user_id = request.user.id
             profiles = Profile.objects.all().filter(user_id=user_id)
             serialized = ProfileSerializer(profiles, many=True)
+        else:
+            profiles = Profile.objects.filter(id__in=[1, 2])
+            serialized = ProfileSerializer(profiles, many=True)
         return Response(data=serialized.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
