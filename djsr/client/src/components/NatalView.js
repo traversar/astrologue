@@ -68,7 +68,7 @@ const NatalView = ({
                     ))
                 }
             </div>
-            <div id='chart'></div>
+            <div id='chart' className='boxed'></div>
         </div>
     )
 }

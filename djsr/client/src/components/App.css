@@ -8,7 +8,7 @@ body {
     /* border: 1px solid rgb(53, 53, 105); */
     border: 1px solid rgb(90, 90, 138);
     border-radius: 4px;
-    padding: 7px 5px;
+    padding: 5px;
 }
 
 .boxed-selected {
@@ -20,6 +20,7 @@ body {
 
 #chart {
     z-index: -1;
+    margin-left: 5px;
 }
 
 
@@ -282,11 +283,18 @@ body {
 }
 
 
+
+
 /* ==================================== NatalView == */
 
 .nv-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.nv-container div {
+    width: 100%;
 }
 
 .nv-details-container {

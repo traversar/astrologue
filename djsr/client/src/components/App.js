@@ -19,12 +19,11 @@ const App = ({
 
     useEffect(() => {
 
-        if(loggedIn) {
-            loadProfiles()
-        } else {
-            console.log('before refresh login')
-            refreshLogin()
-        }
+        // if(!loggedIn) {
+        //     refreshLogin()
+        // }
+
+        loadProfiles()
 
     }, [loggedIn]);
 
@@ -39,7 +38,7 @@ const App = ({
                     <div className='app-profile-container boxed'>
                         <ProfileView />
                     </div>
-                    <div className='app-content-container boxed'>
+                    <div className='app-content-container'>
                         <Switch>
                             <Route exact path='/' component={NatalView}></Route>
                             <Route exact path='/transits/' component={TransitsView}></Route>

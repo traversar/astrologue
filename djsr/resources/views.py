@@ -10,6 +10,7 @@ import json
 
 class ProfilesView(APIView):
     permission_classes = (permissions.AllowAny,)
+    # authentication_classes = ()
 
     def get(self, request):
         if request.user.is_authenticated:
