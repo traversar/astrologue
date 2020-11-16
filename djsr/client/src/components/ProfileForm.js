@@ -4,6 +4,7 @@ import * as profileActions from '../actions/profiles';
 
 const ProfileForm = ({
     handleSubmit,
+    profile,
     createProfile,
     editProfile,
     profileId,
@@ -28,21 +29,24 @@ const ProfileForm = ({
         setCloseCondition(false);
     }
 
+    console.log('profile.name: ', profile.name)
+    console.log('profile.birthDate: ', profile.birthDate)
+
     return (
-        <div className='profile-form-container profile-form-container-hidden'>
+        <div className='pf-container'>
             <form onSubmit={handleSubmit === 'edit' ? handleEditProfile : handleAddProfile}>
                 <div className='pf-inputs-container'>
                     <label>
-                        <div name="name" type="text" placeholder='Name/Alias' value={name} onChange={(e) => setName(e.target.value)}></div>
+                        <input name="name" value={profile.name} type="text" value={name} onChange={(e) => setName(e.target.value)}></input>
                     </label>
                     <label>
-                        <input name="birthdate" type="date" placeholder='Birthdate' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                        <input name="birthdate" value={profile.birthDate} type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                     </label>
                     <label>
-                        <input name="birthtime" type="time" placeholder='Birthtime' value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
+                        <input name="birthtime" value={profile.birthTime} type="time" value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
                     </label>
                     <label>
-                        <input name="birthLocation" type="text" placeholder='Birth Location' value={birthLocation} onChange={(e) => setBirthLocation(e.target.value)} />
+                        <input name="birthLocation" value={profile.birthLocation} type="text" value={birthLocation} onChange={(e) => setBirthLocation(e.target.value)} />
                     </label>
                     <input type="submit" value={handleSubmit === 'edit' ? 'Save' : 'Create'} />
                 </div>
@@ -54,13 +58,15 @@ const ProfileForm = ({
 const ProfileFormContainer = ({
     profileId,
     handleSubmit,
-    setCloseCondition
+    setCloseCondition,
+    profile
 }) => {
     const dispatch = useDispatch();
     let createProfile = (name, birthDate, birthTime, birthLocation) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthLocation));
     let editProfile = (profileId, name, birthDate, birthTime, birthLocation) => dispatch(profileActions.editProfile(profileId, name, birthDate, birthTime, birthLocation));
 
     return <ProfileForm
+        profile={profile}
         profileId={profileId}
         handleSubmit={handleSubmit}
         createProfile={createProfile}

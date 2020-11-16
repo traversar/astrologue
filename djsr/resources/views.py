@@ -16,7 +16,8 @@ class ProfilesView(APIView):
         if request.user.is_authenticated:
             user_id = request.user.id
             profiles = Profile.objects.all().filter(user_id=user_id)
-            serialized = ProfileSerializer(profiles, many=True)
+            serialized = ProfileSerializer(profiles, context={'request': request}, many=True)
+            print(serialized.data)
         else:
             profiles = Profile.objects.filter(id__in=[1, 2])
             serialized = ProfileSerializer(profiles, many=True)

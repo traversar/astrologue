@@ -34,7 +34,7 @@ body {
 
 .dic-hidden {
     position: absolute;
-    top: -10%;
+    top: -25%;
     transition: .8s top;
 }
 
@@ -160,7 +160,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-.pv-profile-links-scrolldiv div {
+.pv-profile-links-scrolldiv > div {
     min-width: 120px;
     height: 80px;
     box-sizing: border-box;
@@ -312,9 +312,27 @@ body {
 
 /* ==================================== ProfileForm == */
 
+
+.pf-container {
+    z-index: 1;
+    border: 1px solid rgb(72, 72, 124);
+    border-radius: 4px;
+    padding: 7px 5px;
+    background-color: rgb(62, 62, 107, .7);
+    height: fit-content;
+    width: fit-content;
+}
+
 .pf-inputs-container {
-    background-color: none;
-    padding: 0;
-    margin: 0;
-    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.pf-inputs-container input {
+    margin: 0 0 5px 0;
+    padding: 2px;
+    border: 1px solid rgb(106, 106, 150);
+    border-radius: 5px;
+    background-clip: content-box;
+    font-size: 1.2em;
 }
