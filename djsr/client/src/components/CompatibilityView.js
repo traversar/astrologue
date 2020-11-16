@@ -37,15 +37,16 @@ const CompatibilityView = ({
     useEffect(() => {
 
         if(chartData && chartDataOther) {
-            console.log('chartDataOther: ', chartDataOther)
-            console.log('chartData: ', chartData)
-            console.log(calComp(chartData.positions, chartDataOther.positions))
+            // console.log('chartDataOther: ', chartDataOther)
+            // console.log('chartData: ', chartData)
+            // console.log(calComp(chartData.positions, chartDataOther.positions))
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
             var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
             var synastry = chart.transit(chartDataOther)
             synastry.aspects()
         } else {
+            // chartDiv.innerHTML = 'Select a second profile to calculate compatibility.';
             console.log('No chart data')
         }
 

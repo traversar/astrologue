@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles';
-import { astroSVGs } from '../svgs'
+import { astroSVGs } from '../svgs';
+import {Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 const NatalView = ({
     selectedProfile,
@@ -12,6 +13,7 @@ const NatalView = ({
 }) => {
     let [chartOverview, setChartOverview] = useState('{}');
     let [view, setView] = useState('positions');
+    let [details, setDetails] = useState('');
 
     useEffect(() => {
         selectOther(false);
@@ -92,32 +94,53 @@ const NatalView = ({
     }
 
 
+    const getPositionInterpretation = (planet, sign, house) => {
+        setDetails(`
+        ${planet} in ${sign}: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        \n\n
+        ${planet} in the ${house} house: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        `)
+    }
+
+    const getAspectInterpretation = (planet1, aspect, planet2) => {
+        setDetails(`
+        ${planet1} ${aspect} ${planet2}: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        `)
+    }
+
     return (
-        <div className='nv-container'>
-            <div className='nv-details-container boxed'>
-                <div style={{textAlign: "center", cursor: "pointer"}}>
-                    <span style={ view === 'positions' ? {textDecoration: "underline"} : {}} onClick={() => setView('positions')}>Positions</span>{" | "}
-                    <span style={ view === 'aspects' ? {textDecoration: "underline"} : {}} onClick={() => setView('aspects')}>Aspects</span>
+        <>
+            <div className='nv-container'>
+                <div className='nv-details-container boxed'>
+                    <div style={{textAlign: "center", cursor: "pointer"}}>
+                        <span style={ view === 'positions' ? {textDecoration: "underline"} : {}} onClick={() => setView('positions')}>Positions</span>{" | "}
+                        <span style={ view === 'aspects' ? {textDecoration: "underline"} : {}} onClick={() => setView('aspects')}>Aspects</span>
+                    </div>
+                    <div>
+                        {chartOverview.positions && (
+                            view === 'positions' ?
+                                Object.keys(chartOverview.positions).map(planet => (
+                                    <Link to="details-expand" spy={true} smooth={true} duration={500}>
+                                        <div id={`${planet}-position`}  className="details-link" onClick={() => getPositionInterpretation(planet, chartOverview.positions[planet].sign, chartOverview.positions[planet].house)}>
+                                            {astroSVGs['planets'][planet]} in {astroSVGs['signs'][chartOverview.positions[planet].sign]} in the {chartOverview.positions[planet].house} house
+                                        </div>
+                                    </Link>
+                                ))
+                            :
+                                Object.keys(chartOverview.aspects).map(aspect => (
+                                    <Link to="details-expand" spy={true} smooth={true} duration={500}>
+                                        <div id={aspect}  className="details-link" onClick={() => getAspectInterpretation(chartOverview.aspects[aspect].point1Label, chartOverview.aspects[aspect].aspectKey, chartOverview.aspects[aspect].point2Label)}>
+                                            {astroSVGs['planets'][chartOverview.aspects[aspect].point1Label]} {chartOverview.aspects[aspect].aspectKey}{astroSVGs['planets'][chartOverview.aspects[aspect].point2Label]} +{chartOverview.aspects[aspect].orb}
+                                        </div>
+                                    </Link>
+                                ))
+                        )}
+                    </div>
                 </div>
-                <div>
-                    {chartOverview.positions && (
-                        view === 'positions' ?
-                            Object.keys(chartOverview.positions).map(planet => (
-                                <div id={`${planet}-position`}>
-                                    {astroSVGs['planets'][planet]} in {astroSVGs['signs'][chartOverview.positions[planet].sign]} in the {chartOverview.positions[planet].house} house
-                                </div>
-                            ))
-                        :
-                            Object.keys(chartOverview.aspects).map(aspect => (
-                                <div id={aspect}>
-                                    {astroSVGs['planets'][chartOverview.aspects[aspect].point1Label]} {chartOverview.aspects[aspect].aspectKey}{astroSVGs['planets'][chartOverview.aspects[aspect].point2Label]} +{chartOverview.aspects[aspect].orb}
-                                </div>
-                            ))
-                    )}
-                </div>
+                <div id='chart' className='boxed'></div>
             </div>
-            <div id='chart' className='boxed'></div>
-        </div>
+            <div id='details-expand' className='nv-details-expand-container boxed' style={{width: 'auto'}}>{details}</div>
+        </>
     )
 }
 

@@ -9,16 +9,18 @@ import requests
 import json
 
 class ProfilesView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = ()
+    # permission_classes = (permissions.AllowAny,)
     # authentication_classes = ()
 
     def get(self, request):
         if request.user.is_authenticated:
+            print("authenticated: ", request.user)
             user_id = request.user.id
             profiles = Profile.objects.all().filter(user_id=user_id)
             serialized = ProfileSerializer(profiles, context={'request': request}, many=True)
-            print(serialized.data)
         else:
+            print("not authenticated", request.user)
             profiles = Profile.objects.filter(id__in=[1, 2])
             serialized = ProfileSerializer(profiles, many=True)
         return Response(data=serialized.data, status=status.HTTP_200_OK)

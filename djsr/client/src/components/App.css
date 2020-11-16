@@ -109,7 +109,9 @@ body {
     padding: 7px 5px;
 
     /* background-color */
-    background-color: rgb(62, 62, 107, .7);
+    /* background-color: rgb(62, 62, 107, .7); */
+    background-color: rgb(85, 85, 184, .7);
+
     transition: .8s top;
 }
 
@@ -127,7 +129,8 @@ body {
 .nb-auth-button {
     font-family: helvetica;
     cursor: pointer;
-    color: rgb(146, 114, 204);
+    /* color: rgb(146, 114, 204); */
+    color: rgb(169, 141, 221);
     margin-right: 6px;
 }
 
@@ -244,7 +247,8 @@ body {
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
-    background-color: rgb(62, 62, 107, .7);
+    background-color: rgb(85, 85, 184, .7);
+    /* background-color: rgb(62, 62, 107, .7); */
     position: absolute;
     left: 50%;
     top: 30%;
@@ -330,6 +334,13 @@ body {
     font-size: 1em;
 }
 
+.nv-details-expand-container {
+    margin-top: 5px;
+    font-family: helvetica;
+    padding: 15px 10px;
+    color: rgb(215, 215, 230);
+    font-size: 1.2em;
+}
 
 
 /* ==================================== ProfileForm == */
@@ -340,7 +351,8 @@ body {
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
-    background-color: rgb(62, 62, 107, .7);
+    /* background-color: rgb(62, 62, 107, .7); */
+    background-color: rgb(85, 85, 184, .7);
     height: fit-content;
     width: fit-content;
 }
@@ -357,4 +369,15 @@ body {
     border-radius: 5px;
     background-clip: content-box;
     font-size: 1.2em;
+}
+
+.details-link {
+    cursor: pointer;
+    padding: 2px;
+}
+
+.details-link:hover {
+    padding: 2px;
+    border-radius: 5px;
+    background: linear-gradient(rgb(85, 85, 184, .2), rgb(255, 255, 255, .05));
 }
