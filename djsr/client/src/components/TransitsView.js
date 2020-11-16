@@ -13,8 +13,11 @@ const TransitsView = ({
     horoscopeDataOther,
     renderChartForNow
 }) => {
-    selectOther(false);
     let [chartOverview, setChartOverview] = useState('{}');
+
+    useEffect(() => {
+        selectOther(false);
+    }, [])
 
     useEffect(() => {
 

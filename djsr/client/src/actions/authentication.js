@@ -1,6 +1,12 @@
 import { authConstants } from "../constants/authentication";
 import axiosInstance from '../axiosApi';
 
+export const setLoggedInTrue = () => async (dispatch, getState) => {
+    console.log('setloggedintrue')
+    dispatch(() => { type: authConstants.LOGIN_SUCCESS })
+    return 'yes'
+}
+
 export const login = (username, password) => async (dispatch, getState) => {
 
     const response = await axiosInstance.post(

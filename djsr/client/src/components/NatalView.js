@@ -10,12 +10,14 @@ const NatalView = ({
     horoscopeData,
     selectOther
 }) => {
-    selectOther(false);
     let [chartOverview, setChartOverview] = useState('{}');
     let [view, setView] = useState('positions');
 
     useEffect(() => {
-        selectOther(false)
+        selectOther(false);
+    }, [])
+
+    useEffect(() => {
         if(selectedProfile) {
             renderChart(selectedProfile)
         }

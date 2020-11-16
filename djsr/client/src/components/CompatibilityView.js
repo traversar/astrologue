@@ -13,8 +13,11 @@ const CompatibilityView = ({
     horoscopeData,
     horoscopeDataOther
 }) => {
-    selectOther(true);
     let [chartOverview, setChartOverview] = useState('{}');
+
+    useEffect(() => {
+        selectOther(true);
+    }, [])
 
     useEffect(() => {
 
