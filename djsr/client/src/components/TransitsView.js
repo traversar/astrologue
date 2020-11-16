@@ -7,32 +7,23 @@ const TransitsView = ({
     renderChart,
     selectOther,
     selectedProfile,
-    selectedProfileOther,
     chartData,
     chartDataOther,
     horoscopeData,
-    horoscopeDataOther
+    horoscopeDataOther,
+    renderChartForNow
 }) => {
-    selectOther(true);
+    selectOther(false);
     let [chartOverview, setChartOverview] = useState('{}');
-
-    const getProfileForNow = () => {
-
-    }
 
     useEffect(() => {
 
         if(selectedProfile) {
             renderChart(selectedProfile)
-        }
-        if(selectedProfileOther) {
-            console.log('Before render other chart')
-            renderChart(selectedProfileOther, true)
-            console.log('After render other chart')
+            renderChartForNow(selectedProfile)
         }
 
-    }, [selectedProfile, selectedProfileOther])
-
+    }, [selectedProfile])
 
     useEffect(() => {
 
@@ -40,7 +31,8 @@ const TransitsView = ({
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
             var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
-            var other = chart.transit(chartDataOther)
+            var transits = chart.transit(chartDataOther)
+            transits.aspects()
         } else {
             console.log('No chart data')
         }
@@ -50,6 +42,8 @@ const TransitsView = ({
     useEffect(() => {
 
         if(horoscopeData) {
+            console.log('horoscopeData: ', horoscopeData)
+            console.log('horoscopeDataOther: ', horoscopeDataOther)
             renderHoroscopeData(horoscopeData);
         } else {
             console.log('No horoscope data')
@@ -90,11 +84,11 @@ const TransitsView = ({
 const TransitsViewContainer = () => {
     const dispatch = useDispatch();
     let renderChart = (profile, other) => dispatch(profileActions.renderChart(profile, other));
+    let renderChartForNow = (profile) => dispatch(profileActions.renderChartForNow(profile));
     let selectOther = (status) => dispatch(profileActions.selectOther(status));
     let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile);
     let chartData = useSelector(state => state.entities.profiles.chartData);
     let horoscopeData = useSelector(state => state.entities.profiles.horoscopeData);
-    let selectedProfileOther = useSelector(state => state.entities.profiles.selectedProfileOther);
     let chartDataOther = useSelector(state => state.entities.profiles.chartDataOther);
     let horoscopeDataOther = useSelector(state => state.entities.profiles.horoscopeDataOther);
 
@@ -104,8 +98,8 @@ const TransitsViewContainer = () => {
         horoscopeData={horoscopeData}
         horoscopeDataOther={horoscopeDataOther}
         selectedProfile={selectedProfile}
-        selectedProfileOther={selectedProfileOther}
         renderChart={renderChart}
+        renderChartForNow={renderChartForNow}
         selectOther={selectOther} />
 }
 

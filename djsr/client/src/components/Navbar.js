@@ -27,7 +27,7 @@ const Navbar = ({
                 <div className='nb-links'>
                     <Link to='/'>Natal</Link>
                     <Link to='/transits/'>Transits</Link>
-                    <Link to='/compatibility/' activeClassName='active'>Compatibility</Link>
+                    <Link to='/compatibility/'>Compatibility</Link>
                     <Link to='/learn/'>Learn</Link>
                 </div>
                 <div className='nb-auth-container'>

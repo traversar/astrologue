@@ -10,7 +10,9 @@ const NatalView = ({
     horoscopeData,
     selectOther
 }) => {
+    selectOther(false);
     let [chartOverview, setChartOverview] = useState('{}');
+    let [view, setView] = useState('positions');
 
     useEffect(() => {
         selectOther(false)
@@ -23,10 +25,20 @@ const NatalView = ({
 
     useEffect(() => {
 
+        let settings = {
+            ASPECTS: {
+                "conjunction":{"degree":0, "orbit":10, "color":"transparent"},
+                "square":{"degree":90, "orbit":8, "color":"#FF4500"},
+                "trine":{"degree":120, "orbit":8, "color":"#27AE60"},
+                "opposition":{"degree":180, "orbit":10, "color":"#27AE60"}
+                }
+        }
+
         if(chartData) {
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
-            var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
+            var chart = new astrology.Chart('chart', 550, 550, settings).radix(chartData)
+            chart.aspects()
         } else {
             console.log('No chart data')
         }
@@ -36,6 +48,7 @@ const NatalView = ({
     useEffect(() => {
 
         if(horoscopeData) {
+            console.log('horoscopeData: ', horoscopeData)
             renderHoroscopeData(horoscopeData);
         } else {
             console.log('No horoscope data')
@@ -45,14 +58,34 @@ const NatalView = ({
 
 
     const renderHoroscopeData = horoscopeData => {
-        let _chartOverview = {};
+        let _chartOverview = {
+            positions: {},
+            aspects: {}
+        };
         let celestialBodies = horoscopeData.CelestialBodies.all;
+        let aspects = horoscopeData.Aspects.all
 
         for(let i = 0; i < celestialBodies.length; i++){
-            _chartOverview[celestialBodies[i].label] = { house: [celestialBodies[i].House.label], sign: [celestialBodies[i].Sign.label] }
+            _chartOverview.positions[celestialBodies[i].label] = { house: [celestialBodies[i].House.label], sign: [celestialBodies[i].Sign.label] }
         }
-        delete _chartOverview['Sirius'];
+        delete _chartOverview.positions['Sirius'];
 
+        let maxOrb = Number(aspects[0].orb)
+        for(let i = 0; i < aspects.length; i++){
+            if(Object.keys(_chartOverview.aspects).length < 10){
+                _chartOverview.aspects[aspects[i].orb] = aspects[i]
+                if(aspects[i].orb > maxOrb) maxOrb = aspects[i].orb
+            } else {
+                if(aspects[i].orb < maxOrb) {
+                    delete _chartOverview.aspects[maxOrb]
+                    let orbs = Object.keys(_chartOverview.aspects).map(orb => Number(orb))
+                    maxOrb = Math.max(...orbs);
+                    _chartOverview.aspects[aspects[i].orb] = aspects[i]
+                }
+            }
+        }
+
+        console.log('_chartOverview: ', _chartOverview)
         setChartOverview(_chartOverview);
     }
 
@@ -60,13 +93,26 @@ const NatalView = ({
     return (
         <div className='nv-container'>
             <div className='nv-details-container boxed'>
-                {chartOverview &&
-                    Object.keys(chartOverview).map(planet => (
-                        <div>
-                            {astroSVGs['planets'][planet]} in {astroSVGs['signs'][chartOverview[planet].sign]} in the {chartOverview[planet].house} house
-                        </div>
-                    ))
-                }
+                <div style={{textAlign: "center", cursor: "pointer"}}>
+                    <span style={ view === 'positions' ? {textDecoration: "underline"} : {}} onClick={() => setView('positions')}>Positions</span>{" | "}
+                    <span style={ view === 'aspects' ? {textDecoration: "underline"} : {}} onClick={() => setView('aspects')}>Aspects</span>
+                </div>
+                <div>
+                    {chartOverview.positions && (
+                        view === 'positions' ?
+                            Object.keys(chartOverview.positions).map(planet => (
+                                <div id={`${planet}-position`}>
+                                    {astroSVGs['planets'][planet]} in {astroSVGs['signs'][chartOverview.positions[planet].sign]} in the {chartOverview.positions[planet].house} house
+                                </div>
+                            ))
+                        :
+                            Object.keys(chartOverview.aspects).map(aspect => (
+                                <div id={aspect}>
+                                    {astroSVGs['planets'][chartOverview.aspects[aspect].point1Label]} {chartOverview.aspects[aspect].aspectKey}{astroSVGs['planets'][chartOverview.aspects[aspect].point2Label]} +{chartOverview.aspects[aspect].orb}
+                                </div>
+                            ))
+                    )}
+                </div>
             </div>
             <div id='chart' className='boxed'></div>
         </div>

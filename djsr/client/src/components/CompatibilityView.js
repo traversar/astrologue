@@ -36,7 +36,8 @@ const CompatibilityView = ({
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
             var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
-            var other = chart.transit(chartDataOther)
+            var synastry = chart.transit(chartDataOther)
+            synastry.aspects()
         } else {
             console.log('No chart data')
         }
