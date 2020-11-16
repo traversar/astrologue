@@ -15,7 +15,7 @@ body {
     /* border: 1px solid rgb(53, 53, 105); */
     border: 1.5px solid rgb(119, 119, 158);
     border-radius: 4px;
-    padding: 7px 5px;
+    padding: 5px;
 }
 
 #chart {

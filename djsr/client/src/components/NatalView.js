@@ -66,7 +66,7 @@ const NatalView = ({
         let aspects = horoscopeData.Aspects.all
 
         for(let i = 0; i < celestialBodies.length; i++){
-            _chartOverview.positions[celestialBodies[i].label] = { house: [celestialBodies[i].House.label], sign: [celestialBodies[i].Sign.label] }
+            _chartOverview.positions[celestialBodies[i].label] = { house: [celestialBodies[i].House.label], sign: [celestialBodies[i].Sign.label], degree: celestialBodies[i].ChartPosition.Ecliptic.DecimalDegrees }
         }
         delete _chartOverview.positions['Sirius'];
 
