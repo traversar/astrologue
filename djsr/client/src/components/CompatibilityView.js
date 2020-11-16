@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles';
+import { calComp } from '../utils/AstroCalc'
 
 
 const CompatibilityView = ({
@@ -36,6 +37,9 @@ const CompatibilityView = ({
     useEffect(() => {
 
         if(chartData && chartDataOther) {
+            console.log('chartDataOther: ', chartDataOther)
+            console.log('chartData: ', chartData)
+            console.log(calComp(chartData.positions, chartDataOther.positions))
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
             var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
@@ -69,7 +73,6 @@ const CompatibilityView = ({
 
         setChartOverview(_chartOverview);
     }
-
 
     return (
         <div className='nv-container'>

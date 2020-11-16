@@ -29,8 +29,10 @@ const ProfileView = ({
         <div>
             <div className='pv-profile-links'>
                 <div onClick={handleAddProfileContainer} className='pv-addprofile-btn boxed'>
-                    <div>+</div>
-                    <div>Add Profile</div>
+                    <div>
+                        <div style={{fontSize: '2em'}}>+</div>
+                        <div>Add Profile</div>
+                    </div>
                 </div>
                 <div className='pv-profile-links-scrolldiv'>
                 {Array.isArray(profiles) &&

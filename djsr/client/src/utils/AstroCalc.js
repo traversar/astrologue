@@ -30,7 +30,7 @@ export const renderHoroscopeData = horoscopeData => {
 }
 
 export function calComp(chart1, chart2){
-    aspects = {}
+    let aspects = {}
     chart1keys = Object.keys(chart1);
     chart2keys = Object.keys(chart2);
     for(let i = 0; i < chart1keys.length; i++) {
@@ -50,7 +50,9 @@ export function calComp(chart1, chart2){
             if(0 < diff % 120 < 5 || 115 < diff % 120 < 120) {
                 aspects[chart1keys[i]][chart2[chart1keys[j]]]['trine'] = true;
             }
+        }
     }
+    return aspects
 }
 
 // subtract smaller from greater
