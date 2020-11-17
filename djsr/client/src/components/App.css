@@ -1,18 +1,55 @@
 body {
     /* background-color: rgb(29, 29, 83); */
     /* background-color: rgb(62, 62, 107); */
-    background-color: rgb(85, 85, 184);
+
+    /* background-color: rgb(85, 85, 184); */
+
     font-size: 15px;
+
+    /* background-color: black; */
+    /* background-color: rgb(57, 57, 117); */
+    /* background-color: (39,39,90); */
+
+    /* Night-time */
+    background-color: rgb(14,14,45);
+
+    /* Day-time */
+    /* background: linear-gradient(rgb(206, 203, 255), rgb(180,174,255)); */
+
+    /* Webkit */
+    background-image:
+        -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 40, from(white), color-stop(0.1, rgba(248,255,128,.5)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 30, from(white), color-stop(0.1, rgba(255,186,170,.4)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 40, from(rgba(255,255,255,.9)), color-stop(0.05, rgba(251,255,186,.3)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 30, from(rgba(255,255,255,.4)), color-stop(0.03, rgba(253,255,219,.2)), to(transparent));
+
+    /* Firefox */
+    background-image:
+        /* -moz-radial-gradient(circle, #FFFFFF 2px, rgba(248,255,128,.5) 4px, transparent 40px),
+        -moz-radial-gradient(circle, #FFFFFF 1px, rgba(255,186,170,.4) 3px, transparent 30px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.9) 1px, rgba(251,255,186,.3) 2px, transparent 40px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.4), rgba(253,255,219,.2) 1px, transparent 30px); */
+
+        -moz-radial-gradient(circle, #FFF 2px, rgba(248,255,128,.2) 5px, transparent 10px),
+        -moz-radial-gradient(circle, #FFF 1px, rgba(255,186,170,.2) 1px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.1) 1px, rgba(251,255,186,.1) 2px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.2), rgba(253,255,219,.2) 1px, transparent 10px);
+
+    /* Background images size */
+    background-size: 550px 550px, 350px 350px, 250px 270px, 220px 200px;
+
+    /* Background images position*/
+    background-position: 0 0, 30px 60px, 130px 270px, 70px 150px;
 }
 
 .boxed {
     /* background-color: rgba(0, 0, 0, 0.01); */
     /* border: 1px solid rgb(90, 90, 138); */
-    border: 1px solid rgb(121, 121, 185);
+    /* border: 1px solid rgb(121, 121, 185); */
     border-radius: 4px;
     padding: 5px;
 }
-/* 114, 114, 182 */
+
 .boxed-selected {
     /* border: 1px solid rgb(53, 53, 105); */
     border: 1.5px solid rgb(119, 119, 158);
@@ -21,7 +58,7 @@ body {
 }
 
 #chart {
-    z-index: -1;
+    z-index: 1;
     margin-left: 5px;
 }
 
@@ -32,6 +69,7 @@ body {
     top: 30%;
     transform: translate(-50%, -50%);
     transition: .8s top;
+    z-index: 3;
 }
 
 .dic-hidden {
@@ -46,7 +84,13 @@ body {
 .app-container {
     max-width: 800px;
     margin: 0 auto;
-    /* background-color: rgb(255, 255, 255, .005) */
+
+    /* Day-time */
+    /* background-color: rgb(85, 85, 184); */
+
+    /* Night-time */
+    background-color: rgba(85, 85, 184, .4)
+
 }
 
 .app-header-container h1 {
@@ -97,7 +141,7 @@ body {
 }
 
 .nb-loginsignup-container {
-    z-index: 0;
+    z-index: 2;
     position: absolute;
     left: 50%;
     top: 30%;
@@ -243,7 +287,7 @@ body {
 }
 
 .add-profile-container {
-    z-index: 0;
+    z-index: 2;
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
@@ -347,7 +391,7 @@ body {
 
 
 .pf-container {
-    z-index: 1;
+    z-index: 2;
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
