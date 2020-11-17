@@ -1,4 +1,5 @@
 import { profileConstants } from '../constants/profiles';
+import { authConstants } from "../constants/authentication";
 import axiosInstance from '../axiosApi';
 import { Origin, Horoscope } from 'circular-natal-horoscope-js';
 
@@ -183,10 +184,16 @@ export const loadProfiles = () => async (dispatch, getState) => {
     if (response.status === 200) {
         let data = response.data
         dispatch(success(data))
+        console.log(data[0].owner)
+        if(response.data[0].owner) {
+            dispatch(loggedIn())
+            console.log('dispatch login')
+        }
     } else {
         console.log('Failed to load profiles')
     }
 
+    function loggedIn() { return { type: authConstants.LOGIN_SUCCESS } }
     function success(data) { return { type: profileConstants.LOAD_PROFILES, profiles: data } }
 }
 

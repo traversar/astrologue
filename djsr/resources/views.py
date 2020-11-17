@@ -9,9 +9,8 @@ import requests
 import json
 
 class ProfilesView(APIView):
-    permission_classes = ()
-    # permission_classes = (permissions.AllowAny,)
-    # authentication_classes = ()
+    # permission_classes = []
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request):
         if request.user.is_authenticated:
@@ -19,6 +18,8 @@ class ProfilesView(APIView):
             user_id = request.user.id
             profiles = Profile.objects.all().filter(user_id=user_id)
             serialized = ProfileSerializer(profiles, context={'request': request}, many=True)
+            serialized.data.append({'user': request.user})
+            print(serialized.data)
         else:
             print("not authenticated", request.user)
             profiles = Profile.objects.filter(id__in=[1, 2])
