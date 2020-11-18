@@ -13,7 +13,7 @@ const NatalView = ({
 }) => {
     let [chartOverview, setChartOverview] = useState('{}');
     let [view, setView] = useState('positions');
-    let [details, setDetails] = useState('Select position or aspect above for detailed interpretation.');
+    let [details, setDetails] = useState('Select a position or aspect above for detailed interpretation.');
 
     useEffect(() => {
         selectOther(false);

@@ -17,7 +17,7 @@ const TransitsView = ({
     renderChartForNow
 }) => {
     let [compOverview, setCompOverview] = useState({});
-    let [details, setDetails] = useState('Select a second profile and a compatibility aspect above for detailed interpretation.');
+    let [details, setDetails] = useState('');
 
     useEffect(() => {
         selectOther(false);

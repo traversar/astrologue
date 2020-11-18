@@ -17,7 +17,7 @@ const CompatibilityView = ({
     horoscopeDataOther
 }) => {
     let [compOverview, setCompOverview] = useState({});
-    let [details, setDetails] = useState('Select a second profile and a compatibility aspect above for detailed interpretation.');
+    let [details, setDetails] = useState(`Select a second profile to draw a synastry chart.`);
 
 
     useEffect(() => {
@@ -27,12 +27,15 @@ const CompatibilityView = ({
     useEffect(() => {
         if(selectedProfile) {
             renderChart(selectedProfile)
+            setDetails(`Select a second profile to draw a synastry chart with ${selectedProfile.name}.`)
+
         }
     }, [selectedProfile])
 
     useEffect(() => {
         if(selectedProfileOther) {
             renderChart(selectedProfileOther, true)
+            setDetails('Select a compatibility aspect above for detailed interpretation.')
         }
     }, [selectedProfileOther])
 
