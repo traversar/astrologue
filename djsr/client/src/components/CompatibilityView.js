@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles';
 import { calComp, renderHoroscopeData } from '../utils/AstroCalc'
 import { astroSVGs } from '../svgs';
+import {Link } from 'react-scroll'
+
 
 
 const CompatibilityView = ({
@@ -16,6 +18,8 @@ const CompatibilityView = ({
     horoscopeDataOther
 }) => {
     let [compOverview, setCompOverview] = useState({});
+    let [details, setDetails] = useState('Select a second profile and a compatibility aspect above for detailed interpretation.');
+
 
     useEffect(() => {
         selectOther(true);
@@ -39,7 +43,7 @@ const CompatibilityView = ({
 
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
-            var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
+            var chart = new astrology.Chart('chart', 540, 540).radix(chartData)
             var synastry = chart.transit(chartDataOther)
             synastry.aspects()
         } else {
@@ -76,6 +80,11 @@ const CompatibilityView = ({
 
     }, [horoscopeData, horoscopeDataOther])
 
+    const handleDetailClick = (planet1, aspect, planet2) => {
+        setDetails(`
+        ${selectedProfile.name}'s ${planet1} ${aspect} ${selectedProfileOther.name}'s ${planet2}: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`)
+    }
+
     let planetTerms = {
         Sun: 'Vision',
         Moon: 'Emotion',
@@ -92,29 +101,34 @@ const CompatibilityView = ({
 
 
     return (
-        <div className='cv-container'>
-            <div className='cv-details-container boxed'>
-                <div className='cv-details-scroll-container'>
-                    {compOverview &&
-                        Object.keys(compOverview).map(planet => (
-                            <div className='cv-aspect-link'>
-                                <div className='cv-aspect-header'>{astroSVGs['planets'][planet]} {planetTerms[planet]}</div>
-                                <div>
-                                {Object.keys(compOverview[planet]).length > 0 ?
-                                    Object.keys(compOverview[planet]).map(planets => (
-                                        <div className='cv-aspect-detail'>{compOverview[planet][planets]} {astroSVGs['planets'][planets]}</div>
-                                    ))
-                                :
-                                    <div className='cv-aspect-detail' style={{paddingTop: '10px'}}>No aspects</div>
-                                }
+        <>
+            <div className='cv-container'>
+                <div className='cv-details-container boxed'>
+                    <div className='cv-details-scroll-container'>
+                        {compOverview &&
+                            Object.keys(compOverview).map(planet => (
+                                <div className='cv-aspect-link'>
+                                    <div className='cv-aspect-header'>{astroSVGs['planets'][planet]} {planetTerms[planet]}</div>
+                                    <div>
+                                    {Object.keys(compOverview[planet]).length > 0 ?
+                                        Object.keys(compOverview[planet]).map(planets => (
+                                            <Link to="details-expand" spy={true} smooth={true} duration={500}>
+                                                <div onClick={() => handleDetailClick(planet, compOverview[planet][planets], planets)} className='cv-aspect-detail'>{compOverview[planet][planets]} {astroSVGs['planets'][planets]}</div>
+                                            </Link>
+                                        ))
+                                    :
+                                        <div className='cv-aspect-detail' style={{paddingTop: '10px'}}>No aspects</div>
+                                    }
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
+                    </div>
                 </div>
+                <div id='chart' className='boxed'></div>
             </div>
-            <div id='chart' className='boxed'></div>
-        </div>
+            <div id='details-expand' className='nv-details-expand-container boxed' style={{width: 'auto'}}>{details}</div>
+        </>
     )
 }
 
