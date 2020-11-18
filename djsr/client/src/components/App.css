@@ -25,15 +25,10 @@ body {
 
     /* Firefox */
     background-image:
-        /* -moz-radial-gradient(circle, #FFFFFF 2px, rgba(248,255,128,.5) 4px, transparent 40px),
-        -moz-radial-gradient(circle, #FFFFFF 1px, rgba(255,186,170,.4) 3px, transparent 30px),
-        -moz-radial-gradient(circle, rgba(255,255,255,.9) 1px, rgba(251,255,186,.3) 2px, transparent 40px),
-        -moz-radial-gradient(circle, rgba(255,255,255,.4), rgba(253,255,219,.2) 1px, transparent 30px); */
-
-        -moz-radial-gradient(circle, #FFF 2px, rgba(248,255,128,.2) 5px, transparent 10px),
-        -moz-radial-gradient(circle, #FFF 1px, rgba(255,186,170,.2) 1px, transparent 10px),
-        -moz-radial-gradient(circle, rgba(255,255,255,.1) 1px, rgba(251,255,186,.1) 2px, transparent 10px),
-        -moz-radial-gradient(circle, rgba(255,255,255,.2), rgba(253,255,219,.2) 1px, transparent 10px);
+        -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 1px, transparent 10px),
+        -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.9) 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.8) 1px, rgba(255, 255, 255, 0.2) 1px, transparent 8px);
 
     /* Background images size */
     background-size: 550px 550px, 350px 350px, 250px 270px, 220px 200px;
@@ -59,7 +54,6 @@ body {
 
 #chart {
     z-index: 1;
-    margin-left: 5px;
 }
 
 
@@ -82,14 +76,14 @@ body {
 /* ==================================== App == */
 
 .app-container {
-    max-width: 800px;
+    max-width: 870px;
     margin: 0 auto;
 
     /* Day-time */
     /* background-color: rgb(85, 85, 184); */
 
     /* Night-time */
-    background-color: rgba(85, 85, 184, .4)
+    background-color: rgba(85, 85, 184, .5)
 
 }
 
@@ -107,7 +101,7 @@ body {
 }
 
 .app-profile-container {
-    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 
@@ -168,6 +162,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin: 5px 15px 0;
 }
 
 .nb-auth-button {
@@ -357,16 +352,16 @@ body {
 .nv-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-}
-
-.nv-container div {
-    width: 100%;
+    justify-content: space-around;
 }
 
 .nv-details-container {
     display: flex;
     flex-direction: column;
+    text-align: left;
+    align-self: center;
+    /* position: relative; */
+    /* top: 10%; */
 }
 
 .nv-details-container div {
@@ -379,11 +374,13 @@ body {
 }
 
 .nv-details-expand-container {
-    margin-top: 5px;
     font-family: helvetica;
     padding: 15px 10px;
     color: rgb(215, 215, 230);
     font-size: 1.2em;
+    margin: 0 15px 15px 15px;
+    padding: 15px 10px;
+    background-color: rgba(255,255,255,.1)
 }
 
 
