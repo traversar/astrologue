@@ -365,12 +365,13 @@ body {
     /* top: 10%; */
 }
 
+.nv-details-type {
+    font-size: 1.1em;
+}
+
 .nv-details-container div {
     font-family: helvetica;
-    /* color: rgb(183, 183, 211); */
     color: rgb(215, 215, 230);
-
-
     font-size: 1em;
 }
 
@@ -413,15 +414,13 @@ body {
     font-size: 1.2em;
 }
 
-.details-link {
+.nv-details-link {
     cursor: pointer;
     padding: 2px;
 }
 
-.details-link:hover {
-    padding: 2px;
-    border-radius: 5px;
-    background: linear-gradient(rgb(85, 85, 184, .2), rgb(255, 255, 255, .05));
+.nv-details-link:hover {
+    text-decoration: underline;
 }
 
 /* ==================================== CompatibilityView == */

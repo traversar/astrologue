@@ -113,15 +113,15 @@ const NatalView = ({
             <div className='nv-container'>
                 <div className='nv-details-container boxed'>
                     <div style={{textAlign: "center", cursor: "pointer"}}>
-                        <span style={ view === 'positions' ? {textDecoration: "underline"} : {}} onClick={() => setView('positions')}>Positions</span>{" | "}
-                        <span style={ view === 'aspects' ? {textDecoration: "underline"} : {}} onClick={() => setView('aspects')}>Aspects</span>
+                        <span className='nv-details-type' style={ view === 'positions' ? {textDecoration: "underline"} : {}} onClick={() => setView('positions')}>Positions</span>{" | "}
+                        <span className='nv-details-type' style={ view === 'aspects' ? {textDecoration: "underline"} : {}} onClick={() => setView('aspects')}>Aspects</span>
                     </div>
                     <div>
                         {chartOverview.positions && (
                             view === 'positions' ?
                                 Object.keys(chartOverview.positions).map(planet => (
                                     <Link to="details-expand" spy={true} smooth={true} duration={500}>
-                                        <div id={`${planet}-position`}  className="details-link" onClick={() => getPositionInterpretation(planet, chartOverview.positions[planet].sign, chartOverview.positions[planet].house)}>
+                                        <div id={`${planet}-position`}  className="nv-details-link" onClick={() => getPositionInterpretation(planet, chartOverview.positions[planet].sign, chartOverview.positions[planet].house)}>
                                             {astroSVGs['planets'][planet]} in {astroSVGs['signs'][chartOverview.positions[planet].sign]} in the {chartOverview.positions[planet].house} house
                                         </div>
                                     </Link>
@@ -129,7 +129,7 @@ const NatalView = ({
                             :
                                 Object.keys(chartOverview.aspects).map(aspect => (
                                     <Link to="details-expand" spy={true} smooth={true} duration={500}>
-                                        <div id={aspect}  className="details-link" onClick={() => getAspectInterpretation(chartOverview.aspects[aspect].point1Label, chartOverview.aspects[aspect].aspectKey, chartOverview.aspects[aspect].point2Label)}>
+                                        <div id={aspect}  className="nv-details-link" onClick={() => getAspectInterpretation(chartOverview.aspects[aspect].point1Label, chartOverview.aspects[aspect].aspectKey, chartOverview.aspects[aspect].point2Label)}>
                                             {astroSVGs['planets'][chartOverview.aspects[aspect].point1Label]} {chartOverview.aspects[aspect].aspectKey}{astroSVGs['planets'][chartOverview.aspects[aspect].point2Label]} +{chartOverview.aspects[aspect].orb}
                                         </div>
                                     </Link>

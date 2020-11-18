@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles';
 import { calComp, renderHoroscopeData } from '../utils/AstroCalc'
 import { astroSVGs } from '../svgs';
-import {Link } from 'react-scroll'
-
+import { Link } from 'react-scroll'
 
 
 const CompatibilityView = ({
@@ -57,22 +56,9 @@ const CompatibilityView = ({
 
         if(horoscopeData && horoscopeDataOther) {
             let renderedHoroscopeData = renderHoroscopeData(horoscopeData);
-            console.log('renderedHoroscopeData', renderedHoroscopeData);
-
             let renderedHoroscopeDataOther = renderHoroscopeData(horoscopeDataOther)
-            console.log('renderHoroscopeDataOther', renderedHoroscopeDataOther);
-
-            console.log('horoscopeData ', horoscopeData)
-            console.log('horoscopeDataOther ', horoscopeDataOther)
-
-            // console.log('chartDataOther: ', chartOverview)
-            // console.log('chartData: ', chartOverviewOther)
-
             let _compOverview = calComp(renderedHoroscopeData.positions, renderedHoroscopeDataOther.positions);
-
             setCompOverview(_compOverview);
-
-            console.log(_compOverview)
 
         } else {
             console.log('No horoscope data');
