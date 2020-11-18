@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles';
 import ProfileForm from './ProfileForm'
+import DropInComponent from '../utils/DropInComponent'
 
 const ProfileButton = ({
-    location,
     profile,
     selectProfile,
     selectedProfile,
@@ -13,11 +13,6 @@ const ProfileButton = ({
 }) => {
     let [selectSwitch, setSelectSwitch] = useState(true);
     let [editProfile, setEditProfile] = useState('');
-
-    let [name, setName] = useState('');
-    let [birthDate, setBirthDate] = useState('');
-    let [birthTime, setBirthTime] = useState('');
-    let [birthLocation, setBirthLocation] = useState('');
 
     const handleProfileSelect = (profileId) => {
         if(selectOtherOn) {
@@ -48,35 +43,20 @@ const ProfileButton = ({
             <div
                 onClick={() =>  profile.id === selectedProfile.id || (selectOtherOn  && selectedProfileOther && selectedProfileOther.id === profile.id) ? handleProfileEdit(profile.id) : handleProfileSelect(profile.id)}
                 className={ profile.id === selectedProfile.id || (selectedProfileOther && selectedProfileOther.id === profile.id) ? 'pb-container boxed-selected ' + elementColors[profile.id % 4] : 'pb-container boxed ' + elementColors[profile.id % 4]}>
-            {!editProfile ?
-                <>
                     <div>{profile.name}</div>
                     <div>{profile.birthDate}</div>
                     <div>{profile.birthLocation}</div>
-                </>
-            :
-                <ProfileForm handleSubmit={'edit'} profileId={editProfile} />
-            }
             </div>
-            {/* <div className='edit-profile-container edit-profile-container-hidden'>
-                <form onSubmit={handleEditProfile}>
-                    <div className='pv-addprofile-form'>
-                        <label>
-                            <input name="name" type="text" placeholder='Name/Alias' value={name} onChange={(e) => setName(e.target.value)} />
-                        </label>
-                        <label>
-                            <input name="birthdate" type="date" placeholder='Birthdate' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
-                        </label>
-                        <label>
-                            <input name="birthtime" type="time" placeholder='Birthtime' value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
-                        </label>
-                        <label>
-                            <input name="birthLocation" type="text" placeholder='Birth Location' value={birthLocation} onChange={(e) => setBirthLocation(e.target.value)} />
-                        </label>
-                        <input type="submit" value="Create" />
-                    </div>
-                </form>
-            </div> */}
+            {editProfile &&
+                <DropInComponent
+                    id="dic-1"
+                    dropIn={ProfileForm}
+                    setCloseCondition={setEditProfile}
+                    handleSubmit={'edit'}
+                    profileId={editProfile}
+                    profile={profile}
+                />
+            }
         </>
     )
 }

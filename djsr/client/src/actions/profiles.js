@@ -1,12 +1,33 @@
 import { profileConstants } from '../constants/profiles';
+import { authConstants } from "../constants/authentication";
 import axiosInstance from '../axiosApi';
 import { Origin, Horoscope } from 'circular-natal-horoscope-js';
 
+// customOrbs = {
+//     conjunction: 8,
+//     opposition: 8,
+//     trine: 8,
+//     square: 5,
+//     sextile: 6,
+//     quincunx: 5,
+//     quintile: 1,
+//     septile: 1,
+//     "semi-square": 1,
+//     "semi-sextile": 1,
+// }
+
 export const renderChartForNow = (profileData) => async(dispatch, getState) => {
     let { latitude, longitude } = profileData;
-    currentDate = new Date();
-    console.log(currentDate)
-    let [ year, month, date ] = currentDate;
+    let cD = new Date();
+    let [ year, month, date, hour, minute ] = [
+        cD.getFullYear(),
+        cD.getMonth(),
+        cD.getDate(),
+        cD.getHours(),
+        cD.getMinutes()
+    ]
+
+    console.log(year, month, date, hour, minute)
 
     const profile = new Origin({
         year,
@@ -22,14 +43,33 @@ export const renderChartForNow = (profileData) => async(dispatch, getState) => {
         origin: profile,
         houseSystem: "whole-sign",
         zodiac: "tropical",
-        aspectPoints: ["bodies", "points", "angles"],
-        aspectWithPoints: ["bodies", "points", "angles"],
+        aspectPoints: ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"],
+        aspectWithPoints: ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "chiron", "ascendant", "midheaven", "northnode"],
         aspectTypes: ["major", "minor"],
         customOrbs: {},
         language: 'en',
     });
 
+    let planets = {}
+    let celestialBodies = horoscope.CelestialBodies.all;
 
+    for(let i = 0; i < celestialBodies.length; i++){
+        planets[celestialBodies[i].label] = [celestialBodies[i].ChartPosition.Ecliptic.DecimalDegrees]
+    }
+    delete planets['Sirius'];
+
+    let cusps = [horoscope.Ascendant.ChartPosition.Ecliptic.DecimalDegrees]
+    for(let i = 1; i < 12; i++) {
+        cusps.push((cusps[i-1] + 30) % 360)
+    }
+
+    let chartData = {
+        planets,
+        cusps
+    }
+
+    dispatch(chartDataOtherAction())
+    function chartDataOtherAction () { return { type: profileConstants.LOAD_CHART_DATA_OTHER, chartData, horoscope } }
 }
 
 export const renderChart = (profileData, other=false) => async(dispatch, getState) => {
@@ -66,8 +106,8 @@ export const renderChart = (profileData, other=false) => async(dispatch, getStat
         origin: profile,
         houseSystem: "whole-sign",
         zodiac: "tropical",
-        aspectPoints: ["bodies", "points", "angles"],
-        aspectWithPoints: ["bodies", "points", "angles"],
+        aspectPoints: ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"],
+        aspectWithPoints: ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "chiron", "ascendant", "midheaven", "northnode"],
         aspectTypes: ["major", "minor"],
         customOrbs: {},
         language: 'en',
@@ -124,8 +164,8 @@ export const chartTest = () => async(dispatch, getState) => {
         origin: origin,
         houseSystem: "whole-sign",
         zodiac: "tropical",
-        aspectPoints: ["bodies", "points", "angles"],
-        aspectWithPoints: ["bodies", "points", "angles"],
+        aspectPoints: ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"],
+        aspectWithPoints: ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "chiron", "ascendant", "midheaven", "northnode"],
         aspectTypes: ["major", "minor"],
         customOrbs: {},
         language: 'en',
@@ -144,10 +184,16 @@ export const loadProfiles = () => async (dispatch, getState) => {
     if (response.status === 200) {
         let data = response.data
         dispatch(success(data))
+        console.log(data[0].owner)
+        if(response.data[0].owner) {
+            dispatch(loggedIn())
+            console.log('dispatch login')
+        }
     } else {
         console.log('Failed to load profiles')
     }
 
+    function loggedIn() { return { type: authConstants.LOGIN_SUCCESS } }
     function success(data) { return { type: profileConstants.LOAD_PROFILES, profiles: data } }
 }
 

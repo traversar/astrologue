@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import * as authActions from '../actions/authentication';
 
 const Signup = ({
-    submitSignup
+    submitSignup,
+    setCloseCondition
 }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ const Signup = ({
         event.preventDefault()
         if (password === confirmPassword) {
             submitSignup(username, email, password);
+            setCloseCondition(false);
         } else {
             let loginSignupErrors = document.getElementById('login-signup-errors');
             loginSignupErrors.innerHTML = "Passwords don't match";
@@ -41,11 +43,11 @@ const Signup = ({
     )
 }
 
-const SignupContainer = () => {
+const SignupContainer = ({setCloseCondition}) => {
     const dispatch = useDispatch();
     const submitSignup = (username, email, password) => dispatch(authActions.signup(username, email, password));
 
-    return <Signup submitSignup={submitSignup} />
+    return <Signup submitSignup={submitSignup} setCloseCondition={setCloseCondition} />
 }
 
 export default SignupContainer

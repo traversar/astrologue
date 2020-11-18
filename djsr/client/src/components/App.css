@@ -1,41 +1,100 @@
 body {
     /* background-color: rgb(29, 29, 83); */
-    background-color: rgb(62, 62, 107);
+    /* background-color: rgb(62, 62, 107); */
+
+    /* background-color: rgb(85, 85, 184); */
+
     font-size: 15px;
+
+    /* background-color: black; */
+    /* background-color: rgb(57, 57, 117); */
+    /* background-color: (39,39,90); */
+
+    /* Night-time */
+    background-color: rgb(14,14,45);
+
+    /* Day-time */
+    /* background: linear-gradient(rgb(206, 203, 255), rgb(180,174,255)); */
+
+    /* Webkit */
+    background-image:
+        -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 40, from(white), color-stop(0.1, rgba(248,255,128,.5)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 30, from(white), color-stop(0.1, rgba(255,186,170,.4)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 40, from(rgba(255,255,255,.9)), color-stop(0.05, rgba(251,255,186,.3)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 30, from(rgba(255,255,255,.4)), color-stop(0.03, rgba(253,255,219,.2)), to(transparent));
+
+    /* Firefox */
+    background-image:
+        -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 1px, transparent 10px),
+        -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.9) 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.8) 1px, rgba(255, 255, 255, 0.2) 1px, transparent 8px);
+
+    /* Background images size */
+    background-size: 550px 550px, 350px 350px, 250px 270px, 220px 200px;
+
+    /* Background images position*/
+    background-position: 0 0, 30px 60px, 130px 270px, 70px 150px;
 }
 
 .boxed {
-    /* border: 1px solid rgb(53, 53, 105); */
-    border: 1px solid rgb(90, 90, 138);
+    /* background-color: rgba(0, 0, 0, 0.01); */
+    /* border: 1px solid rgb(90, 90, 138); */
+    /* border: 1px solid rgb(121, 121, 185); */
     border-radius: 4px;
-    padding: 7px 5px;
+    padding: 5px;
 }
 
 .boxed-selected {
     /* border: 1px solid rgb(53, 53, 105); */
     border: 1.5px solid rgb(119, 119, 158);
     border-radius: 4px;
-    padding: 7px 5px;
+    padding: 5px;
 }
 
 #chart {
-    z-index: -1;
+    z-index: 1;
 }
 
+
+.dic {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    transition: .8s top;
+    z-index: 3;
+}
+
+.dic-hidden {
+    position: absolute;
+    top: -25%;
+    transition: .8s top;
+}
 
 
 /* ==================================== App == */
 
 .app-container {
-    max-width: 800px;
+    max-width: 870px;
     margin: 0 auto;
+
+    /* Day-time */
+    /* background-color: rgb(85, 85, 184); */
+
+    /* Night-time */
+    background-color: rgba(85, 85, 184, .5)
+
 }
 
 .app-header-container h1 {
     color: white;
-    margin: 0 0 0 0;
+    margin: 0 0 0 6px;
     padding: 0;
-    font-size: 2.5em;
+    font-size: 1.8em;
+    position: relative;
+    top: 3px;
+    font-family: Tahoma;
 }
 
 .app-nav-container {
@@ -43,7 +102,7 @@ body {
 }
 
 .app-profile-container {
-    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 
@@ -77,7 +136,7 @@ body {
 }
 
 .nb-loginsignup-container {
-    z-index: 0;
+    z-index: 2;
     position: absolute;
     left: 50%;
     top: 30%;
@@ -89,7 +148,9 @@ body {
     padding: 7px 5px;
 
     /* background-color */
-    background-color: rgb(62, 62, 107, .7);
+    /* background-color: rgb(62, 62, 107, .7); */
+    background-color: rgb(85, 85, 184, .7);
+
     transition: .8s top;
 }
 
@@ -102,12 +163,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin: 5px 15px 0;
 }
 
 .nb-auth-button {
     font-family: helvetica;
     cursor: pointer;
-    color: rgb(146, 114, 204);
+    /* color: rgb(146, 114, 204); */
+    color: rgb(169, 141, 221);
+    margin-right: 6px;
 }
 
 .login-container {
@@ -145,7 +209,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-.pv-profile-links-scrolldiv div {
+.pv-profile-links-scrolldiv > div {
     min-width: 120px;
     height: 80px;
     box-sizing: border-box;
@@ -154,7 +218,8 @@ body {
 
 .pb-container {
     font-family: helvetica;
-    color: rgb(167, 167, 201);
+    /* color: rgb(167, 167, 201); */
+    color: rgb(215, 215, 230);
     font-size: 1em;
     cursor: pointer;
     display: flex;
@@ -186,13 +251,25 @@ body {
 
 .pv-addprofile-btn {
     font-family: helvetica;
-    color: rgb(167, 167, 201);
+    /* color: rgb(167, 167, 201); */
+    color: rgb(215, 215, 230);
+
+
     font-size: 1em;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     width: fit-content;
     transition: .5s background-color;
+    position: relative;
+}
+
+.pv-addprofile-btn > span {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .pv-addprofile-btn:hover {
@@ -206,11 +283,12 @@ body {
 }
 
 .add-profile-container {
-    z-index: 0;
+    z-index: 2;
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
-    background-color: rgb(62, 62, 107, .7);
+    background-color: rgb(85, 85, 184, .7);
+    /* background-color: rgb(62, 62, 107, .7); */
     position: absolute;
     left: 50%;
     top: 30%;
@@ -268,31 +346,129 @@ body {
 }
 
 
+
+
 /* ==================================== NatalView == */
 
 .nv-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .nv-details-container {
     display: flex;
     flex-direction: column;
+    text-align: left;
+    align-self: center;
+    /* position: relative; */
+    /* top: 10%; */
+}
+
+.nv-details-type {
+    font-size: 1.1em;
 }
 
 .nv-details-container div {
     font-family: helvetica;
-    color: rgb(183, 183, 211);
+    color: rgb(215, 215, 230);
     font-size: 1em;
 }
 
+.nv-details-expand-container {
+    font-family: helvetica;
+    padding: 15px 10px;
+    color: rgb(215, 215, 230);
+    font-size: 1.2em;
+    margin: 0 15px 15px 15px;
+    padding: 15px 10px;
+    background-color: rgba(255,255,255,.1)
+}
 
 
 /* ==================================== ProfileForm == */
 
+
+.pf-container {
+    z-index: 2;
+    border: 1px solid rgb(72, 72, 124);
+    border-radius: 4px;
+    padding: 7px 5px;
+    /* background-color: rgb(62, 62, 107, .7); */
+    background-color: rgb(85, 85, 184, .7);
+    height: fit-content;
+    width: fit-content;
+}
+
 .pf-inputs-container {
-    background-color: none;
-    padding: 0;
-    margin: 0;
-    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.pf-inputs-container input {
+    margin: 0 0 5px 0;
+    padding: 2px;
+    border: 1px solid rgb(106, 106, 150);
+    border-radius: 5px;
+    background-clip: content-box;
+    font-size: 1.2em;
+}
+
+.nv-details-link {
+    cursor: pointer;
+    padding: 2px;
+}
+
+.nv-details-link:hover {
+    text-decoration: underline;
+}
+
+/* ==================================== CompatibilityView == */
+
+.cv-aspect-link {
+    margin-bottom: 5px;
+}
+
+.cv-aspect-header {
+    font-size: 1.1em;
+}
+
+.cv-aspect-detail {
+    padding: 0 0 0 35px;
+    margin: -5px 0;
+}
+
+.cv-aspect-detail:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cv-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.cv-details-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-self: center;
+    max-height: 550px;
+    overflow-x: hidden;
+    max-width: 100%;
+    padding-bottom: 10px;
+    /* position: relative; */
+    /* top: 10%; */
+}
+
+.cv-details-scroll-container {
+    overflow-y: scroll;
+    width: 120%;
+}
+
+.cv-details-container div {
+    font-family: helvetica;
+    color: rgb(215, 215, 230);
+    font-size: 1em;
 }
