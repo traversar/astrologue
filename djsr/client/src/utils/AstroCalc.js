@@ -30,25 +30,36 @@ export const renderHoroscopeData = horoscopeData => {
 }
 
 export function calComp(chart1, chart2){
-    let aspects = {}
-    chart1keys = Object.keys(chart1);
-    chart2keys = Object.keys(chart2);
+    console.log('1')
+
+    let chart1keys = Object.keys(chart1);
+    let chart2keys = Object.keys(chart2);
+    let aspects = {};
+    chart1keys.forEach(planet => {
+        aspects[planet] = {}
+    })
+
     for(let i = 0; i < chart1keys.length; i++) {
         for(let j = 0; j < chart2keys.length; j++) {
+            console.log('2')
             let planetChart1 = chart1[chart1keys[i]].degree
-            let planetChart2 = chart2[chart1keys[j]].degree
+            let planetChart2 = chart2[chart2keys[j]].degree
             let diff = Math.max(planetChart1, planetChart2) - Math.min(planetChart1, planetChart2)
             if(diff > 355 || diff < 5) {
-                aspects[chart1keys[i]][chart2[chart1keys[j]]]['conjunction'] = true;
+                aspects[chart1keys[i]][chart2keys[j]] = 'conjunction'
+                continue
             }
-            if(0 < diff % 180 < 5 || 175 < diff % 180 < 180) {
-                aspects[chart1keys[i]][chart2[chart1keys[j]]]['opposition'] = true;
+            if( (0 < diff % 180 && diff % 180 < 5) || (175 < diff % 180 && diff % 180 < 180) ) {
+                aspects[chart1keys[i]][chart2keys[j]] = 'opposition'
+                continue
             }
-            if(0 < diff % 90 < 5 || 85 < diff % 90 < 90) {
-                aspects[chart1keys[i]][chart2[chart1keys[j]]]['square'] = true;
+            if( (0 < diff % 90 && diff % 90 < 5) || (85 < diff % 90 && diff % 90 < 90) ) {
+                aspects[chart1keys[i]][chart2keys[j]] = 'square'
+                continue
             }
-            if(0 < diff % 120 < 5 || 115 < diff % 120 < 120) {
-                aspects[chart1keys[i]][chart2[chart1keys[j]]]['trine'] = true;
+            if( (0 < diff % 120 && diff % 120 < 5) || (115 < diff % 120 && diff % 120 < 120) ) {
+                aspects[chart1keys[i]][chart2keys[j]] = 'trine'
+                continue
             }
         }
     }

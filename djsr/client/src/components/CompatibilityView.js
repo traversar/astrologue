@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as profileActions from '../actions/profiles';
-import { calComp } from '../utils/AstroCalc'
+import { calComp, renderHoroscopeData } from '../utils/AstroCalc'
+import { astroSVGs } from '../svgs';
 
 
 const CompatibilityView = ({
@@ -14,32 +15,28 @@ const CompatibilityView = ({
     horoscopeData,
     horoscopeDataOther
 }) => {
-    let [chartOverview, setChartOverview] = useState('{}');
+    let [compOverview, setCompOverview] = useState({});
 
     useEffect(() => {
         selectOther(true);
     }, [])
 
     useEffect(() => {
-
         if(selectedProfile) {
             renderChart(selectedProfile)
         }
+    }, [selectedProfile])
+
+    useEffect(() => {
         if(selectedProfileOther) {
-            console.log('Before render other chart')
             renderChart(selectedProfileOther, true)
-            console.log('After render other chart')
         }
-
-    }, [selectedProfile, selectedProfileOther])
-
+    }, [selectedProfileOther])
 
     useEffect(() => {
 
         if(chartData && chartDataOther) {
-            // console.log('chartDataOther: ', chartDataOther)
-            // console.log('chartData: ', chartData)
-            // console.log(calComp(chartData.positions, chartDataOther.positions))
+
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
             var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
@@ -54,37 +51,67 @@ const CompatibilityView = ({
 
     useEffect(() => {
 
-        if(horoscopeData) {
-            renderHoroscopeData(horoscopeData);
+        if(horoscopeData && horoscopeDataOther) {
+            let renderedHoroscopeData = renderHoroscopeData(horoscopeData);
+            console.log('renderedHoroscopeData', renderedHoroscopeData);
+
+            let renderedHoroscopeDataOther = renderHoroscopeData(horoscopeDataOther)
+            console.log('renderHoroscopeDataOther', renderedHoroscopeDataOther);
+
+            console.log('horoscopeData ', horoscopeData)
+            console.log('horoscopeDataOther ', horoscopeDataOther)
+
+            // console.log('chartDataOther: ', chartOverview)
+            // console.log('chartData: ', chartOverviewOther)
+
+            let _compOverview = calComp(renderedHoroscopeData.positions, renderedHoroscopeDataOther.positions);
+
+            setCompOverview(_compOverview);
+
+            console.log(_compOverview)
+
         } else {
-            console.log('No horoscope data')
+            console.log('No horoscope data');
         }
 
     }, [horoscopeData, horoscopeDataOther])
 
-
-    const renderHoroscopeData = horoscopeData => {
-        let _chartOverview = {};
-        let celestialBodies = horoscopeData.CelestialBodies.all;
-
-        for(let i = 0; i < celestialBodies.length; i++){
-            _chartOverview[celestialBodies[i].label] = { house: [celestialBodies[i].House.label], sign: [celestialBodies[i].Sign.label] }
-        }
-        delete _chartOverview['Sirius'];
-
-        setChartOverview(_chartOverview);
+    let planetTerms = {
+        Sun: 'Vision',
+        Moon: 'Emotion',
+        Mercury: 'Communication',
+        Venus: 'Pleasure/Taste',
+        Mars: 'Drive/Attraction',
+        Jupiter: 'Belief',
+        Saturn: 'Discipline',
+        Uranus: 'Eccentricity',
+        Neptune: 'Spirituality',
+        Pluto: 'Power',
+        Chiron: 'Sensitivity'
     }
 
+
     return (
-        <div className='nv-container'>
-            <div className='nv-details-container boxed'>
-                {chartOverview &&
-                    Object.keys(chartOverview).map(planet => (
-                        <div>
-                            {planet} in {chartOverview[planet].sign} in the {chartOverview[planet].house} house
-                        </div>
-                    ))
-                }
+        <div className='cv-container'>
+            <div className='cv-details-container boxed'>
+                <div className='cv-details-scroll-container'>
+                    {compOverview &&
+                        Object.keys(compOverview).map(planet => (
+                            <div className='cv-aspect-link'>
+                                <div className='cv-aspect-header'>{astroSVGs['planets'][planet]} {planetTerms[planet]}</div>
+                                <div>
+                                {Object.keys(compOverview[planet]).length > 0 ?
+                                    Object.keys(compOverview[planet]).map(planets => (
+                                        <div className='cv-aspect-detail'>{compOverview[planet][planets]} {astroSVGs['planets'][planets]}</div>
+                                    ))
+                                :
+                                    <div className='cv-aspect-detail' style={{paddingTop: '10px'}}>No aspects</div>
+                                }
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
             <div id='chart' className='boxed'></div>
         </div>
