@@ -11,10 +11,10 @@ const ProfileForm = ({
     setCloseCondition
 }) => {
 
-    let [name, setName] = useState('');
-    let [birthDate, setBirthDate] = useState('');
-    let [birthTime, setBirthTime] = useState('');
-    let [birthLocation, setBirthLocation] = useState('');
+    let [name, setName] = useState(profile.name);
+    let [birthDate, setBirthDate] = useState(profile.birthDate);
+    let [birthTime, setBirthTime] = useState(profile.birthTime);
+    let [birthLocation, setBirthLocation] = useState(profile.birthLocation);
 
     const handleEditProfile = (e) => {
         e.preventDefault();
@@ -29,24 +29,21 @@ const ProfileForm = ({
         setCloseCondition(false);
     }
 
-    console.log('profile.name: ', profile.name)
-    console.log('profile.birthDate: ', profile.birthDate)
-
     return (
         <div className='pf-container'>
             <form onSubmit={handleSubmit === 'edit' ? handleEditProfile : handleAddProfile}>
                 <div className='pf-inputs-container'>
                     <label>
-                        <input name="name" value={profile.name} type="text" value={name} onChange={(e) => setName(e.target.value)}></input>
+                        <input name="name" type="text" value={name} onChange={(e) => setName(e.target.value)}></input>
                     </label>
                     <label>
-                        <input name="birthdate" value={profile.birthDate} type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                        <input name="birthdate" type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                     </label>
                     <label>
-                        <input name="birthtime" value={profile.birthTime} type="time" value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
+                        <input name="birthtime" type="time" value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
                     </label>
                     <label>
-                        <input name="birthLocation" value={profile.birthLocation} type="text" value={birthLocation} onChange={(e) => setBirthLocation(e.target.value)} />
+                        <input name="birthLocation" type="text" value={birthLocation} onChange={(e) => setBirthLocation(e.target.value)} />
                     </label>
                     <input type="submit" value={handleSubmit === 'edit' ? 'Save' : 'Create'} />
                 </div>
