@@ -28,13 +28,13 @@ class ProfilesView(APIView):
 
     def patch(self, request):
         if request.user.is_authenticated:
-            data = json.loads(request)
-            data = data['body']
-
+            data = JSONParser().parse(request)
+            print('data ', data)
+            data = json.loads(data['body'])
+            print('name 2 ', data['name'])
             profile = Profile.objects.get(id=data['profileId'])
-
             if(request.user.id == profile.user.id):
-                profile.name = data['name'],
+                profile.name = data['name']
                 profile.birthDate = data['birthDate']
                 profile.birthTime = data['birthTime']
                 profile.birthLocation = data['birthLocation']
@@ -44,6 +44,7 @@ class ProfilesView(APIView):
 
                 return Response(status=status.HTTP_200_OK)
 
+            print(5)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
