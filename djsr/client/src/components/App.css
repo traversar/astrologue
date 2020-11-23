@@ -28,13 +28,17 @@ body {
         -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 1px, transparent 10px),
         -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
         -moz-radial-gradient(circle, rgba(255,255,255,.9) 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
+        -moz-radial-gradient(circle, rgba(255,255,255,.8) 1px, rgba(255, 255, 255, 0.2) 1px, transparent 8px),
+        -moz-radial-gradient(circle, #FFF 1px, rgba(255, 255, 255, 0.2) 2px, transparent 10px),
         -moz-radial-gradient(circle, rgba(255,255,255,.8) 1px, rgba(255, 255, 255, 0.2) 1px, transparent 8px);
 
     /* Background images size */
-    background-size: 550px 550px, 350px 350px, 250px 270px, 220px 200px;
+    /* background-size: 550px 550px, 350px 350px, 250px 270px, 220px 200px; */
+    background-size: 550px 550px, 350px 350px, 250px 270px, 220px 200px, 300px 300px, 250px 250px;
 
     /* Background images position*/
-    background-position: 0 0, 30px 60px, 130px 270px, 70px 150px;
+    /* background-position: 0 0, 30px 60px, 130px 270px, 70px 150px; */
+    background-position: 0 0, 30px 60px, 130px 270px, 70px 150px, 200px 50px, 50px 200px;
 }
 
 .boxed {
