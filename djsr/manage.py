@@ -3,8 +3,9 @@
 import os
 import sys
 
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+if os.environ['NODE_ENV'] == 'development':
+    from dotenv import load_dotenv, find_dotenv
+    load_dotenv(find_dotenv())
 
 def main():
     """Run administrative tasks."""

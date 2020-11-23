@@ -12,6 +12,7 @@ djangorestframework-simplejwt = "*"
 python-dotenv = {extras = ["cli"], version = "*"}
 psycopg2-binary = "*"
 requests = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
