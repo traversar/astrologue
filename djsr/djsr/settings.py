@@ -158,3 +158,8 @@ STATIC_URL = '/static/'
 # Custom user model
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
+
+
+if os.environ['NODE_ENV'] == 'production':
+    import django_heroku
+    django_heroku.settings(locals())
