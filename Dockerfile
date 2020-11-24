@@ -20,4 +20,5 @@ RUN ["npm", "run", "build"]
 EXPOSE 8000
 
 # Run django environment
-CMD python djsr/manage.py runserver
+# CMD python djsr/manage.py runserver
+CMD gunicorn --chdir astrologue/ djsr.wsgi

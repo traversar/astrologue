@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "python djsr/manage.py runserver",
-    "start-dev": "NODE_ENV=development python djsr/manage.py runserver",
+    "start": "python astrologue/manage.py runserver",
+    "start-dev": "NODE_ENV=development python astrologue/manage.py runserver",
     "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

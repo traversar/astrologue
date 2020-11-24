@@ -1,1 +1,1 @@
-web: gunicorn djsr.wsgi --log-file -
+web: gunicorn astrologue.djsr.wsgi --log-file -
