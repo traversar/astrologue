@@ -17,7 +17,7 @@ const TransitsView = ({
     renderChartForNow
 }) => {
     let [compOverview, setCompOverview] = useState({});
-    let [details, setDetails] = useState('');
+    let [details, setDetails] = useState('Select transit aspect above for detailed interpretation.');
 
     useEffect(() => {
         selectOther(false);
@@ -37,19 +37,22 @@ const TransitsView = ({
         if(chartData && chartDataOther) {
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
-            var chart = new astrology.Chart('chart', 550, 550).radix(chartData)
+            let size = window.innerWidth < 700 ? window.innerWidth : 550;
+            var chart = new astrology.Chart('chart', size, size).radix(chartData)
             var transits = chart.transit(chartDataOther)
             transits.aspects()
         } else {
             console.log('No chart data')
         }
 
-    }, [chartData, chartDataOther])
+    }, [chartData, chartDataOther, window])
 
     useEffect(() => {
 
         if(horoscopeData && horoscopeDataOther) {
+            console.log('check 1: ', horoscopeData)
             let renderedHoroscopeData = renderHoroscopeData(horoscopeData);
+            console.log('check 2: ', horoscopeDataOther)
             let renderedHoroscopeDataOther = renderHoroscopeData(horoscopeDataOther)
             let _compOverview = calComp(renderedHoroscopeData.positions, renderedHoroscopeDataOther.positions);
             setCompOverview(_compOverview)
