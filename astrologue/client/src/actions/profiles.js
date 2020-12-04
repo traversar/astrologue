@@ -24,7 +24,7 @@ export const renderChartForNow = (profileData) => async(dispatch, getState) => {
         cD.getMonth()-1,
         cD.getDate(),
         cD.getHours(),
-        cD.getMinutes()
+        cD.getMinutes()-10
     ]
 
     console.log(year, month, date, hour, minute)

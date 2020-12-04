@@ -45,7 +45,8 @@ const CompatibilityView = ({
 
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
-            var chart = new astrology.Chart('chart', 540, 540).radix(chartData)
+            let size = window.innerWidth < 700 ? window.innerWidth*.9 : 550;
+            var chart = new astrology.Chart('chart', size, size).radix(chartData)
             var synastry = chart.transit(chartDataOther)
             synastry.aspects()
         } else {

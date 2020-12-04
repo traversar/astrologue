@@ -41,7 +41,8 @@ const NatalView = ({
         if(chartData) {
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
-            var chart = new astrology.Chart('chart', 550, 550, settings).radix(chartData)
+            let size = window.innerWidth < 700 ? window.innerWidth*.9 : 550;
+            var chart = new astrology.Chart('chart', size, size, settings).radix(chartData)
             chart.aspects()
         } else {
             console.log('No chart data')

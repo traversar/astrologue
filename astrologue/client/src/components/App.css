@@ -195,6 +195,19 @@ body {
         align-items: flex-start;
     }
 
+    .app-nav-container a {
+        font-size: 1.1em;
+        margin: 10px 3px 5px 0;
+    }
+
+    .nb-auth-container {
+        position: absolute;
+        align-self: end;
+    }
+
+    .nb-links {
+        margin-top: 10px;
+    }
 }
 
 
@@ -208,10 +221,10 @@ body {
     height: 80px;
 }
 
-.pv-profile-links div {
+/* .pv-profile-links div {
     min-width: 120px;
     margin: 0 5px 0 0;
-}
+} */
 
 .pv-profile-links-scrolldiv {
     display: flex;
@@ -266,8 +279,6 @@ body {
     font-family: helvetica;
     /* color: rgb(167, 167, 201); */
     color: rgb(215, 215, 230);
-
-
     font-size: 1em;
     cursor: pointer;
     display: flex;
@@ -275,6 +286,8 @@ body {
     width: fit-content;
     transition: .5s background-color;
     position: relative;
+    background-color: rgba(255, 255, 255, .1);
+    margin-right: 5px;
 }
 
 .pv-addprofile-btn > span {
@@ -300,8 +313,8 @@ body {
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
-    background-color: rgb(85, 85, 184, .7);
-    /* background-color: rgb(62, 62, 107, .7); */
+    /* background-color: rgb(85, 85, 184, .7); */
+    background-color: rgba(85, 85, 184, 0.8);
     position: absolute;
     left: 50%;
     top: 30%;
@@ -329,8 +342,11 @@ body {
 
 /* ==================================== LoginSignup == */
 
-.login-container {
-    /* padding: 10px; */
+#login-signup-panel {
+    background-color: rgba(85, 85, 184, 0.8);
+    border: 1px solid rgb(72, 72, 124);
+    border-radius: 4px;
+    padding: 7px 5px;
 }
 
 .login-container input {
@@ -369,15 +385,6 @@ body {
     justify-content: space-around;
 }
 
-@media (max-width: 700px) {
-
-    .nv-container {
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: space-around;
-    }
-}
-
 .nv-details-container {
     display: flex;
     flex-direction: column;
@@ -402,11 +409,18 @@ body {
     padding: 15px 10px;
     color: rgb(215, 215, 230);
     font-size: 1.2em;
-    margin: 0 15px 15px 15px;
+    margin: 15px;
     padding: 15px 10px;
     background-color: rgba(255,255,255,.1)
 }
 
+@media (max-width: 700px) {
+    .nv-container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-around;
+    }
+}
 
 /* ==================================== ProfileForm == */
 
@@ -416,8 +430,7 @@ body {
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
-    /* background-color: rgb(62, 62, 107, .7); */
-    background-color: rgb(85, 85, 184, .7);
+    background-color: rgba(85, 85, 184, 0.8);
     height: fit-content;
     width: fit-content;
 }
@@ -493,4 +506,10 @@ body {
     font-family: helvetica;
     color: rgb(215, 215, 230);
     font-size: 1em;
+}
+
+@media (max-width: 700px) {
+    .cv-container {
+        flex-direction: column-reverse;
+    }
 }

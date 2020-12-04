@@ -37,7 +37,7 @@ const TransitsView = ({
         if(chartData && chartDataOther) {
             let chartDiv = document.getElementById('chart')
             chartDiv.innerHTML = '';
-            let size = window.innerWidth < 700 ? window.innerWidth : 550;
+            let size = window.innerWidth < 700 ? window.innerWidth*.9 : 550;
             var chart = new astrology.Chart('chart', size, size).radix(chartData)
             var transits = chart.transit(chartDataOther)
             transits.aspects()
@@ -50,13 +50,14 @@ const TransitsView = ({
     useEffect(() => {
 
         if(horoscopeData && horoscopeDataOther) {
-            console.log('check 1: ', horoscopeData)
-            let renderedHoroscopeData = renderHoroscopeData(horoscopeData);
-            console.log('check 2: ', horoscopeDataOther)
-            let renderedHoroscopeDataOther = renderHoroscopeData(horoscopeDataOther)
-            let _compOverview = calComp(renderedHoroscopeData.positions, renderedHoroscopeDataOther.positions);
-            setCompOverview(_compOverview)
-
+            try {
+                let renderedHoroscopeData = renderHoroscopeData(horoscopeData);
+                let renderedHoroscopeDataOther = renderHoroscopeData(horoscopeDataOther)
+                let _compOverview = calComp(renderedHoroscopeData.positions, renderedHoroscopeDataOther.positions);
+                setCompOverview(_compOverview)
+            } catch(e) {
+                console.log(e)
+            }
         } else {
             console.log('No horoscope data')
         }
@@ -107,7 +108,7 @@ const TransitsView = ({
                         }
                     </div>
                 </div>
-                <div id='chart' className='boxed'></div>
+                <div id='chart'></div>
             </div>
             <div id='details-expand' className='nv-details-expand-container boxed' style={{width: 'auto'}}>{details}</div>
         </>
