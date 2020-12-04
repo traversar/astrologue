@@ -49,7 +49,7 @@ body {
     padding: 5px;
 }
 
-.boxed-selected {
+.boxed-selected, .boxed-selected-other {
     /* border: 1px solid rgb(53, 53, 105); */
     border: 1.5px solid rgb(119, 119, 158);
     border-radius: 4px;

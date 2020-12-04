@@ -42,10 +42,19 @@ const ProfileButton = ({
         <>
             <div
                 onClick={() =>  profile.id === selectedProfile.id || (selectOtherOn  && selectedProfileOther && selectedProfileOther.id === profile.id) ? handleProfileEdit(profile.id) : handleProfileSelect(profile.id)}
-                className={ profile.id === selectedProfile.id || (selectedProfileOther && selectedProfileOther.id === profile.id) ? 'pb-container boxed-selected ' + elementColors[profile.id % 4] : 'pb-container boxed ' + elementColors[profile.id % 4]}>
-                    <div>{profile.name}</div>
-                    <div>{profile.birthDate}</div>
-                    <div>{profile.birthLocation}</div>
+                // className={ profile.id === selectedProfile.id || (selectedProfileOther && selectedProfileOther.id === profile.id) ? 'pb-container boxed-selected ' + elementColors[profile.id % 4] : 'pb-container boxed ' + elementColors[profile.id % 4]}>
+                className={ profile.id === selectedProfile.id
+                    ?
+                        'pb-container boxed-selected ' + elementColors[profile.id % 4]
+                    :
+                        (selectedProfileOther && selectedProfileOther.id === profile.id)
+                    ?
+                        'pb-container boxed-selected-other ' + elementColors[profile.id % 4]
+                    :
+                        'pb-container boxed ' + elementColors[profile.id % 4]}>
+                        <div>{profile.name}</div>
+                        <div>{profile.birthDate}</div>
+                        <div>{profile.birthLocation}</div>
             </div>
             {editProfile &&
                 <DropInComponent

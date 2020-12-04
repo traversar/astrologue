@@ -287,6 +287,9 @@ export const selectOther = (status) => async(dispatch, getState) => {
         dispatch(allowSelectOther())
     } else {
         dispatch(disallowSelectOther())
+        let otherSelected = document.querySelector('.boxed-selected-other');
+        otherSelected.classList.add('boxed');
+        otherSelected.classList.remove('boxed-selected-other');
     }
 
     function allowSelectOther() { return { type: profileConstants.ALLOW_SELECT_OTHER } }
