@@ -370,8 +370,9 @@ body {
 .ls-toggle-link {
     cursor: pointer;
     /* color: white; */
-    color: rgb(134, 104, 168);
+    color: rgb(192, 176, 211);
     font-family: helvetica;
+    text-align: center;
 }
 
 

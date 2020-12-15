@@ -12,10 +12,7 @@ const Navbar = ({
     let [showPanel, setShowPanel] = useState(false);
 
     const handleLoginSignup = () => {
-        // let authContainer = document.getElementById('auth-container')
-        // authContainer.classList.contains('nb-loginsignup-container-hidden') ? authContainer.classList.remove('nb-loginsignup-container-hidden') : authContainer.classList.add('nb-loginsignup-container-hidden');
-        setShowPanel(true);
-
+        setShowPanel(!showPanel);
     }
 
     return (
