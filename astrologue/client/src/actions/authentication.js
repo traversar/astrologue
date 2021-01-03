@@ -1,5 +1,6 @@
 import { authConstants } from "../constants/authentication";
 import axiosInstance from '../axiosApi';
+import jwt from 'jwt-decode';
 
 export const setLoggedInTrue = () => async (dispatch, getState) => {
     console.log('setloggedintrue')
@@ -20,12 +21,14 @@ export const login = (username, password) => async (dispatch, getState) => {
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
 
-        dispatch(success())
+        let username = jwt(response.data.access).username
+
+        dispatch(success(username))
     } else {
         dispatch(failure())
     }
 
-    function success() { return { type: authConstants.LOGIN_SUCCESS } }
+    function success(username) { return { type: authConstants.LOGIN_SUCCESS, username } }
     function failure() { return { type: authConstants.LOGIN_FAILURE } }
 }
 

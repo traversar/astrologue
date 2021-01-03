@@ -167,13 +167,13 @@ export const loadProfiles = () => async (dispatch, getState) => {
         dispatch(success(data))
         console.log(data[0].owner)
         if(response.data[0].owner) {
-            dispatch(loggedIn())
+            dispatch(loggedIn(response.data[0].owner))
         }
     } else {
         console.log('Failed to load profiles')
     }
 
-    function loggedIn() { return { type: authConstants.LOGIN_SUCCESS } }
+    function loggedIn(username) { return { type: authConstants.LOGIN_SUCCESS, username } }
     function success(data) { return { type: profileConstants.LOAD_PROFILES, profiles: data } }
 }
 

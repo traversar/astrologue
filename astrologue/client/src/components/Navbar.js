@@ -6,7 +6,7 @@ import * as authActions from '../actions/authentication';
 import DropInComponent from '../utils/DropInComponent';
 
 const Navbar = ({
-    loggedIn,
+    authenticated,
     logout
 }) => {
     let [showPanel, setShowPanel] = useState(false);
@@ -28,14 +28,11 @@ const Navbar = ({
                     <Link to='/learn/'>Learn</Link>
                 </div>
                 <div className='nb-auth-container'>
-                    {loggedIn ?
-                    <div id='nb-auth-button' className='nb-auth-button' onClick={logout}>Logout</div>
+                    {authenticated.loggedIn ?
+                    <div id='nb-auth-button' className='nb-auth-button' onClick={logout}>({authenticated.username}) Logout</div>
                     :
                     <div id='nb-auth-button' className='nb-auth-button' onClick={handleLoginSignup}>Login/Signup</div>
                     }
-                    {/* <div id='auth-container' className='nb-loginsignup-container nb-loginsignup-container-hidden'>
-                        <LoginSignup />
-                    </div> */}
                 </div>
             </div>
             {showPanel &&
@@ -47,10 +44,10 @@ const Navbar = ({
 
 const NavbarContainer = () => {
     const dispatch = useDispatch();
-    let loggedIn = useSelector(state => state.authentication.loggedIn);
+    let authenticated = useSelector(state => state.authentication);
     let logout = () => dispatch(authActions.logout());
 
-    return <Navbar loggedIn={loggedIn} logout={logout} />
+    return <Navbar authenticated={authenticated} logout={logout} />
 }
 
 export default NavbarContainer
