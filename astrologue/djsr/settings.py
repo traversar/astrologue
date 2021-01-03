@@ -23,9 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -164,3 +161,6 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 if os.environ['NODE_ENV'] == 'production':
     import django_heroku
     django_heroku.settings(locals())
+    DEBUG = False
+else:
+    DEBUG = True
