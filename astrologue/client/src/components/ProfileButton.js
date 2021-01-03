@@ -54,7 +54,7 @@ const ProfileButton = ({
                         'pb-container boxed ' + elementColors[profile.id % 4]}>
                         <div>{profile.name}</div>
                         <div>{profile.birthDate}</div>
-                        <div>{profile.birthLocation}</div>
+                        <div>{profile.birthCity} {profile.birthState}, {profile.birthCountry}</div>
             </div>
             {editProfile &&
                 <DropInComponent

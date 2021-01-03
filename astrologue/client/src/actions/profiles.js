@@ -188,7 +188,6 @@ export const selectProfile = (profileId, other=false) => async (dispatch, getSta
 export const createProfile = (name, birthDate, birthTime, birthCity, birthState, birthCountry) => async(dispatch, getState) => {
     let latAndLong = await dispatch(getLongLat(birthCity, birthState, birthCountry));
     let [latitude, longitude] = latAndLong
-    birthLocation = [birthCity, birthState, birthCountry].join('@')
 
     const response = await axiosInstance.post(
         '/profiles/',

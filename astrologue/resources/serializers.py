@@ -2,10 +2,6 @@ from rest_framework import serializers
 from .models import Profile
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # owner = serializers.HiddenField(
-    #     default=serializers.CurrentUserDefault()
-    # )
-
     # Create a custom method field
     owner = serializers.SerializerMethodField('_user')
 
@@ -23,7 +19,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             'name',
             'birthDate',
             'birthTime',
-            'birthLocation',
+            'birthCity',
+            'birthState',
+            'birthCountry',
             'latitude',
             'longitude',
         )

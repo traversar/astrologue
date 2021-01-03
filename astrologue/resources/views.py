@@ -9,7 +9,6 @@ import requests
 import json
 
 class ProfilesView(APIView):
-    # permission_classes = []
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request):
@@ -37,7 +36,9 @@ class ProfilesView(APIView):
                 profile.name = data['name']
                 profile.birthDate = data['birthDate']
                 profile.birthTime = data['birthTime']
-                profile.birthLocation = data['birthLocation']
+                profile.birthCity = data['birthCity']
+                profile.birthState = data['birthState']
+                profile.birthCountry = data['birthCountry']
                 profile.latitude = data['latitude']
                 profile.lonitude = data['longitude']
                 profile.save()
@@ -47,37 +48,20 @@ class ProfilesView(APIView):
             print(5)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
     def post(self, request):
         if request.user.is_authenticated:
             try:
                 data = JSONParser().parse(request)
                 data = json.loads(data['body'])
 
-                print('Post data: ', data)
-
-                print('user = ', request.user)
-                print('name = ', data['name'])
-                print('birthDate = ', data['birthDate'])
-                print('birthTime = ', data['birthTime'])
-                print('birthLocation = ', data['birthLocation'])
-                print('longitude = ', data['longitude'])
-                print('latitude = ', data['latitude'])
-
-                # serialized = ProfileSerializer(data=data['body'])
-                # print(serialized)
-                # if serialized.is_valid():
-                #     print('\n\nvalid\n\n')
-                #     serialized.save()
-                #     # return Response(serialized.data)
-                # # print('request.user: ', request.user)
-                # # print('request.body.name: ', request.body.name)
                 new_profile = Profile(
                     user = request.user,
                     name = data['name'],
                     birthDate = data['birthDate'],
                     birthTime = data['birthTime'],
-                    birthLocation = data['birthLocation'],
+                    birthCity = data['birthCity'],
+                    birthState = data['birthState'],
+                    birthCountry = data['birthCountry'],
                     latitude = data['latitude'],
                     longitude = data['longitude']
                 )
