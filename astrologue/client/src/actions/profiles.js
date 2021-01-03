@@ -165,7 +165,6 @@ export const loadProfiles = () => async (dispatch, getState) => {
     if (response.status === 200) {
         let data = response.data
         dispatch(success(data))
-        console.log(data[0].owner)
         if(response.data[0].owner) {
             dispatch(loggedIn(response.data[0].owner))
         }
@@ -188,21 +187,25 @@ export const selectProfile = (profileId, other=false) => async (dispatch, getSta
 export const createProfile = (name, birthDate, birthTime, birthCity, birthState, birthCountry) => async(dispatch, getState) => {
     let latAndLong = await dispatch(getLongLat(birthCity, birthState, birthCountry));
     let [latitude, longitude] = latAndLong
+    let newProfile = {name, birthDate, birthTime, birthCity, birthState, birthCountry, latitude, longitude}
 
     const response = await axiosInstance.post(
         '/profiles/',
         {
             method: 'POST',
-            body: JSON.stringify({name, birthDate, birthTime, birthCity, birthState, birthCountry, latitude, longitude})
+            body: JSON.stringify(newProfile)
         }
     )
 
     if (response.status === 200) {
-        dispatch(loadProfiles())
+        dispatch(addProfile(newProfile))
+        // dispatch(loadProfiles())
         console.log('Successfully created profile');
     } else {
         console.log('Failed to create profile');
     }
+
+    function addProfile(profile) { return { type: profileConstants.ADD_PROFILE, profile }}
 }
 
 export const editProfile = (profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry) => async (dispatch, getState) => {

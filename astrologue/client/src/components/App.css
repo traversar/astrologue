@@ -1,14 +1,5 @@
 body {
-    /* background-color: rgb(29, 29, 83); */
-    /* background-color: rgb(62, 62, 107); */
-
-    /* background-color: rgb(85, 85, 184); */
-
     font-size: 15px;
-
-    /* background-color: black; */
-    /* background-color: rgb(57, 57, 117); */
-    /* background-color: (39,39,90); */
 
     /* Night-time */
     background-color: rgb(14,14,45);
@@ -118,23 +109,15 @@ body {
     font-size: .9em;
     font-weight: 100;
     text-decoration: none;
-    /* border: 1px solid rgb(53, 53, 105); */
-    /* border: 1px solid rgb(72, 72, 124); */
     border-radius: 8px;
     padding: 4px 4px 2px;
     margin: 0 3px 5px 0;
     color: rgb(57, 50, 94);
-    /* color: rgb(167, 167, 201); */
     background-color: rgb(237, 206, 255);
     transition: .5s background-color;
-    /* transition: .5s color; */
-
 }
 
 .app-nav-container a:hover {
-    /* background-color: rgb(137, 0, 250); */
-    /* border-color: rgb(68, 68, 124); */
-    /* border-color: rgb(100, 100, 158); */
     background-color: rgb(230, 211, 255);
     color: rgb(82, 74, 122);
 }
@@ -173,7 +156,6 @@ body {
 .nb-auth-button {
     font-family: helvetica;
     cursor: pointer;
-    /* color: rgb(146, 114, 204); */
     color: rgb(169, 141, 221);
     margin-right: 6px;
 }
@@ -202,7 +184,7 @@ body {
 
     .nb-auth-container {
         position: absolute;
-        align-self: end;
+        right: 5%;
     }
 
     .nb-links {
@@ -220,11 +202,6 @@ body {
     overflow: hidden;
     height: 80px;
 }
-
-/* .pv-profile-links div {
-    min-width: 120px;
-    margin: 0 5px 0 0;
-} */
 
 .pv-profile-links-scrolldiv {
     display: flex;
@@ -244,7 +221,6 @@ body {
 
 .pb-container {
     font-family: helvetica;
-    /* color: rgb(167, 167, 201); */
     color: rgb(215, 215, 230);
     font-size: 1em;
     cursor: pointer;
@@ -277,7 +253,6 @@ body {
 
 .pv-addprofile-btn {
     font-family: helvetica;
-    /* color: rgb(167, 167, 201); */
     color: rgb(215, 215, 230);
     font-size: 1em;
     cursor: pointer;
@@ -313,7 +288,6 @@ body {
     border: 1px solid rgb(72, 72, 124);
     border-radius: 4px;
     padding: 7px 5px;
-    /* background-color: rgb(85, 85, 184, .7); */
     background-color: rgba(85, 85, 184, 0.8);
     position: absolute;
     left: 50%;
@@ -391,8 +365,6 @@ body {
     flex-direction: column;
     text-align: left;
     align-self: center;
-    /* position: relative; */
-    /* top: 10%; */
 }
 
 .nv-details-type {
