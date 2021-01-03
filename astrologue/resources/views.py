@@ -21,7 +21,7 @@ class ProfilesView(APIView):
             print(serialized.data)
         else:
             print("not authenticated", request.user)
-            profiles = Profile.objects.filter(id__in=[1, 2])
+            profiles = Profile.objects.filter(id__in=[1, 2, 3, 4, 5, 6, 7, 8])
             serialized = ProfileSerializer(profiles, many=True)
         return Response(data=serialized.data, status=status.HTTP_200_OK)
 
