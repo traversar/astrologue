@@ -31,14 +31,17 @@ const DropInComponent = ({
 
 
     return (
-        <div id={dicId} className="dic dic-hidden">
-            <DropIn
-                // id="drop-in-component"
-                // className="dic dic-hidden"
-                setCloseCondition={setCloseConditionWithDelay}
-                {...rest}
-            />
-        </div>
+        <>
+            <div id={dicId} className="dic dic-hidden">
+                <DropIn
+                    // id="drop-in-component"
+                    // className="dic dic-hidden"
+                    setCloseCondition={setCloseConditionWithDelay}
+                    {...rest}
+                />
+            </div>
+            <div style={{height: '100vh', width: '90vw', position: 'absolute', zIndex: 2, top: 0, left: 0}} onClick={() => setCloseConditionWithDelay(false)}></div>
+        </>
     )
 
 }
