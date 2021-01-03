@@ -11,10 +11,10 @@ const ProfileForm = ({
     setCloseCondition
 }) => {
 
-    let [name, setName] = useState(profile.name);
-    let [birthDate, setBirthDate] = useState(profile.birthDate);
-    let [birthTime, setBirthTime] = useState(profile.birthTime);
-    let [birthLocation, setBirthLocation] = useState(profile.birthLocation);
+    let [name, setName] = useState(profile.name || 'Name/Alias');
+    let [birthDate, setBirthDate] = useState(profile.birthDate || 'Birthdate');
+    let [birthTime, setBirthTime] = useState(profile.birthTime || 'Birthtime');
+    let [birthLocation, setBirthLocation] = useState(profile.birthLocation || 'Birth Location');
 
     const handleEditProfile = (e) => {
         e.preventDefault();
