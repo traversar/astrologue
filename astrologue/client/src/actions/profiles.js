@@ -78,19 +78,6 @@ export const renderChart = (profileData, other=false) => async(dispatch, getStat
     [year, month, date] = [Number(year), Number(month)-1, Number(date)];
     let [ hour, minute ] = birthTime.split(':');
     [hour, minute] = [Number(hour), Number(minute)]
-    let [ city, stateProvince, country ] = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''));
-
-    // console.log(
-    //     'year: ', year,
-    //     'month: ', month,
-    //     'date: ', date,
-    //     'hour: ', hour,
-    //     'minute: ', minute,
-    //     'state: ', stateProvince,
-    //     'country: ', country,
-    //     'lat: ', latitude,
-    //     'long: ', longitude,
-    // )
 
     const profile = new Origin({
         year,
@@ -127,10 +114,6 @@ export const renderChart = (profileData, other=false) => async(dispatch, getStat
         cusps.push((cusps[i-1] + 30) % 360)
     }
 
-    // console.log(horoscope);
-    // console.log('Planets: ', planets)
-    // console.log('Cusps: ', cusps)
-
     let chartData = {
         planets,
         cusps
@@ -139,9 +122,7 @@ export const renderChart = (profileData, other=false) => async(dispatch, getStat
     if(!other) {
         dispatch(chartDataAction());
     } else {
-        console.log('Before dispatch chartDataOtherAction')
         dispatch(chartDataOtherAction());
-        console.log('After dispatch chartDataOtherAction')
     }
 
     function chartDataAction () { return { type: profileConstants.LOAD_CHART_DATA, chartData, horoscope } }
@@ -187,7 +168,6 @@ export const loadProfiles = () => async (dispatch, getState) => {
         console.log(data[0].owner)
         if(response.data[0].owner) {
             dispatch(loggedIn())
-            console.log('dispatch login')
         }
     } else {
         console.log('Failed to load profiles')
@@ -205,31 +185,16 @@ export const selectProfile = (profileId, other=false) => async (dispatch, getSta
     }
 }
 
-export const createProfile = (name, birthDate, birthTime, birthLocation) => async(dispatch, getState) => {
-    let [year, month, date] = birthDate.split('-');
-    let [hour, minute] = birthTime.split(':');
-    let locationArr = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''))
-    let [city, stateProvince, country] = locationArr.length === 3 ? locationArr : locationArr.length === 2 ? ['', ...locationArr] : ['', '', ...locationArr];
-    let latAndLong = await dispatch(getLongLat(city, stateProvince, country));
+export const createProfile = (name, birthDate, birthTime, birthCity, birthState, birthCountry) => async(dispatch, getState) => {
+    let latAndLong = await dispatch(getLongLat(birthCity, birthState, birthCountry));
     let [latitude, longitude] = latAndLong
-
-    // console.log(
-    //     'year: ', year,
-    //     'month: ', month,
-    //     'date: ', date,
-    //     'hour: ', hour,
-    //     'minute: ', minute,
-    //     'state: ', stateProvince,
-    //     'country: ', country,
-    //     'lat: ', latitude,
-    //     'long: ', longitude,
-    // )
+    birthLocation = [birthCity, birthState, birthCountry].join('@')
 
     const response = await axiosInstance.post(
         '/profiles/',
         {
             method: 'POST',
-            body: JSON.stringify({name, birthDate, birthTime, birthLocation, latitude, longitude})
+            body: JSON.stringify({name, birthDate, birthTime, birthCity, birthState, birthCountry, latitude, longitude})
         }
     )
 
@@ -241,19 +206,15 @@ export const createProfile = (name, birthDate, birthTime, birthLocation) => asyn
     }
 }
 
-export const editProfile = (profileId, name, birthDate, birthTime, birthLocation) => async (dispatch, getState) => {
-    let [year, month, date] = birthDate.split('-');
-    let [hour, minute] = birthTime.split(':');
-    let locationArr = birthLocation.split(' ').map(ele => ele.trim().replaceAll(',',''))
-    let [city, stateProvince, country] = locationArr.length === 3 ? locationArr : locationArr.length === 2 ? ['', ...locationArr] : ['', '', ...locationArr];
-    let latAndLong = await dispatch(getLongLat(city, stateProvince, country));
+export const editProfile = (profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry) => async (dispatch, getState) => {
+    let latAndLong = await dispatch(getLongLat(birthCity, birthState, birthCountry));
     let [latitude, longitude] = latAndLong;
 
     const response = await axiosInstance.patch(
         '/profiles/',
         {
             method: 'PATCH',
-            body: JSON.stringify({profileId, name, birthDate, birthTime, birthLocation, latitude, longitude})
+            body: JSON.stringify({profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, latitude, longitude})
         }
     )
 
