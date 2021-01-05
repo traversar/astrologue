@@ -221,12 +221,13 @@ export const editProfile = (profileId, name, birthDate, birthTime, birthCity, bi
     )
 
     if (response.status === 200) {
-        dispatch(loadProfiles())
+        dispatch(editProfile({id: profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, latitude, longitude}))
         console.log('Successfully edited profile');
     } else {
         console.log('Failed to edit profile');
     }
 
+    function editProfile(profile) { return { type: profileConstants.EDIT_PROFILE, profile} }
 }
 
 export const getLongLat = (city, stateProvince, country) => async(dispatch, getState) => {

@@ -16,6 +16,17 @@ export function profiles(state = {}, action) {
                 profiles,
                 selectedProfile: action.profile
             }
+        case profileConstants.EDIT_PROFILE:
+            let editedProfiles = state.profiles.map(profile => {
+                if(profile.id === action.profile.id) {
+                    profile = action.profile
+                }
+                return profile
+            })
+            return {
+                ...state,
+                profiles: editedProfiles
+            }
         case profileConstants.SELECT_PROFILE:
             let selectedProfile;
             state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfile = profile } });
