@@ -50,7 +50,6 @@ const CompatibilityView = ({
             var synastry = chart.transit(chartDataOther)
             synastry.aspects()
         } else {
-            // chartDiv.innerHTML = 'Select a second profile to calculate compatibility.';
             console.log('No chart data')
         }
 
@@ -101,8 +100,8 @@ const CompatibilityView = ({
                                     <div className='cv-aspect-header'>{astroSVGs['planets'][planet]} {planetTerms[planet]}</div>
                                     <div>
                                     {Object.keys(compOverview[planet]).length > 0 ?
-                                        Object.keys(compOverview[planet]).map(planets => (
-                                            <Link to="details-expand" spy={true} smooth={true} duration={500}>
+                                        Object.keys(compOverview[planet]).map((planets, index) => (
+                                            <Link key={index} to="details-expand" spy={true} smooth={true} duration={500}>
                                                 <div onClick={() => handleDetailClick(planet, compOverview[planet][planets], planets)} className='cv-aspect-detail'>{compOverview[planet][planets]} {astroSVGs['planets'][planets]}</div>
                                             </Link>
                                         ))
