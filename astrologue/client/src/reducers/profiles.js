@@ -30,6 +30,17 @@ export function profiles(state = {}, action) {
                 ...state,
                 profiles: editedProfiles
             }
+        case profileConstants.REMOVE_PROFILE:
+            let removedProfiles = state.profiles.reduce((profiles, profile) => {
+                if(profile.id !== action.profileId) {
+                    profiles.push(profile)
+                }
+                return profiles
+            }, [])
+            return {
+                ...state,
+                profiles: removedProfiles
+            }
         case profileConstants.SELECT_PROFILE:
             let selectedProfile;
             state.profiles.forEach(profile => { if(profile.id === action.profileId) { selectedProfile = profile } });

@@ -248,6 +248,28 @@ export const editProfile = (profileId, name, birthDate, birthTime, birthCity, bi
     function editProfile(profile) { return { type: profileConstants.EDIT_PROFILE, profile} }
 }
 
+export const deleteProfile = (profileId) => async(dispatch, getState) => {
+    if(getState().authentication.loggedIn) {
+        const response = await axiosInstance.delete(
+            '/profiles/',
+            {
+                method: 'DELETE',
+                body: profileId
+            }
+        )
+
+        if(response.status === 200) {
+            dispatch(removeProfile(profileId))
+        } else {
+            console.log('Could not delete')
+        }
+    } else {
+        dispatch(removeProfile(profileId))
+    }
+
+    function removeProfile(profileId) { return { type: profileConstants.REMOVE_PROFILE, profileId} }
+}
+
 export const getLongLat = (city, stateProvince, country) => async(dispatch, getState) => {
     const response = await axiosInstance.post(
         '/address/',

@@ -7,6 +7,7 @@ const ProfileForm = ({
     profile,
     createProfile,
     editProfile,
+    deleteProfile,
     profileId,
     setCloseCondition
 }) => {
@@ -31,11 +32,15 @@ const ProfileForm = ({
         setCloseCondition(false);
     }
 
+    const handleDeleteProfile = (profileId) => {
+        deleteProfile(profileId)
+    }
+
     return (
         <div className='pf-container'>
             <form onSubmit={handleSubmit === 'edit' ? handleEditProfile : handleAddProfile}>
                 <div className='pf-inputs-container'>
-                    <label style={{fontFamily: 'helvetica', fontWeight: '500', color: 'rgb(219, 205, 246)', marginBottom: '5px'}}>
+                    <label style={{fontFamily: 'helvetica', fontWeight: '500', color: 'rgb(219, 205, 246)', marginBottom: '5px', textAlign: 'center', fontWeight: 600}}>
                         Enter Birth Information
                     </label>
                     <label>
@@ -57,6 +62,9 @@ const ProfileForm = ({
                         <input name="birthCountry" type="text" placeholder='Country*' value={birthCountry} onChange={(e) => setBirthCountry(e.target.value)} />
                     </label>
                     <input type="submit" value={handleSubmit === 'edit' ? 'Save' : 'Create'} />
+                    {handleSubmit === "edit" &&
+                        <input type="button" value="Delete" style={{backgroundColor: '#ffbdbd'}} onClick={() => handleDeleteProfile(profile.id)} />
+                    }
                 </div>
             </form>
         </div>
@@ -72,6 +80,7 @@ const ProfileFormContainer = ({
     const dispatch = useDispatch();
     let createProfile = (name, birthDate, birthTime, birthCity, birthState, birthCountry) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthCity, birthState, birthCountry));
     let editProfile = (profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, profile) => dispatch(profileActions.editProfile(profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, profile));
+    let deleteProfile = (profileId) => dispatch(profileActions.deleteProfile(profileId));
 
     return <ProfileForm
         profile={profile}
@@ -79,6 +88,7 @@ const ProfileFormContainer = ({
         handleSubmit={handleSubmit}
         createProfile={createProfile}
         editProfile={editProfile}
+        deleteProfile={deleteProfile}
         setCloseCondition={setCloseCondition}
     />
 }
