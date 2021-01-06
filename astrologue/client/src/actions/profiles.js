@@ -251,7 +251,7 @@ export const editProfile = (profileId, name, birthDate, birthTime, birthCity, bi
 export const deleteProfile = (profileId) => async(dispatch, getState) => {
     if(getState().authentication.loggedIn) {
         const response = await axiosInstance.delete(
-            '/profiles/',
+            `/profiles/${profileId}`,
             {
                 method: 'DELETE',
                 body: profileId

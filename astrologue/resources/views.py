@@ -28,9 +28,7 @@ class ProfilesView(APIView):
     def patch(self, request):
         if request.user.is_authenticated:
             data = JSONParser().parse(request)
-            print('data ', data)
             data = json.loads(data['body'])
-            print('name 2 ', data['name'])
             profile = Profile.objects.get(id=data['profileId'])
             if(request.user.id == profile.user.id):
                 profile.name = data['name']
@@ -70,6 +68,17 @@ class ProfilesView(APIView):
                 print(e)
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             return Response(status=status.HTTP_200_OK)
+
+    def delete(self, request, profile_id):
+        if request.user.is_authenticated:
+            try:
+                profile = Profile.objects.get(id=profile_id)
+                profile.delete()
+                return Response(status.HTTP_200_OK)
+            except Exception as e:
+                print(e)
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class AstroHelper(APIView):
     permission_classes = (permissions.AllowAny,)

@@ -34,6 +34,7 @@ const ProfileForm = ({
 
     const handleDeleteProfile = (profileId) => {
         deleteProfile(profileId)
+        setCloseCondition(false);
     }
 
     return (
