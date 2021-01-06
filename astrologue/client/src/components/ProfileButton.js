@@ -9,9 +9,10 @@ const ProfileButton = ({
     selectProfile,
     selectedProfile,
     selectedProfileOther,
-    selectOtherOn
+    selectOtherOn,
+    setSelectSwitch,
+    selectSwitch
 }) => {
-    let [selectSwitch, setSelectSwitch] = useState(true);
     let [editProfile, setEditProfile] = useState('');
 
     const handleProfileSelect = (profileId) => {
@@ -70,17 +71,17 @@ const ProfileButton = ({
     )
 }
 
-const ProfileButtonContainer = ({profile}) => {
+const ProfileButtonContainer = ({profile, selectSwitch, setSelectSwitch}) => {
     const dispatch = useDispatch();
     const selectProfile = (profileId, other) => dispatch(profileActions.selectProfile(profileId, other));
-    // const editProfile = (profileId, name, birthDate, birthTime, birthLocation) => dispatch(profileActions.selectProfile(profileId, name, birthDate, birthTime, birthLocation));
     let selectedProfile = useSelector(state => state.entities.profiles.selectedProfile)
     let selectedProfileOther = useSelector(state => state.entities.profiles.selectedProfileOther)
     let selectOtherOn = useSelector(state => state.entities.profiles.selectOtherOn)
 
     return <ProfileButton
         profile={profile}
-        // editProfile={editProfile}
+        selectSwitch={selectSwitch}
+        setSelectSwitch={setSelectSwitch}
         selectOtherOn={selectOtherOn}
         selectProfile={selectProfile}
         selectedProfile={selectedProfile}

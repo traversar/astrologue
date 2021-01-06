@@ -8,6 +8,7 @@ const ProfileView = ({
     profiles
 }) => {
     let [showAddProfile, setShowAddProfile] = useState(false)
+    let [selectSwitch, setSelectSwitch] = useState(true);
 
     const handleAddProfile = () => {
         setShowAddProfile(!showAddProfile)
@@ -26,7 +27,7 @@ const ProfileView = ({
                 <div className='pv-profile-links-scrolldiv'>
                 {Array.isArray(profiles) &&
                     profiles.map((profile, index) => (
-                        <ProfileButton key={index} profile={profile} />
+                        <ProfileButton key={index} profile={profile} selectSwitch={selectSwitch} setSelectSwitch={setSelectSwitch} />
                     ))
                 }
                 </div>
