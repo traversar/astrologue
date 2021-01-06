@@ -10,6 +10,9 @@ export function profiles(state = {}, action) {
                 selectedProfileOther: null
             }
         case profileConstants.ADD_PROFILE:
+            if(action.profile.id === null) {
+                action.profile.id = state.profiles.length + 1
+            }
             let profiles = [action.profile, ...state.profiles]
             return {
                 ...state,

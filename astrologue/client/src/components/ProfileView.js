@@ -25,8 +25,8 @@ const ProfileView = ({
                 </div>
                 <div className='pv-profile-links-scrolldiv'>
                 {Array.isArray(profiles) &&
-                    profiles.map(profile => (
-                        <ProfileButton key={profile.id} profile={profile} />
+                    profiles.map((profile, index) => (
+                        <ProfileButton key={index} profile={profile} />
                     ))
                 }
                 </div>

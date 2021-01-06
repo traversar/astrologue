@@ -206,6 +206,7 @@ export const createProfile = (name, birthDate, birthTime, birthCity, birthState,
             console.log('Failed to create profile');
         }
     } else {
+        newProfile.id = null
         dispatch(addProfile(newProfile))
     }
 
