@@ -75,15 +75,14 @@ class AstroHelper(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        if request.user.is_authenticated:
-            data = JSONParser().parse(request)
-            data = json.loads(data['body'])
-            city = data['city']
-            state = data['stateProvince']
-            country = data['country']
-            city = f'&locality={city}' if city else ''
-            ak = 'ApcaXhwxeE_RSaDrryKrzRoUEViV1h-sUcw76TOb0D-FbBNozCcJtsY1DkM2tweX'
-            google_geocode = requests.get(f'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion={country}&adminDistrict={state}{city}&maxResults=1&key={ak}')
-            google_geocode = google_geocode.json()
-            lat_and_long = google_geocode['resourceSets'][0]['resources'][0]['geocodePoints'][0]['coordinates']
-            return Response(data=lat_and_long, status=status.HTTP_200_OK)
+        data = JSONParser().parse(request)
+        data = json.loads(data['body'])
+        city = data['city']
+        state = data['stateProvince']
+        country = data['country']
+        city = f'&locality={city}' if city else ''
+        ak = 'ApcaXhwxeE_RSaDrryKrzRoUEViV1h-sUcw76TOb0D-FbBNozCcJtsY1DkM2tweX'
+        google_geocode = requests.get(f'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion={country}&adminDistrict={state}{city}&maxResults=1&key={ak}')
+        google_geocode = google_geocode.json()
+        lat_and_long = google_geocode['resourceSets'][0]['resources'][0]['geocodePoints'][0]['coordinates']
+        return Response(data=lat_and_long, status=status.HTTP_200_OK)

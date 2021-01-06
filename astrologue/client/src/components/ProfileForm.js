@@ -21,7 +21,7 @@ const ProfileForm = ({
     const handleEditProfile = (e) => {
         e.preventDefault();
         if(profileId && name && birthDate && birthTime && birthState && birthCountry)
-            editProfile(profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry);
+            editProfile(profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, profile);
         setCloseCondition(false);
     }
 
@@ -71,7 +71,7 @@ const ProfileFormContainer = ({
 }) => {
     const dispatch = useDispatch();
     let createProfile = (name, birthDate, birthTime, birthCity, birthState, birthCountry) => dispatch(profileActions.createProfile(name, birthDate, birthTime, birthCity, birthState, birthCountry));
-    let editProfile = (profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry) => dispatch(profileActions.editProfile(profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry));
+    let editProfile = (profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, profile) => dispatch(profileActions.editProfile(profileId, name, birthDate, birthTime, birthCity, birthState, birthCountry, profile));
 
     return <ProfileForm
         profile={profile}
