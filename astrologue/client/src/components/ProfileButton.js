@@ -52,9 +52,9 @@ const ProfileButton = ({
                         'pb-container boxed-selected-other ' + elementColors[profile.id % 4]
                     :
                         'pb-container boxed ' + elementColors[profile.id % 4]}>
-                        <div>{profile.name}</div>
-                        <div style={{fontSize: '.8em', borderTop: '1px dotted white'}}>{profile.birthDate}</div>
-                        <div style={{fontSize: '.8em', borderTop: '1px dotted white'}}>{profile.birthCity} {profile.birthState}, {profile.birthCountry}</div>
+                            <div>{profile.name}</div>
+                            <div style={{fontSize: '.8em', borderTop: '1px dotted white'}}>{profile.birthDate}</div>
+                            <div style={{fontSize: '.8em', borderTop: '1px dotted white'}}>{profile.birthCity} {profile.birthState}, {profile.birthCountry}</div>
             </div>
             {editProfile &&
                 <DropInComponent
