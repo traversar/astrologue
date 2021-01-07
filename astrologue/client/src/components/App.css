@@ -488,3 +488,33 @@ body {
         flex-direction: column-reverse;
     }
 }
+
+
+/* ==================================== LearnView == */
+
+.lv-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.lv-symbols-container {
+    font-family: helvetica;
+    color: rgb(215, 215, 230);
+    font-size: 1em;
+    margin: 15px 10px;
+    padding: 15px 10px;
+    background-color: rgba(255,255,255,.1);
+    border-radius: 4px;
+    width: 25%;
+}
+
+.lv-details-container {
+    font-family: helvetica;
+    padding: 15px 10px;
+    color: rgb(215, 215, 230);
+    font-size: 1em;
+    margin: 15px 10px;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 4px;
+    width: 100%;
+}
