@@ -8,11 +8,13 @@ body {
     /* background: linear-gradient(rgb(206, 203, 255), rgb(180,174,255)); */
 
     /* Webkit */
-    background-image:
-        -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 40, from(white), color-stop(0.1, rgba(248,255,128,.5)), to(transparent)),
-        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 30, from(white), color-stop(0.1, rgba(255,186,170,.4)), to(transparent)),
-        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 40, from(rgba(255,255,255,.9)), color-stop(0.05, rgba(251,255,186,.3)), to(transparent)),
-        -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 30, from(rgba(255,255,255,.4)), color-stop(0.03, rgba(253,255,219,.2)), to(transparent));
+        background-image:
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 10, from(white), color-stop(0.1, rgba(255,255,255,.2)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 8, from(white), color-stop(0.1, rgba(255,255,255,.2)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 8, from(white), color-stop(0.1, rgba(255,255,255,.3)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 7, from(white), color-stop(0.03, rgba(255,255,255,.2)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 1, 50% 50%, 10, from(rgba(255,255,255)), color-stop(0.05, rgba(255,255,255,.3)), to(transparent)),
+        -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 10, from(rgba(255,255,255)), color-stop(0.03, rgba(255,255,255,.2)), to(transparent));
 
     /* Firefox */
     background-image:
