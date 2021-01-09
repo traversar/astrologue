@@ -95,3 +95,12 @@ class AstroHelper(APIView):
         google_geocode = google_geocode.json()
         lat_and_long = google_geocode['resourceSets'][0]['resources'][0]['geocodePoints'][0]['coordinates']
         return Response(data=lat_and_long, status=status.HTTP_200_OK)
+
+
+class AstroDetails(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request):
+        data = JSONParser().parse(request)
+        data = json.loads(data['body'])
+        subject = data.subject

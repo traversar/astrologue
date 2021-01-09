@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Aries",
+        "mode": "Cardinal",
+        "element": "Fire",
+        "ruler": "Mars",
+        "summary": "I will",
+        "description": "The ram. It has the qualities of impulsivity and leadership. Entrepreneurial. They want to do, to initiate."
+    },
+    {
+        "name": "Taurus",
+        "mode": "Fixed",
+        "element": "Earth",
+        "ruler": "Venus",
+        "summary": "I have",
+        "description": "The bull. It has the qualities of patience, groundedness and stubbornness. Seeks comfort and aesthetical pleasure."
+    },
+    {
+        "name": "Gemini",
+        "mode": "Mutable",
+        "element": "Air",
+        "ruler": "Mercury",
+        "summary": "I think",
+        "description": "The twins. Sign of duality. Social, curious, friendly and intellectual. Seeks a lot of stimulation."
+    },
+    {
+        "name": "Cancer",
+        "mode": "Cardinal",
+        "element": "Water",
+        "ruler": "Moon",
+        "summary": "I feel",
+        "description": "The crab. Sensitive with a protective shell. Nurturing and resourceful in all matters. Takes a measured, indirect path."
+    },
+    {
+        "name": "Leo",
+        "mode": "Fixed",
+        "element": "Fire",
+        "ruler": "Sun",
+        "summary": "We Are",
+        "description": "The lion. Loyalty important. Gregarious person. Need or impulse for the spotlight and often attractive in it."
+    },
+    {
+        "name": "Virgo",
+        "mode": "Mutable",
+        "element": "Earth",
+        "ruler": "Mercury",
+        "summary": "We have",
+        "description": "The virgin. Concerned with health and nutrition. Impulsive: very neat or very sloppy in any given area. Love to serve other people."
+    },
+    {
+        "name": "Libra",
+        "mode": "Cardinal",
+        "element": "Air",
+        "ruler": "Venus",
+        "summary": "We think",
+        "description": "The scales of justice and economy alike. Affinity with the arts and music. Seeks balance, rightness, justice. Socially-oriented."
+    },
+    {
+        "name": "Scorpio",
+        "mode": "Fixed",
+        "element": "Water",
+        "ruler": "Mars",
+        "summary": "We feel",
+        "description": "The scorpion. Very high or very low moral standing. Intense, driven. Doesn't take anything lighthearted. Will merge or push."
+    },
+    {
+        "name": "Sagittarius",
+        "mode": "Fixed",
+        "element": "Fire",
+        "ruler": "Jupiter",
+        "summary": "All are",
+        "description": "The archer. Happy-go-lucky. Aims for goals and ideals, often for and in faraway places; opposing and varied experiences."
+    },
+    {
+        "name": "Capricorn",
+        "mode": "Cardinal",
+        "element": "Earth",
+        "ruler": "Saturn",
+        "summary": "All have",
+        "description": "The mountain goat. Highly ambitious to climb to the top. A builder of structured environments. Does well in business."
+    },
+    {
+        "name": "Aquarius",
+        "mode": "Fixed",
+        "element": "Air",
+        "ruler": "Saturn",
+        "summary": "All think",
+        "description": "The water-bearer. Sign of friendships. They are humnitarians and are primarily attuned to others on that scale of basis."
+    },
+    {
+        "name": "Pisces",
+        "mode": "Mutable",
+        "element": "Water",
+        "ruler": "Jupiter",
+        "summary": "All feel",
+        "description": "The fish. The sensitive dreamer. Emphasis on some or all of the senses. Affinity with media of all forms; information throughput."
+    }
+]

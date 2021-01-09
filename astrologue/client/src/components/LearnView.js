@@ -39,6 +39,7 @@ const LearnView = () => {
 const LearnViewContainer = () => {
     // dispatch = useDispatch();
     // getDetails = (subject) => dispatch(astroActions.getDetails(subject))
+    learnDetails = useSelector(state => state.astro.learnDetails)
 
     return <LearnView />
 }

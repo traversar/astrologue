@@ -11,3 +11,17 @@ class Profile(models.Model):
     birthCountry = models.CharField(max_length=50)
     latitude = models.CharField(max_length=50)
     longitude = models.CharField(max_length=50)
+
+class CelestialBodies(models.Model):
+    name = models.CharField(max_length=50)
+    domicile = models.CharField(max_length=20)
+    exaltation = models.CharField(max_length=20)
+    description = models.TextField()
+
+class ZodiacalSigns(models.Model):
+    name = models.CharField(max_length=50)
+    mode = models.CharField(max_length=10)
+    element = models.CharField(max_length=10)
+    ruler = models.CharField(max_length=20)
+    summary = models.CharField(max_length=50)
+    description = models.TextField()

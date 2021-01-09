@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Sun",
+        "domicile": "Leo",
+        "exaltation": "Aries",
+        "description": "Archetype of self. Whatever is primary, central. That which elucidates. Truth."
+    },
+    {
+        "name": "Moon",
+        "domicile": "Cancer",
+        "exaltation": "Taurus",
+        "description": "Archetype of nurturer. Home and resources. Protection. The physical body. Scopes of all kinds, such as scope of perspective; worldview. Darkness. That which empathizes and reflects."
+    },
+    {
+        "name": "Mercury",
+        "domicile": "Gemini,Virgo",
+        "exaltation": "Virgo",
+        "description": "Archetype of messenger. Communications and networks. Interpretation. Atomization, articulation, and expression. Skills, trade and fine motor tasks."
+    },
+    {
+        "name": "Venus",
+        "domicile": "Libra,Taurus",
+        "exaltation": "Pisces",
+        "description": "Archetype of lover. Beauty and balance. Feminine energy. Taste, aesthetics and choice. Relationships and connection of all kinds."
+    },
+    {
+        "name": "Mars",
+        "domicile": "Aries,Scorpio",
+        "exaltation": "Capricorn",
+        "description": "Archetype of warrior. Assertion and intervention. Masculine energy. Battles, struggles and disconnection of all kinds."
+    },
+    {
+        "name": "Jupiter",
+        "domicile": "Sagittarius,Pisces",
+        "exaltation": "Cancer",
+        "description": "Archetype of growth. Gregarity and generosity. In the context of collective society, that which facilitates growth and connection. Joy, joviality. Good will. Public speaker. Motivational speaker. Saint. Entertainer."
+    },
+    {
+        "name": "Saturn",
+        "domicile": "Capricorn,Aquarius",
+        "exaltation": "Libra",
+        "description": "Archetype of restriction. Boundaries, structures, restriction and support of all kinds. In the context of collective society, that which judges, challenges and limits. Hard and dry. Limitation, struggle, and resilience. Mastery through effort. Monk. Stoic. Teacher. Wisdom"
+    },
+    {
+        "name": "Uranus",
+        "domicile": "Aquarius",
+        "exaltation": "Scorpio",
+        "description": "Archetype of change. Rebellion, freedom and uniqueness. High energy that disrupts the status-quo. Insight, invention and ingenuity."
+    },
+    {
+        "name": "Neptune",
+        "domicile": "Pisces",
+        "exaltation": "Leo",
+        "description": "Archetype of transcendance. Meditation, spirit and illusion alike. The intangible. Higher truth and belief."
+    },
+    {
+        "name": "Pluto",
+        "domicile": "Scorpio",
+        "exaltation": "Aries",
+        "description": "Archetype of power. The cycle of death and rebirth. Transformative energy. Explosion, obsession, and the deepest depths. Intensifies what it touches."
+    }
+]
