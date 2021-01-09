@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Profile
-from .serializers import ProfileSerializer
+from .models import Profile, CelestialBodies, ZodiacalSigns
+from .serializers import ProfileSerializer, CelestialBodiesSerializer, ZodiacalSignsSerializer
 from rest_framework.parsers import JSONParser
 import requests
 import json
@@ -101,6 +101,12 @@ class AstroDetails(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request):
-        data = JSONParser().parse(request)
-        data = json.loads(data['body'])
-        subject = data.subject
+        # data = JSONParser().parse(request)
+        # data = json.loads(data['body'])
+        zodiacal_signs = ZodiacalSigns.objects.all()
+        celestial_bodies = CelestialBodies.objects.all()
+        data = {
+            "signs": ZodiacalSignsSerializer(zodiacal_signs, many=True).data,
+            "bodies": CelestialBodiesSerializer(celestial_bodies, many=True).data
+        }
+        return Response(data=data, status=status.HTTP_200_OK)

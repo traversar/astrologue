@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as astroActions from '../actions/astro';
 import { astroSVGs } from '../svgs'
 
-const LearnView = () => {
+const LearnView = ({
+    learnDetails,
+    getDetails
+}) => {
     let [details, setDetails] = useState('')
 
+    useEffect(() => {
+        getDetails()
+    }, [])
+
     const handleDetailSelect = (subject) => {
-        // setDetails(getDetails(subject))
+        setDetails(learnDetails[subject])
     }
 
     return (
@@ -37,11 +45,11 @@ const LearnView = () => {
 }
 
 const LearnViewContainer = () => {
-    // dispatch = useDispatch();
-    // getDetails = (subject) => dispatch(astroActions.getDetails(subject))
-    learnDetails = useSelector(state => state.astro.learnDetails)
+    const dispatch = useDispatch();
+    const getDetails = (subject) => dispatch(astroActions.getDetails(subject))
+    const learnDetails = useSelector(state => state.entities.astro.learnDetails)
 
-    return <LearnView />
+    return <LearnView getDetails={getDetails} learnDetails={learnDetails} />
 }
 
 export default LearnViewContainer

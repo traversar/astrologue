@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile
+from .models import Profile, ZodiacalSigns, CelestialBodies
 
 class ProfileSerializer(serializers.ModelSerializer):
     # Create a custom method field
@@ -26,3 +26,13 @@ class ProfileSerializer(serializers.ModelSerializer):
             'longitude',
         )
         # fields = '__all__'
+
+class CelestialBodiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CelestialBodies
+        fields = '__all__'
+
+class ZodiacalSignsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ZodiacalSigns
+        fields = '__all__'
