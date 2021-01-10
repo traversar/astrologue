@@ -518,3 +518,11 @@ body {
     border-radius: 4px;
     width: 100%;
 }
+
+.lv-details {
+    cursor: pointer;
+}
+
+.lv-details:hover {
+    text-decoration: underline;
+}

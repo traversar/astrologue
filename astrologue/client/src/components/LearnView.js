@@ -4,7 +4,7 @@ import * as astroActions from '../actions/astro';
 import { astroSVGs } from '../svgs'
 
 const LearnView = ({
-    learnDetails,
+    astroData,
     getDetails
 }) => {
     let [details, setDetails] = useState('')
@@ -13,8 +13,15 @@ const LearnView = ({
         getDetails()
     }, [])
 
-    const handleDetailSelect = (subject) => {
-        setDetails(learnDetails[subject])
+    const handleSignSelect = (sign) => {
+        console.log('astroData ', astroData)
+        console.log('astroData -> ', sign, astroData.signs[sign])
+        setDetails(astroData.signs[sign])
+    }
+
+    const handleBodySelect = (body) => {
+        console.log(astroData.bodies[body])
+        setDetails(astroData.bodies[body])
     }
 
     return (
@@ -23,7 +30,7 @@ const LearnView = ({
                 <div style={{borderBottom: '1px dotted white', fontWeight: 600}}>Zodiacal Signs</div>
                 {Object.keys(astroSVGs.signs).map(sign => (
                     <div className='lv-symbol'>
-                        <span>{astroSVGs.signs[sign]} {sign}</span>
+                        <span className='lv-details' onClick={() => handleSignSelect(sign)}>{astroSVGs.signs[sign]} {sign}</span>
                     </div>
                 ))
                 }
@@ -32,13 +39,29 @@ const LearnView = ({
                 <div style={{borderBottom: '1px dotted white', fontWeight: 600}}>Celestial Bodies</div>
                 {Object.keys(astroSVGs.planets).map(planet => (
                     <div className='lv-symbol'>
-                        <span>{astroSVGs.planets[planet]} {planet}</span>
+                        <span className='lv-details' onClick={() => handleBodySelect(planet)}>{astroSVGs.planets[planet]} {planet}</span>
                     </div>
                 ))
                 }
             </div>
             <div className='lv-details-container'>
-                {details}
+                {details.mode &&
+                    <>
+                        <h1>{details.name}</h1>
+                        <h2>{details.summary}</h2>
+                        <h3>{details.mode} {details.element}</h3>
+                        <h3>Ruled by {details.ruler}</h3>
+                        <h4>{details.description}</h4>
+                    </>
+                }
+                {details.domicile &&
+                    <>
+                        <h1>{details.name}</h1>
+                        <h3>Ruler of {details.domicile}</h3>
+                        <h3>Exalted in {details.exaltation}</h3>
+                        <h4>{details.description}</h4>
+                    </>
+                }
             </div>
         </div>
     )
@@ -46,10 +69,10 @@ const LearnView = ({
 
 const LearnViewContainer = () => {
     const dispatch = useDispatch();
-    const getDetails = (subject) => dispatch(astroActions.getDetails(subject))
-    const learnDetails = useSelector(state => state.entities.astro.learnDetails)
+    const getDetails = () => dispatch(astroActions.getDetails());
+    const astroData = useSelector(state => state.entities.astro);
 
-    return <LearnView getDetails={getDetails} learnDetails={learnDetails} />
+    return <LearnView getDetails={getDetails} astroData={astroData} />
 }
 
 export default LearnViewContainer

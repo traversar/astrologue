@@ -1,7 +1,7 @@
 import { astroConstants } from "../constants/astro";
 import axiosInstance from '../axiosApi';
 
-export const getDetails = (subject) => async(dispatch, getState) => {
+export const getDetails = () => async(dispatch, getState) => {
     let response = await axiosInstance.get(
         '/astro/',
     )
