@@ -1,6 +1,5 @@
 # Welcome to Astrologue!
-## Developed by Andrew Travers
-**An app for generating and interpreting astrology charts.**
+## An app for generating and interpreting astrology charts.**
 **Developed by Andrew Travers**
 
 # Description
