@@ -1,0 +1,114 @@
+[
+    {
+        "model": "resources.profile",
+        "pk": 1,
+        "fields": {
+            "name": "Shakespeare",
+            "birthDate": "1564-04-23",
+            "birthTime": "08:30",
+            "birthCity": "",
+            "birthState": "Stratford-Upon-Avon",
+            "birthCountry": "England",
+            "latitude": "52.19157028198242",
+            "longitude": "-1.706989049911499"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 2,
+        "fields": {
+            "name": "Jimi Hendrix",
+            "birthDate": "1564-04-23",
+            "birthTime": "10:15",
+            "birthCity": "Seattle",
+            "birthState": "Washington",
+            "birthCountry": "US",
+            "latitude": "47.60322952270508",
+            "longitude": "-122.33027648925781"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 3,
+        "fields": {
+            "name": "Fyodor Dostoyevsky",
+            "birthDate": "1821-11-11",
+            "birthTime": "09:47",
+            "birthCity": "",
+            "birthState": "Moscow",
+            "birthCountry": "Russia",
+            "latitude": "55.496158599853516",
+            "longitude": "37.369781494140625"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 4,
+        "fields": {
+            "name": "Heidegger",
+            "birthDate": "1564-04-23",
+            "birthTime": "10:15",
+            "birthCity": "",
+            "birthState": "Messkirch",
+            "birthCountry": "Germany",
+            "latitude": "51.09328079223633",
+            "longitude": "10.380292892456055"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 5,
+        "fields": {
+            "name": "Jane Austen",
+            "birthDate": "1775-12-16",
+            "birthTime": "11:45",
+            "birthCity": "",
+            "birthState": "Steveston",
+            "birthCountry": "UK",
+            "latitude": "55.640870",
+            "longitude": "-4.756370"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 6,
+        "fields": {
+            "name": "Simone de Beauvoir",
+            "birthDate": "1908-01-09",
+            "birthTime": "4:30",
+            "birthCity": "",
+            "birthState": "Paris",
+            "birthCountry": "France",
+            "latitude": "48.8566",
+            "longitude": "2.3522"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 7,
+        "fields": {
+            "name": "Lana Del Rey",
+            "birthDate": "1985-06-21",
+            "birthTime": "16:47",
+            "birthCity": "",
+            "birthState": "New York",
+            "birthCountry": "US",
+            "latitude": "40.7128",
+            "longitude": "-74.006"
+        }
+    },
+    {
+        "model": "resources.profile",
+        "pk": 8,
+        "fields": {
+            "name": "Alan Turing",
+            "birthDate": "1912-06-23",
+            "birthTime": "2:15",
+            "birthCity": "",
+            "birthState": "London",
+            "birthCountry": "UK",
+            "latitude": "51.5074",
+            "longitude": "-0.1278"
+        }
+    }
+]
